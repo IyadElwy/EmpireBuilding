@@ -1,2 +1,2 @@
 # EmpireBuilding
-The Finished Empire Building Game
+The Last Mile in the Empire Building Game
