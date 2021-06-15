@@ -1,6 +1,6 @@
 module EmpireBuilding {
-    requires javafx.fxml;
+    requires javafx.media;
+    requires java.xml;
     requires javafx.controls;
-    requires junit;
     opens GUI;
 }

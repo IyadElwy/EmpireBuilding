@@ -1,12 +1,13 @@
 package GUI;
 
+import GUI.BuiltWindow.EnterNameWindow;
 import GUI.BuiltWindow.WelcomeWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public Stage window;
+    public static Stage window;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -18,9 +19,14 @@ public class Main extends Application {
         WelcomeWindow welcomeWindow = new WelcomeWindow();
 
 
-//        Setting the first scene to the welcome scene
+
+//        Setting the first scene to the welcome scene and setting the title
         window.setScene(welcomeWindow.getWelcomeScene());
+        window.setTitle("Empire Building");
+        window.setMinWidth(Constants.GAME_WINDOW_SIZE_X);
+        window.setMinHeight(Constants.GAME_WINDOW_SIZE_Y);
         window.show();
+
     }
 
 
