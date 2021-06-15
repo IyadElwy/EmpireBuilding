@@ -1,19 +1,26 @@
 package GUI;
 
+import GUI.BuiltWindow.WelcomeWindow;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public Stage window;
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+    public void start(Stage primaryStage) throws Exception {
+//        setting the primary stage to the variable window to be able to change
+//        scenes
+        window = primaryStage;
+
+//        The welcome window
+        WelcomeWindow welcomeWindow = new WelcomeWindow();
+
+
+//        Setting the first scene to the welcome scene
+        window.setScene(welcomeWindow.getWelcomeScene());
+        window.show();
     }
 
 
