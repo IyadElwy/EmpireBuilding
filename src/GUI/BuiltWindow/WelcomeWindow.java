@@ -7,7 +7,7 @@ import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyHbox;
 import GUI.Main;
 import GUI.Scenes.MyScene;
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -49,7 +49,8 @@ public class WelcomeWindow {
 //        Creating hbox for title
         MyHbox welcomeTitleHbox = new MyHbox();
         welcomeTitleHbox.getChildren().add(welcomeLabel);
-        welcomeTitleHbox.setPadding(new Insets(0, 0, 100, 120));
+        welcomeTitleHbox.setAlignment(Pos.CENTER);
+//        welcomeTitleHbox.setPadding(new Insets(0, 0, 100, 120));
 
 //        Setting button properties
         MyButton startGameButton = new MyButton("Start Game");

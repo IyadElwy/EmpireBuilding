@@ -17,6 +17,55 @@ public class Constants {
             "/openingWindowsSound.mp3").toURI().toString());
     public static Media clickButton = new Media(new File("src/GUI/Resources/" +
             "sword_button_click.mp3").toURI().toString());
+    public static String gameDescription = "A player\n" +
+            "initially chooses one historical city to start his empire with. " +
+            "The goal is to conquer the whole\n" +
+            "world by taking control over every other city under a certain amount " +
+            "of turns. In order to\n" +
+            "achieve this goal, the player have the option of building various types " +
+            "of building in any city he\n" +
+            "has control over and also build armies in order to conquer other \n" +
+            "cities.\n" + "The player will win if he managed to conquer all \n" +
+            "cities available in the game under the \n" +
+            "\ndetermined amounts of turns. If these turns passed and the \n" +
+            "player did not achieve this goal, this is\n" +
+            "considered a loss.\n\n\n" + "Each city has an army that defends \n" +
+            "it from conquerors. The player needs to build a powerful\n" +
+            "army and defeat the defending army in order to take control over \n" +
+            "the city. Once the attacking\n" +
+            "army reaches the city, it can either lay siege on the target city \n" +
+            "trying to starve them out or\n" +
+            "directly attack the defending army. If the player chooses to besiege \n" +
+            "the city, the defending\n" +
+            "army will gradually lose soldiers each turn the city is under siege. \n" +
+            "However, the player can\n" +
+            "only besiege a city for a max of three turns. During these three turns,\n" +
+            " the player can choose\n" +
+            "to break the siege and leave the city or directly fight the defending army. \n" +
+            "If these three turns\n" +
+            "passed, the player has to fight the defending army in a decisive battle.\n" +
+            "When the player engages\n" +
+            "the defending army in a battle, he can choose to either automatically\n" +
+            "resolves the battle or\n" +
+            "he manually commands his units during it. In auto resolve mode, a random\n" +
+            "unit from the\n" +
+            "attacking army will attack another random unit from the defending army\n" +
+            "then, same action\n" +
+            "happens but this time the defending army will be the attacker and so on\n" +
+            "till one of the two\n" +
+            "armies is completely destroyed. In all cases, only the attacked unit\n" +
+            "receives damage and have\n" +
+            "some of its soldiers lost during the attack. The attacking unit does not\n" +
+            "receive any damage\n" +
+            "in the process. In the manual mode, the battle starts by the player " +
+            "choosing \n" +
+            " one of his units\n" +
+            "to attack another unit in \nthe defending army followed by a random\n" +
+            " unit from the defending" + " army attack another random unit from the player’s \n" +
+            "army and so on till one of the two armies is\n" +
+            "destroyed. Once the city’s defending army is defeated, the player takes control\n" +
+            " over it and can\n" +
+            "build any building or recruit any unit inside it.";
 
     public static void playMusic(Media media) {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
