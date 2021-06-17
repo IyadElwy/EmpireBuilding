@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 
 import java.io.File;
 
@@ -57,7 +56,8 @@ public class ChooseCityWindow {
             cairoButton.setEffect(new InnerShadow(0, Color.WHITE));
         });
         cairoButton.setOnAction(e -> {
-
+            Main.window.setScene(new MapViewWindow().getMapViewScene());
+            Constants.playEffect(Constants.clickButton);
         });
 
         cairoButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
@@ -91,6 +91,10 @@ public class ChooseCityWindow {
             romeButton.setTextFill(Color.WHITE);
             romeButton.setEffect(new InnerShadow(0, Color.WHITE));
         });
+        romeButton.setOnAction(e -> {
+            Main.window.setScene(new MapViewWindow().getMapViewScene());
+            Constants.playEffect(Constants.clickButton);
+        });
         romeVbox.getChildren().add(romeButton);
         romeVbox.setAlignment(Pos.CENTER);
 
@@ -119,6 +123,10 @@ public class ChooseCityWindow {
         spartaButton.setOnMouseExited(e -> {
             spartaButton.setTextFill(Color.WHITE);
             spartaButton.setEffect(new InnerShadow(0, Color.WHITE));
+        });
+        spartaButton.setOnAction(e -> {
+            Main.window.setScene(new MapViewWindow().getMapViewScene());
+            Constants.playEffect(Constants.clickButton);
         });
         spartaVbox.getChildren().add(spartaButton);
         spartaVbox.setAlignment(Pos.CENTER);

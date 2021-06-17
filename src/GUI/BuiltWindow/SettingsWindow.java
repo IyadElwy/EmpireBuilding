@@ -7,6 +7,7 @@ import GUI.CustomControllers.MyTextField;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
+import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -56,6 +57,7 @@ public class SettingsWindow {
 //        continueGameButton.setMinSize(200, 200);
         continueGameButton.setOnAction(event -> {
             Constants.playEffect(Constants.clickButton);
+            Main.window.setScene(new MapViewWindow().getMapViewScene());
         });
 
         MyButton spaceButton = new MyButton("SP");
