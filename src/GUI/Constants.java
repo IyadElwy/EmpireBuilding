@@ -91,4 +91,13 @@ public class Constants {
         return spaceButton;
     }
 
+    public static MyButton spaceButton2() {
+        MyButton spaceButton = new MyButton("SP");
+        spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 50));
+        spaceButton.setTextFill(Color.DARKGOLDENROD);
+        spaceButton.setOpacity(0);
+        return spaceButton;
+    }
+
 }

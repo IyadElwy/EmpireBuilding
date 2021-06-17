@@ -37,6 +37,7 @@ public class MapViewWindow {
         });
         cairoButton.setOnAction(e -> {
             Constants.playEffect(Constants.clickButton);
+            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
         });
 
         MyButton romeButton = new MyButton("rome");
@@ -48,6 +49,7 @@ public class MapViewWindow {
         });
         romeButton.setOnAction(e -> {
             Constants.playEffect(Constants.clickButton);
+            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
         });
 
 
@@ -60,6 +62,8 @@ public class MapViewWindow {
         });
         spartaButton.setOnAction(e -> {
             Constants.playEffect(Constants.clickButton);
+            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+
         });
 
         MyButton settingsButton = new MyButton("settings");
