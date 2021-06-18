@@ -27,6 +27,8 @@ public class BattleFieldWindow {
     public static MyButton chooseNextAttackButton;
 
     public BattleFieldWindow() {
+        Constants.playMusic(Constants.battleMusic);
+
         MyBorderPane borderPane = new MyBorderPane();
         MyHbox hboxForMap = new MyHbox();
         MyBorderPane battleFieldPane = new MyBorderPane();

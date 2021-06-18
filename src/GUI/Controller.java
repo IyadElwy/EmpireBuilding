@@ -87,6 +87,7 @@ public class Controller {
     public static void chooseCityOrArmy(String choice) {
         if (choice.equals("City")) {
             Constants.playEffect(Constants.clickButton);
+            Main.window.setScene(new CityViewWindow().getCityViewScene());
 
         } else {
             Constants.playEffect(Constants.clickButton);
@@ -164,7 +165,83 @@ public class Controller {
     }
 
 
-
 //    AttackWith Window
+
+
+    //    CityViewWindow
+    public static void openMapFromCityView() {
+        Constants.playEffect(Constants.clickButton);
+        Main.window.setScene(new MapViewWindow().getMapViewScene());
+    }
+
+    public static void updateCityName() {
+
+    }
+
+    public static void updatePlayerGoldAmount() {
+
+    }
+
+    public static void updatePlayerFoodAmount() {
+
+    }
+
+    public static void addBuildingToCity() {
+
+    }
+
+    public static void updateBuildingLevel() {
+
+    }
+
+    public static void buildButtonPressed() {
+
+    }
+
+    public static void armiesButtonPressed() {
+
+    }
+
+    public static void defendingArmyButtonPressed() {
+
+    }
+
+    public static void attackButtonPressed() {
+
+    }
+
+//    EditBuildingWindow
+
+    public static void goBackToCityFromEditBuilding() {
+        Main.window.setScene(new CityViewWindow().getCityViewScene());
+    }
+
+    public static String getValueChoiceBox() {
+        return EditBuildingWindow.buildingChoiceBox.getValue();
+    }
+
+    public static void upgradeBuildingButtonPressed() {
+
+    }
+
+    public static void harvestButtonPressed() {
+
+    }
+
+    public static void recruitButtonPressed() {
+
+    }
+
+    public static void updateBuildingLevelLabel() {
+
+    }
+
+
+
+//    GameOverWindow
+    public static void upDateGameEndResult() {
+
+    }
+
 
 }

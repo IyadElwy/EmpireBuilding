@@ -1,6 +1,8 @@
 package GUI;
 
-import GUI.BuiltWindow.BattleFieldWindow;
+import GUI.BuiltWindow.EditBuildingWindow;
+import GUI.BuiltWindow.GameOverWindow;
+import GUI.BuiltWindow.WelcomeWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -17,7 +19,7 @@ public class Main extends Application {
 
 //        Setting the first scene to the welcome scene and setting the title
 //        window.setScene(new WelcomeWindow().getWelcomeScene());
-        window.setScene(new BattleFieldWindow().getScene());
+        window.setScene(new GameOverWindow().getGameOverScene());
         window.setTitle("Empire Building");
         window.setMinWidth(Constants.GAME_WINDOW_SIZE_X);
         window.setMinHeight(Constants.GAME_WINDOW_SIZE_Y);

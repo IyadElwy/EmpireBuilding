@@ -20,6 +20,7 @@ public class MapViewWindow {
 
 
     public MapViewWindow() {
+        Constants.playMusic(Constants.openingMusic);
 
         BackgroundImage backgroundImage = new BackgroundImage(
                 new Image(new File("src/GUI/Resources/mapGame.jpg")
@@ -37,9 +38,7 @@ public class MapViewWindow {
         cairoButton.setPrefWidth(400);
         cairoButton.setPrefHeight(180);
         cairoButton.setOpacity(0);
-        cairoButton.setOnMouseEntered(e -> {
-            Constants.playEffect(Constants.clickButton);
-        });
+
         cairoButton.setOnAction(e -> {
             Controller.enterCityMapButtonOnAction("Cairo");
         });
@@ -48,9 +47,7 @@ public class MapViewWindow {
         romeButton.setPrefWidth(400);
         romeButton.setPrefHeight(150);
         romeButton.setOpacity(0);
-        romeButton.setOnMouseEntered(e -> {
-            Constants.playEffect(Constants.clickButton);
-        });
+
         romeButton.setOnAction(e -> {
             Controller.enterCityMapButtonOnAction("Rome");
         });
@@ -60,9 +57,7 @@ public class MapViewWindow {
         spartaButton.setPrefWidth(330);
         spartaButton.setPrefHeight(220);
         spartaButton.setOpacity(0);
-        spartaButton.setOnMouseEntered(e -> {
-            Constants.playEffect(Constants.clickButton);
-        });
+
         spartaButton.setOnAction(e -> {
             Controller.enterCityMapButtonOnAction("Sparta");
         });
@@ -71,9 +66,7 @@ public class MapViewWindow {
         settingsButton.setPrefWidth(400);
         settingsButton.setPrefHeight(320);
         settingsButton.setOpacity(0);
-        settingsButton.setOnMouseEntered(e -> {
-            Constants.playEffect(Constants.clickButton);
-        });
+
         settingsButton.setOnAction(e -> {
             Constants.playEffect(Constants.clickButton);
             Main.window.setScene(new SettingsWindow().getSettingsScene());
@@ -100,7 +93,6 @@ public class MapViewWindow {
         mapViewSceneLayout.add(Constants.spaceButton(), 4, 1);
         mapViewSceneLayout.add(Constants.spaceButton(), 4, 2);
         mapViewSceneLayout.add(Constants.spaceButton(), 4, 3);
-
 
 
         this.mapViewScene = new MyScene(mapViewSceneLayout);

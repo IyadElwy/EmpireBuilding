@@ -11,6 +11,8 @@ import java.io.File;
 
 public class Constants {
 
+
+
     public static final double GAME_WINDOW_SIZE_X =
             Screen.getPrimary().getBounds().getMaxX() - 5;
     public static final double GAME_WINDOW_SIZE_Y =
@@ -20,6 +22,14 @@ public class Constants {
             "/openingWindowsSound.mp3").toURI().toString());
     public static Media clickButton = new Media(new File("src/GUI/Resources/" +
             "sword_button_click.mp3").toURI().toString());
+    public static Media cityMusic = new Media(new File("src/GUI/Resources/peace_music.mp3").
+            toURI().toString());
+    public static Media battleMusic = new Media(new File("src/GUI/Resources/battle_music.mp3")
+            .toURI().toString());
+
+    public static MediaPlayer mediaPlayer = new MediaPlayer(openingMusic);
+
+
     public static String gameDescription = "A player\n" +
             "initially chooses one historical city to start his empire with. " +
             "The goal is to conquer the whole\n" +
@@ -71,7 +81,8 @@ public class Constants {
             "build any building or recruit any unit inside it.";
 
     public static void playMusic(Media media) {
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.stop();
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
