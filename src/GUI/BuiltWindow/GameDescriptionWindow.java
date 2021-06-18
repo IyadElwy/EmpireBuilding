@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTextArea;
@@ -20,6 +21,7 @@ import java.io.File;
 
 public class GameDescriptionWindow {
     private final MyScene gameDescriptionScene;
+    public static MyButton readyButton;
 
     public GameDescriptionWindow() {
 
@@ -62,19 +64,14 @@ public class GameDescriptionWindow {
 //        Setting button properties and hbox for button
         MyHbox readyButtonHbox = new MyHbox();
         readyButtonHbox.setPadding(new Insets(0, 0, 100, 850));
-        MyButton readyButton = new MyButton("Proceed");
+        readyButton = new MyButton("Proceed");
         readyButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         readyButton.setTextFill(Color.DARKGOLDENROD);
         readyButton.setShape(new Circle(1.5));
         readyButton.setMinSize(200, 200);
         readyButton.setOpacity(0.9);
-
-        readyButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-            ChooseCityWindow chooseCityWindow = new ChooseCityWindow();
-            Main.window.setScene(chooseCityWindow.getChooseCityScene());
-        });
+        Controller.gameDescriptionWindowProceedButtonOnAction();
 
         readyButtonHbox.getChildren().add(readyButton);
 

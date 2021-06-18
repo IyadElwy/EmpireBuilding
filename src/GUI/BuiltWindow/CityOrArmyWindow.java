@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.Layouts.MyHbox;
 import GUI.Main;
@@ -30,8 +31,7 @@ public class CityOrArmyWindow {
         armyButton.setPadding(new Insets(50, 50, 50, 50));
         armyButton.setTextFill(Color.DARKGOLDENROD);
         armyButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new ShowArmyWindow().getShowArmyScene());
+            Controller.chooseCityOrArmy("Army");
         });
 
         MyButton cityButton = new MyButton("Show City");
@@ -40,8 +40,7 @@ public class CityOrArmyWindow {
         cityButton.setPadding(new Insets(50, 50, 50, 50));
         cityButton.setTextFill(Color.DARKGOLDENROD);
         cityButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-
+            Controller.chooseCityOrArmy("City");
         });
 
         hbox.getChildren().addAll(armyButton, Constants.spaceButton(), cityButton);

@@ -1,7 +1,6 @@
 package GUI;
 
 import GUI.CustomControllers.MyButton;
-import GUI.CustomControllers.MyLabel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -95,6 +94,15 @@ public class Constants {
         MyButton spaceButton = new MyButton("SP");
         spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
+        spaceButton.setTextFill(Color.DARKGOLDENROD);
+        spaceButton.setOpacity(0);
+        return spaceButton;
+    }
+
+    public static MyButton spaceButton3() {
+        MyButton spaceButton = new MyButton("SP");
+        spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 3));
         spaceButton.setTextFill(Color.DARKGOLDENROD);
         spaceButton.setOpacity(0);
         return spaceButton;

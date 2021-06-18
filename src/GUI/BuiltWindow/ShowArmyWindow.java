@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTableView;
@@ -10,10 +11,7 @@ import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
-import GUI.Main;
 import GUI.Scenes.MyScene;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.RadioButton;
@@ -24,12 +22,18 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import units.Archer;
 
 import java.io.File;
 
 public class ShowArmyWindow {
     private final MyScene showArmyScene;
+    public static MyTableView tableView;
+    public static MyLabel title;
+    public static MyTextField statusTextField;
+    public static MyTextField marchingToCityTextField;
+    public static MyTextField besiegingCityTextField;
+    public static MyButton relocateButton;
+    public static MyButton backButton;
 
     public ShowArmyWindow() {
         MyBorderPane borderPane = new MyBorderPane();
@@ -41,12 +45,12 @@ public class ShowArmyWindow {
         MyVbox vbox = new MyVbox();
         vbox.setAlignment(Pos.CENTER);
 
-        MyLabel title = new MyLabel("CityName Army");
+        title = new MyLabel("CityName Army");
         title.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 70));
         title.setTextFill(Color.DARKGOLDENROD);
 
-        MyTextField statusTextField = new MyTextField();
+        statusTextField = new MyTextField();
         statusTextField.setText("Status: ");
         statusTextField.setEditable(false);
         statusTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
@@ -54,7 +58,7 @@ public class ShowArmyWindow {
         statusTextField.setStyle("-fx-text-inner-color: #6A1412");
 
 
-        MyTextField marchingToCityTextField = new MyTextField();
+        marchingToCityTextField = new MyTextField();
         marchingToCityTextField.setText("Marching to 'city'. Target Reached In ..." +
                 " Turns");
         marchingToCityTextField.setEditable(false);
@@ -63,7 +67,7 @@ public class ShowArmyWindow {
         marchingToCityTextField.setStyle("-fx-text-inner-color: #6A1412");
         marchingToCityTextField.setPrefWidth(600);
 
-        MyTextField besiegingCityTextField = new MyTextField();
+        besiegingCityTextField = new MyTextField();
         besiegingCityTextField.setText("Besieging 'city'. ... Turns Besieging");
         besiegingCityTextField.setEditable(false);
         besiegingCityTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
@@ -71,7 +75,8 @@ public class ShowArmyWindow {
         besiegingCityTextField.setStyle("-fx-text-inner-color: #6A1412");
         besiegingCityTextField.setPrefWidth(550);
 
-
+        TableColumn<UnitsHelperClass, String> typeColumn = new TableColumn<>(
+                "Type");
         TableColumn<UnitsHelperClass, String> levelColumn = new TableColumn<>(
                 "Level");
         TableColumn<UnitsHelperClass, String> maxSoldierColumn = new TableColumn<>(
@@ -82,25 +87,46 @@ public class ShowArmyWindow {
                 new TableColumn<>(
                         "Relocate");
 
-        levelColumn.setMinWidth(200);
-        maxSoldierColumn.setMinWidth(200);
-        currentSoldiersColumn.setMinWidth(200);
-        radioButtonColumn.setMinWidth(200);
+        typeColumn.setMinWidth(390);
+        typeColumn.setStyle("-fx-padding: 0.5em;\n" +
+                "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
+                "    -fx-font: 13px \"Arial\";\n" +
+                "    -fx-text-fill: red;");
+        levelColumn.setMinWidth(390);
+        levelColumn.setStyle("-fx-padding: 0.5em;\n" +
+                "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
+                "    -fx-font: 13px \"Arial\";\n" +
+                "    -fx-text-fill: red;");
+        maxSoldierColumn.setMinWidth(390);
+        maxSoldierColumn.setStyle("-fx-padding: 0.5em;\n" +
+                "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
+                "    -fx-font: 13px \"Arial\";\n" +
+                "    -fx-text-fill: red;");
+        currentSoldiersColumn.setMinWidth(390);
+        currentSoldiersColumn.setStyle("-fx-padding: 0.5em;\n" +
+                "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
+                "    -fx-font: 13px \"Arial\";\n" +
+                "    -fx-text-fill: red;");
+        radioButtonColumn.setMinWidth(390);
 
+
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>(
+                "type"));
         levelColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "level"));
-        levelColumn.setStyle("-fx-alignment: CENTER-LEFT;");
         maxSoldierColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "maxSoldierConunt"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
-        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>("radioButton"));
+        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
+                "relocateButton"));
 
-
-        MyTableView tableView = new MyTableView();
+        tableView = new MyTableView();
+//        tableView.setBackground(new Background(new BackgroundFill(Color.DARKGOLDENROD,
+//                new CornerRadii(60,false), new Insets(300,300,300,300))));
         tableView.setEditable(false);
-        tableView.setItems(putUnits());
-        tableView.getColumns().addAll(levelColumn, maxSoldierColumn,
+        tableView.setItems(Controller.putUnits());
+        tableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
                 currentSoldiersColumn,
                 radioButtonColumn);
 
@@ -109,12 +135,12 @@ public class ShowArmyWindow {
         buttonsHbox.setAlignment(Pos.CENTER);
         buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
 
-        MyButton continueGameButton = new MyButton("Relocate");
-        continueGameButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+        relocateButton = new MyButton("Relocate");
+        relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
-        continueGameButton.setTextFill(Color.DARKGOLDENROD);
-        continueGameButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
+        relocateButton.setTextFill(Color.DARKGOLDENROD);
+        relocateButton.setOnAction(event -> {
+            Controller.showArmyWindowRelocateButtonOnAction();
         });
 
         MyButton spaceButton = new MyButton("SP");
@@ -123,17 +149,16 @@ public class ShowArmyWindow {
         spaceButton.setTextFill(Color.DARKGOLDENROD);
         spaceButton.setOpacity(0);
 
-        MyButton exitGameButton = new MyButton("Back");
-        exitGameButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+        backButton = new MyButton("Back");
+        backButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
-        exitGameButton.setTextFill(Color.DARKGOLDENROD);
-        exitGameButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new MapViewWindow().getMapViewScene());
+        backButton.setTextFill(Color.DARKGOLDENROD);
+        backButton.setOnAction(event -> {
+            Controller.showArmyWindowBackButtonOnAction();
         });
 
-        buttonsHbox.getChildren().addAll(continueGameButton, spaceButton,
-                exitGameButton);
+        buttonsHbox.getChildren().addAll(
+                backButton);
 
 
         hbox.getChildren().add(title);
@@ -152,11 +177,6 @@ public class ShowArmyWindow {
         this.showArmyScene = new MyScene(borderPane);
     }
 
-    public ObservableList<UnitsHelperClass> putUnits() {
-        ObservableList<UnitsHelperClass> unitsObservableList = FXCollections.observableArrayList();
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        return unitsObservableList;
-    }
 
     public MyScene getShowArmyScene() {
         return showArmyScene;

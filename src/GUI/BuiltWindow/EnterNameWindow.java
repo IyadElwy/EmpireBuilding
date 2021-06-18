@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTextField;
@@ -21,6 +22,9 @@ import java.io.File;
 public class EnterNameWindow {
 
     private final MyScene enterNameScene;
+    public static MyLabel enterNameLabel;
+    public static MyTextField textField;
+    public static MyButton readyButton;
 
     public EnterNameWindow() {
 
@@ -38,7 +42,7 @@ public class EnterNameWindow {
 
 //        Creating and setting hbox for title
         //        setting the label properties
-        MyLabel enterNameLabel = new MyLabel("Please Enter Your Name:");
+        enterNameLabel = new MyLabel("Please Enter Your Name:");
         enterNameLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 70));
         enterNameLabel.setTextFill(Color.DARKGOLDENROD);
@@ -51,7 +55,7 @@ public class EnterNameWindow {
 //        Creating Hbox for textfield and textfield
         MyHbox enterNameFieldHbox = new MyHbox();
         enterNameFieldHbox.setAlignment(Pos.CENTER);
-        MyTextField textField = new MyTextField();
+        textField = new MyTextField();
         textField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));
         textField.setStyle("-fx-text-inner-color: #6A1412");
@@ -64,20 +68,14 @@ public class EnterNameWindow {
         MyHbox readyButtonHbox = new MyHbox();
         readyButtonHbox.setAlignment(Pos.CENTER);
         readyButtonHbox.setPadding(new Insets(0, 0, 50, 0));
-        MyButton readyButton = new MyButton("Ready");
+        readyButton = new MyButton("Ready");
         readyButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         readyButton.setTextFill(Color.DARKGOLDENROD);
         readyButton.setShape(new Circle(1.5));
         readyButton.setMinSize(200, 200);
         readyButton.setOpacity(0.9);
-
-        readyButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-            GameDescriptionWindow gameDescriptionWindow =
-                    new GameDescriptionWindow();
-            Main.window.setScene(gameDescriptionWindow.getGameDescriptionScene());
-        });
+        Controller.enterNameWindowReadyButtonOnAction();
 
         readyButtonHbox.getChildren().add(readyButton);
 

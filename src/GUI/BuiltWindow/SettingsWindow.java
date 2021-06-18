@@ -1,17 +1,15 @@
 package GUI.BuiltWindow;
 
-import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTextField;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
-import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.PointLight;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -47,7 +45,7 @@ public class SettingsWindow {
 //        Setting hbox for buttons
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
-        buttonsHbox.setPadding(new Insets(0,0,160,0));
+        buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
 
 //        Setting button properties
         MyButton continueGameButton = new MyButton("Continue");
@@ -56,8 +54,7 @@ public class SettingsWindow {
         continueGameButton.setTextFill(Color.DARKGOLDENROD);
 //        continueGameButton.setMinSize(200, 200);
         continueGameButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new MapViewWindow().getMapViewScene());
+            Controller.settingsButtonOnAction("Back");
         });
 
         MyButton spaceButton = new MyButton("SP");
@@ -72,8 +69,7 @@ public class SettingsWindow {
         exitGameButton.setTextFill(Color.DARKGOLDENROD);
 //        continueGameButton.setMinSize(200, 200);
         exitGameButton.setOnAction(event -> {
-            Constants.playEffect(Constants.clickButton);
-            System.exit(0);
+            Controller.settingsButtonOnAction("Exit");
         });
 
         buttonsHbox.getChildren().addAll(continueGameButton, spaceButton,
@@ -84,14 +80,14 @@ public class SettingsWindow {
         MyVbox textFieldsVbox = new MyVbox();
         textFieldsVbox.setAlignment(Pos.CENTER);
         MyHbox textFieldsHbox1 = new MyHbox();
-        textFieldsHbox1.setPadding(new Insets(20,20,20,20));
+        textFieldsHbox1.setPadding(new Insets(20, 20, 20, 20));
         textFieldsHbox1.setAlignment(Pos.CENTER);
         MyHbox textFieldsHbox2 = new MyHbox();
-        textFieldsHbox2.setPadding(new Insets(20,20,20,20));
+        textFieldsHbox2.setPadding(new Insets(20, 20, 20, 20));
         textFieldsHbox2.setAlignment(Pos.CENTER);
 
         MyLabel playerNameLabel = new MyLabel("Player Name:");
-        playerNameLabel.setPadding(new Insets(0,20,0,0));
+        playerNameLabel.setPadding(new Insets(0, 20, 0, 0));
         playerNameLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));
         playerNameLabel.setTextFill(Color.DARKGOLDENROD);
@@ -107,7 +103,7 @@ public class SettingsWindow {
         MyLabel timePlayedLabel = new MyLabel("Time Played:");
         timePlayedLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));
-        timePlayedLabel.setPadding(new Insets(0,20,0,0));
+        timePlayedLabel.setPadding(new Insets(0, 20, 0, 0));
         timePlayedLabel.setTextFill(Color.DARKGOLDENROD);
 
         MyTextField timePlayedTextField = new MyTextField();
@@ -120,9 +116,6 @@ public class SettingsWindow {
         textFieldsHbox1.getChildren().addAll(playerNameLabel, playerNameTextField);
         textFieldsHbox2.getChildren().addAll(timePlayedLabel, timePlayedTextField);
         textFieldsVbox.getChildren().addAll(textFieldsHbox1, textFieldsHbox2);
-
-
-
 
 
         settingsLayout.setTop(settingsTitleHbox);

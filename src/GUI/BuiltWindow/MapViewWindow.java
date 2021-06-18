@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.Layouts.MyGridPane;
 import GUI.Main;
@@ -11,8 +12,12 @@ import javafx.scene.layout.*;
 import java.io.File;
 
 public class MapViewWindow {
-
+    public static MyButton cairoButton;
+    public static MyButton romeButton;
+    public static MyButton spartaButton;
+    public static MyButton settingsButton;
     private final MyScene mapViewScene;
+
 
     public MapViewWindow() {
 
@@ -28,7 +33,7 @@ public class MapViewWindow {
         mapViewSceneLayout.setBackground(new Background(backgroundImage));
 
 
-        MyButton cairoButton = new MyButton("cairo");
+        cairoButton = new MyButton("cairo");
         cairoButton.setPrefWidth(400);
         cairoButton.setPrefHeight(180);
         cairoButton.setOpacity(0);
@@ -36,11 +41,10 @@ public class MapViewWindow {
             Constants.playEffect(Constants.clickButton);
         });
         cairoButton.setOnAction(e -> {
-            Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+            Controller.enterCityMapButtonOnAction("Cairo");
         });
 
-        MyButton romeButton = new MyButton("rome");
+        romeButton = new MyButton("rome");
         romeButton.setPrefWidth(400);
         romeButton.setPrefHeight(150);
         romeButton.setOpacity(0);
@@ -48,12 +52,11 @@ public class MapViewWindow {
             Constants.playEffect(Constants.clickButton);
         });
         romeButton.setOnAction(e -> {
-            Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+            Controller.enterCityMapButtonOnAction("Rome");
         });
 
 
-        MyButton spartaButton = new MyButton("sparta");
+        spartaButton = new MyButton("sparta");
         spartaButton.setPrefWidth(330);
         spartaButton.setPrefHeight(220);
         spartaButton.setOpacity(0);
@@ -61,12 +64,10 @@ public class MapViewWindow {
             Constants.playEffect(Constants.clickButton);
         });
         spartaButton.setOnAction(e -> {
-            Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
-
+            Controller.enterCityMapButtonOnAction("Sparta");
         });
 
-        MyButton settingsButton = new MyButton("settings");
+        settingsButton = new MyButton("settings");
         settingsButton.setPrefWidth(400);
         settingsButton.setPrefHeight(320);
         settingsButton.setOpacity(0);

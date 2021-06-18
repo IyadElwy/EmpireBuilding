@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.Layouts.MyBorderPane;
@@ -20,6 +21,7 @@ import java.io.File;
 public class WelcomeWindow {
 
     private final MyScene welcomeScene;
+    public static MyButton startGameButton;
 
     public WelcomeWindow() {
         //        Music player for this window
@@ -50,22 +52,17 @@ public class WelcomeWindow {
         MyHbox welcomeTitleHbox = new MyHbox();
         welcomeTitleHbox.getChildren().add(welcomeLabel);
         welcomeTitleHbox.setAlignment(Pos.CENTER);
-//        welcomeTitleHbox.setPadding(new Insets(0, 0, 100, 120));
 
 //        Setting button properties
-        MyButton startGameButton = new MyButton("Start Game");
+        startGameButton = new MyButton("Start Game");
         startGameButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         startGameButton.setTextFill(Color.DARKGOLDENROD);
         startGameButton.setShape(new Circle(1.5));
         startGameButton.setMinSize(200, 200);
         startGameButton.setOpacity(0.9);
-        startGameButton.setOnAction(event -> {
-            //        The enter your name window
-            EnterNameWindow enterNameWindow = new EnterNameWindow();
-            Main.window.setScene(enterNameWindow.getWelcomeScene());
-            Constants.playEffect(Constants.clickButton);
-        });
+        Controller.welcomeWindowStartGameButtonAction();
+
 
 
         welcomeSceneLayout.setTop(welcomeTitleHbox);
@@ -73,6 +70,7 @@ public class WelcomeWindow {
         this.welcomeScene = new MyScene(welcomeSceneLayout);
 
     }
+
 
     public MyScene getWelcomeScene() {
         return welcomeScene;

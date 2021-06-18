@@ -1,12 +1,14 @@
 package GUI.HelperClasses;
 
+import GUI.CustomControllers.MyButton;
 import javafx.scene.control.RadioButton;
 import units.Archer;
 import units.Cavalry;
 import units.Unit;
 
 public class UnitsHelperClass {
-    private RadioButton radioButton;
+    private MyButton attackButton;
+    private MyButton relocateButton;
     private int level;
     private int maxSoldierConunt;
     private int currentSoldierCount;
@@ -16,7 +18,8 @@ public class UnitsHelperClass {
         this.level = unit.getLevel();
         this.maxSoldierConunt = unit.getMaxSoldierCount();
         this.currentSoldierCount = unit.getCurrentSoldierCount();
-        this.radioButton = new RadioButton();
+        this.relocateButton = new MyButton("Relocate");
+        this.attackButton = new MyButton("Choose");
         if (unit instanceof Archer) {
             type = "Archer";
         } else if (unit instanceof Cavalry) {
@@ -24,11 +27,26 @@ public class UnitsHelperClass {
         } else {
             type = "Infantry";
         }
+
+        relocateButton.setOnAction(e -> {
+
+        });
+
+        attackButton.setOnAction(e -> {
+
+        });
     }
 
-    public RadioButton getRadioButton() {
-        return radioButton;
+
+
+    public MyButton getAttackButton() {
+        return attackButton;
     }
+
+    public MyButton getRelocateButton() {
+        return relocateButton;
+    }
+
 
     public int getLevel() {
         return level;

@@ -1,6 +1,7 @@
 package GUI.BuiltWindow;
 
 import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
@@ -19,6 +20,9 @@ import java.io.File;
 public class ChooseCityWindow {
 
     private final MyScene chooseCityScene;
+    public static MyButton cairoButton;
+    public static MyButton romeButton;
+    public static MyButton spartaButton;
 
     public ChooseCityWindow() {
 
@@ -39,7 +43,7 @@ public class ChooseCityWindow {
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER, vboxBackgroundSize);
         cairoVbox.setBackground(new Background(backgroundImageCairo));
-        MyButton cairoButton = new MyButton("Cairo");
+        cairoButton = new MyButton("Cairo");
         cairoButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
         cairoButton.setPadding(new Insets(0,
@@ -56,8 +60,7 @@ public class ChooseCityWindow {
             cairoButton.setEffect(new InnerShadow(0, Color.WHITE));
         });
         cairoButton.setOnAction(e -> {
-            Main.window.setScene(new MapViewWindow().getMapViewScene());
-            Constants.playEffect(Constants.clickButton);
+            Controller.chooseCityWindowButtonOnAction("Cairo");
         });
 
         cairoButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
@@ -73,7 +76,7 @@ public class ChooseCityWindow {
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER, vboxBackgroundSize);
         romeVbox.setBackground(new Background(backgroundImageRome));
-        MyButton romeButton = new MyButton("Rome");
+        romeButton = new MyButton("Rome");
         romeButton.setTextFill(Color.WHITE);
         romeButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -92,8 +95,7 @@ public class ChooseCityWindow {
             romeButton.setEffect(new InnerShadow(0, Color.WHITE));
         });
         romeButton.setOnAction(e -> {
-            Main.window.setScene(new MapViewWindow().getMapViewScene());
-            Constants.playEffect(Constants.clickButton);
+            Controller.chooseCityWindowButtonOnAction("Rome");
         });
         romeVbox.getChildren().add(romeButton);
         romeVbox.setAlignment(Pos.CENTER);
@@ -107,7 +109,7 @@ public class ChooseCityWindow {
                         BackgroundRepeat.NO_REPEAT,
                         BackgroundPosition.CENTER, vboxBackgroundSize);
         spartaVbox.setBackground(new Background(backgroundImageSparta));
-        MyButton spartaButton = new MyButton("Sparta");
+        spartaButton = new MyButton("Sparta");
         spartaButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
         spartaButton.setTextFill(Color.WHITE);
@@ -125,12 +127,10 @@ public class ChooseCityWindow {
             spartaButton.setEffect(new InnerShadow(0, Color.WHITE));
         });
         spartaButton.setOnAction(e -> {
-            Main.window.setScene(new MapViewWindow().getMapViewScene());
-            Constants.playEffect(Constants.clickButton);
+            Controller.chooseCityWindowButtonOnAction("Sparta");
         });
         spartaVbox.getChildren().add(spartaButton);
         spartaVbox.setAlignment(Pos.CENTER);
-
 
         allCitiesHbox.getChildren().addAll(cairoVbox, romeVbox, spartaVbox);
 
