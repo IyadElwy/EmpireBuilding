@@ -52,7 +52,6 @@ public class SettingsWindow {
         continueGameButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         continueGameButton.setTextFill(Color.DARKGOLDENROD);
-//        continueGameButton.setMinSize(200, 200);
         continueGameButton.setOnAction(event -> {
             Controller.settingsButtonOnAction("Back");
         });

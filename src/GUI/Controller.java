@@ -71,11 +71,20 @@ public class Controller {
     }
 
 
+    public static Stage showSettingsStage;
+    public static void settingsButtonPressed() {
+        showSettingsStage = new Stage();
+        showSettingsStage.initModality(Modality.APPLICATION_MODAL);
+        showSettingsStage.setScene(new SettingsWindow().getSettingsScene());
+        showSettingsStage.showAndWait();
+    }
+
+
     //  SettingsWindow
     public static void settingsButtonOnAction(String choice) {
         if (choice.equals("Back")) {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new MapViewWindow().getMapViewScene());
+            showSettingsStage.close();
         } else {
             Constants.playEffect(Constants.clickButton);
             System.exit(0);
@@ -84,6 +93,7 @@ public class Controller {
 
 
     //    CityOrArmyWindow
+    public static Stage showArmyWindowStage;
     public static void chooseCityOrArmy(String choice) {
         if (choice.equals("City")) {
             Constants.playEffect(Constants.clickButton);
@@ -91,25 +101,28 @@ public class Controller {
 
         } else {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new ShowArmyWindow().getShowArmyScene());
+            showArmyWindowStage = new Stage();
+            showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
+            showArmyWindowStage.setScene(new ShowArmyWindow().getShowArmyScene());
+            showArmyWindowStage.showAndWait();
         }
     }
 
 
     //    ShowArmyWindow
-    public static void updateTitleLabel() {
+    public static void updateShowArmyWindowTitleLabel() {
 
     }
 
-    public static void updateStatusTextField() {
+    public static void updateShowArmyWindowStatusTextField() {
 
     }
 
-    public static void updateMarchingToCityTextField() {
+    public static void updateShowArmyWindowMarchingToCityTextField() {
 
     }
 
-    public static void updateBesiegingCityTextField() {
+    public static void updateShowArmyWindowBesiegingCityTextField() {
 
     }
 
@@ -117,12 +130,13 @@ public class Controller {
         Constants.playEffect(Constants.clickButton);
     }
 
+
     public static void showArmyWindowBackButtonOnAction() {
         Constants.playEffect(Constants.clickButton);
-        Main.window.setScene(new MapViewWindow().getMapViewScene());
+        showArmyWindowStage.close();
     }
 
-    public static ObservableList<UnitsHelperClass> putUnits() {
+    public static ObservableList<UnitsHelperClass> putShowArmyWindowUnits() {
         ObservableList<UnitsHelperClass> unitsObservableList = FXCollections.observableArrayList();
         unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
         unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
@@ -149,23 +163,38 @@ public class Controller {
 
     }
 
+//    public static Stage defendingArmyStatusFromBattleField;
     public static void showDefendingArmyStatus() {
-
+        Constants.playEffect(Constants.clickButton);
+        showDefendingArmiesWindow = new Stage();
+        showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow().getScene());
+        showDefendingArmiesWindow.showAndWait();
     }
 
     public static void showAttackingArmyStatus() {
-
+        Constants.playEffect(Constants.clickButton);
+        showArmyWindowStage = new Stage();
+        showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
+        showArmyWindowStage.setScene(new ShowArmyWindow().getShowArmyScene());
+        showArmyWindowStage.showAndWait();
     }
 
+    public static Stage attackWithWindow;
     public static void chooseNextAttack() {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setScene(new AttackWithWindow().getAttackWithScene());
-        window.showAndWait();
+        Constants.playEffect(Constants.clickButton);
+        attackWithWindow = new Stage();
+        attackWithWindow.initModality(Modality.APPLICATION_MODAL);
+        attackWithWindow.setScene(new AttackWithWindow().getAttackWithScene());
+        attackWithWindow.showAndWait();
     }
 
 
-//    AttackWith Window
+    //    AttackWith Window
+    public static void goBackFromAttackWithWindow() {
+        Constants.playEffect(Constants.clickButton);
+        attackWithWindow.close();
+    }
 
 
     //    CityViewWindow
@@ -194,26 +223,47 @@ public class Controller {
 
     }
 
+    public static Stage editBuildingwindow;
     public static void buildButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
+        editBuildingwindow = new Stage();
+        editBuildingwindow.initModality(Modality.APPLICATION_MODAL);
+        editBuildingwindow.setScene(new EditBuildingWindow().getEditBuildingScene());
+        editBuildingwindow.showAndWait();
     }
 
+    public static Stage showControlledArmiesWindow;
     public static void armiesButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
+        showControlledArmiesWindow = new Stage();
+        showControlledArmiesWindow.initModality(Modality.APPLICATION_MODAL);
+        showControlledArmiesWindow.setScene(new ShowControlledArmiesWindow().getScene());
+        showControlledArmiesWindow.showAndWait();
     }
 
+    public static Stage showDefendingArmiesWindow;
     public static void defendingArmyButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
+        showDefendingArmiesWindow = new Stage();
+        showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow().getScene());
+        showDefendingArmiesWindow.showAndWait();
     }
 
+    public static Stage showAttackStrategyWindow;
     public static void attackButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
+        showAttackStrategyWindow = new Stage();
+        showAttackStrategyWindow.initModality(Modality.APPLICATION_MODAL);
+        showAttackStrategyWindow.setScene(new AttackStrategyWindow().getScene());
+        showAttackStrategyWindow.showAndWait();
     }
 
 //    EditBuildingWindow
 
     public static void goBackToCityFromEditBuilding() {
-        Main.window.setScene(new CityViewWindow().getCityViewScene());
+        Constants.playEffect(Constants.clickButton);
+        editBuildingwindow.close();
     }
 
     public static String getValueChoiceBox() {
@@ -221,15 +271,15 @@ public class Controller {
     }
 
     public static void upgradeBuildingButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
     }
 
     public static void harvestButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
     }
 
     public static void recruitButtonPressed() {
-
+        Constants.playEffect(Constants.clickButton);
     }
 
     public static void updateBuildingLevelLabel() {
@@ -237,10 +287,69 @@ public class Controller {
     }
 
 
-
-//    GameOverWindow
+    //    GameOverWindow
     public static void upDateGameEndResult() {
 
+    }
+
+
+    //    ShowControlledArmiesWindow
+    public static void controlledArmyOfCityChosen(String city) {
+        Constants.playEffect(Constants.clickButton);
+        showArmyWindowStage = new Stage();
+        showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
+        showArmyWindowStage.setScene(new ShowArmyWindow().getShowArmyScene());
+        showArmyWindowStage.showAndWait();
+    }
+
+    public static void goBackControlledArmiesWindow() {
+        Constants.playEffect(Constants.clickButton);
+        showControlledArmiesWindow.close();
+    }
+
+
+//    ShowDefendingArmyOfCityWindow
+
+    public static void showDefendingArmyWindowBackButtonOnAction() {
+        Constants.playEffect(Constants.clickButton);
+        showDefendingArmiesWindow.close();
+    }
+
+    public static ObservableList<UnitsHelperClass> putDefendingArmyUnits() {
+        ObservableList<UnitsHelperClass> unitsObservableList = FXCollections.observableArrayList();
+        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Infantry(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Infantry(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
+        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
+        return unitsObservableList;
+    }
+
+
+    //    RelocateWindow
+    public static void updateButtonTextRelocate() {
+
+    }
+
+    public static void relocateUnitButtonPressed() {
+        Constants.playEffect(Constants.clickButton);
+        UnitsHelperClass.relocateStage.close();
+    }
+
+
+    //    AttackStrategyWindow
+    public static void cityToAttackButtonPressed() {
+        Constants.playEffect(Constants.clickButton);
+        showAttackStrategyWindow.close();
+        Main.window.setScene(new BattleFieldWindow().getScene());
+    }
+
+    public static void autoresolveButtonPressed() {
+        Constants.playEffect(Constants.clickButton);
     }
 
 

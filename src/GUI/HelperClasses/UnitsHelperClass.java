@@ -1,7 +1,11 @@
 package GUI.HelperClasses;
 
+import GUI.BuiltWindow.AttackWithWindow;
+import GUI.BuiltWindow.RelocateToWindow;
+import GUI.Constants;
+import GUI.Controller;
 import GUI.CustomControllers.MyButton;
-import javafx.scene.control.RadioButton;
+import javafx.stage.Stage;
 import units.Archer;
 import units.Cavalry;
 import units.Unit;
@@ -13,6 +17,8 @@ public class UnitsHelperClass {
     private int maxSoldierConunt;
     private int currentSoldierCount;
     private String type;
+
+    public static Stage relocateStage;
 
     public UnitsHelperClass(Unit unit) {
         this.level = unit.getLevel();
@@ -29,14 +35,17 @@ public class UnitsHelperClass {
         }
 
         relocateButton.setOnAction(e -> {
-
+            Constants.playEffect(Constants.clickButton);
+            relocateStage = new Stage();
+            relocateStage.setScene(new RelocateToWindow().getScene());
+            relocateStage.showAndWait();
         });
 
         attackButton.setOnAction(e -> {
-
+            Constants.playEffect(Constants.clickButton);
+            Controller.attackWithWindow.close();
         });
     }
-
 
 
     public MyButton getAttackButton() {

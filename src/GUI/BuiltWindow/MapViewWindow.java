@@ -69,7 +69,7 @@ public class MapViewWindow {
 
         settingsButton.setOnAction(e -> {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new SettingsWindow().getSettingsScene());
+            Controller.settingsButtonPressed();
         });
 
 

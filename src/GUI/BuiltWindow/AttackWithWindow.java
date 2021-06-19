@@ -93,15 +93,27 @@ public class AttackWithWindow {
 
         ShowArmyWindow.tableView = new MyTableView();
         ShowArmyWindow.tableView.setEditable(false);
-        ShowArmyWindow.tableView.setItems(Controller.putUnits());
+        ShowArmyWindow.tableView.setItems(Controller.putShowArmyWindowUnits());
         ShowArmyWindow.tableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
                 currentSoldiersColumn,
                 radioButtonColumn);
 
 
+
+        MyButton backButton = new MyButton("Back");
+        backButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 50));
+        backButton.setPadding(new Insets(50, 50, 50, 50));
+        backButton.setTextFill(Color.DARKGOLDENROD);
+        backButton.setOnAction(event -> {
+            Controller.goBackFromAttackWithWindow();
+        });
+
+
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
         buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
+        buttonsHbox.getChildren().add(backButton);
 
 
 

@@ -15,8 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -25,6 +23,7 @@ public class CityViewWindow {
     public static MyLabel cityNameLabel;
     public static MyLabel playerGoldAmountLabel;
     public static MyLabel playerFoodAmountLabel;
+    public static MyLabel turnsLabel;
 
     private final MyScene cityViewScene;
     public static MyGridPane cityViewGridPane;
@@ -77,6 +76,11 @@ public class CityViewWindow {
                 "-Regular.ttf").toURI().toString(), 30));
         playerFoodAmountLabel.setTextFill(Color.MAROON);
 
+        turnsLabel = new MyLabel("Turns: 00");
+        turnsLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 30));
+        turnsLabel.setTextFill(Color.MAROON);
+
 
         MyButton buildButton = new MyButton("Build");
         buildButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
@@ -85,10 +89,7 @@ public class CityViewWindow {
         buildButton.setMinSize(50, 50);
         buildButton.setOpacity(0.8);
         buildButton.setOnAction(e -> {
-            Stage window = new Stage();
-            window.initModality(Modality.APPLICATION_MODAL);
-            window.setScene(new EditBuildingWindow().getEditBuildingScene());
-            window.showAndWait();
+            Controller.buildButtonPressed();
         });
 
         MyButton armiesButton = new MyButton("Armies");
@@ -98,7 +99,7 @@ public class CityViewWindow {
         armiesButton.setMinSize(50, 50);
         armiesButton.setOpacity(0.8);
         armiesButton.setOnAction(e -> {
-            Controller.openMapFromCityView();
+            Controller.armiesButtonPressed();
         });
 
         MyButton defendingArmyButton = new MyButton("Defending Army");
@@ -108,7 +109,7 @@ public class CityViewWindow {
         defendingArmyButton.setMinSize(50, 50);
         defendingArmyButton.setOpacity(0.8);
         defendingArmyButton.setOnAction(e -> {
-            Controller.openMapFromCityView();
+            Controller.defendingArmyButtonPressed();
         });
 
         MyButton attackButton = new MyButton("Attack");
@@ -118,7 +119,7 @@ public class CityViewWindow {
         attackButton.setMinSize(50, 50);
         attackButton.setOpacity(0.8);
         attackButton.setOnAction(e -> {
-            Controller.openMapFromCityView();
+            Controller.attackButtonPressed();
         });
 
 
@@ -185,17 +186,16 @@ public class CityViewWindow {
 
 
         hboxForTopControllers.getChildren().addAll(
+                turnsLabel,
+                Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 cityNameLabel,
-                Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 playerGoldAmountLabel,
                 Constants.spaceButton2(),
                 Constants.spaceButton2(),
-                Constants.spaceButton2(),
                 playerFoodAmountLabel,
-                Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 mapButton);

@@ -60,7 +60,7 @@ public class EditBuildingWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         harvestOrRecruitButton.setTextFill(Color.DARKGOLDENROD);
         harvestOrRecruitButton.setOnAction(event -> {
-
+            Controller.harvestButtonPressed();
         });
 
         MyButton upgrade = new MyButton("Upgrade");
@@ -68,7 +68,7 @@ public class EditBuildingWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         upgrade.setTextFill(Color.DARKGOLDENROD);
         upgrade.setOnAction(event -> {
-
+            Controller.upgradeBuildingButtonPressed();
         });
 
         MyButton backButton = new MyButton("Back");
@@ -77,6 +77,7 @@ public class EditBuildingWindow {
         backButton.setTextFill(Color.DARKGOLDENROD);
         backButton.setOnAction(event -> {
             Controller.goBackToCityFromEditBuilding();
+
         });
 
 
