@@ -4,7 +4,6 @@ import GUI.Constants;
 import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.Layouts.MyGridPane;
-import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -20,8 +19,9 @@ public class MapViewWindow {
 
 
     public MapViewWindow() {
-        Constants.playMusic(Constants.openingMusic);
 
+
+        Constants.playMusic(Constants.openingMusic);
         BackgroundImage backgroundImage = new BackgroundImage(
                 new Image(new File("src/GUI/Resources/mapGame.jpg")
                         .toURI().toString()),
@@ -40,16 +40,31 @@ public class MapViewWindow {
         cairoButton.setOpacity(0);
 
         cairoButton.setOnAction(e -> {
-            Controller.enterCityMapButtonOnAction("Cairo");
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+                if (!Controller.game.getPlayer().getControlledCities().get(i).
+                        getName().equalsIgnoreCase("cairo")) {
+                    new PopUpWindow("Cairo not conquered yet.");
+                } else {
+                    Controller.updateInWhatCity("Cairo");
+                    Controller.enterCityMapButtonOnAction("Cairo");
+                }
+            }
         });
 
         romeButton = new MyButton("rome");
         romeButton.setPrefWidth(400);
         romeButton.setPrefHeight(150);
         romeButton.setOpacity(0);
-
         romeButton.setOnAction(e -> {
-            Controller.enterCityMapButtonOnAction("Rome");
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+                if (!Controller.game.getPlayer().getControlledCities().get(i).
+                        getName().equalsIgnoreCase("rome")) {
+                    new PopUpWindow("Rome not conquered yet.");
+                } else {
+                    Controller.updateInWhatCity("Rome");
+                    Controller.enterCityMapButtonOnAction("Rome");
+                }
+            }
         });
 
 
@@ -59,7 +74,15 @@ public class MapViewWindow {
         spartaButton.setOpacity(0);
 
         spartaButton.setOnAction(e -> {
-            Controller.enterCityMapButtonOnAction("Sparta");
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+                if (!Controller.game.getPlayer().getControlledCities().get(i).
+                        getName().equalsIgnoreCase("sparta")) {
+                    new PopUpWindow("Sparta not conquered yet.");
+                } else {
+                    Controller.updateInWhatCity("Sparta");
+                    Controller.enterCityMapButtonOnAction("Sparta");
+                }
+            }
         });
 
         settingsButton = new MyButton("settings");

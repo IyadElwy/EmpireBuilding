@@ -42,7 +42,14 @@ public class ShowControlledArmiesWindow {
         cairoButton.setPadding(new Insets(50, 50, 50, 50));
         cairoButton.setTextFill(Color.DARKGOLDENROD);
         cairoButton.setOnAction(event -> {
-            Controller.controlledArmyOfCityChosen("Cairo");
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+                if (!Controller.game.getPlayer().getControlledCities().get(i).
+                        getName().equalsIgnoreCase("cairo")) {
+                    new PopUpWindow("Cairo not conquered yet.");
+                } else {
+                    Controller.controlledArmyOfCityChosen("Cairo");
+                }
+            }
         });
 
         MyButton romeButton = new MyButton("Rome");
@@ -51,7 +58,14 @@ public class ShowControlledArmiesWindow {
         romeButton.setPadding(new Insets(50, 50, 50, 50));
         romeButton.setTextFill(Color.DARKGOLDENROD);
         romeButton.setOnAction(event -> {
-            Controller.controlledArmyOfCityChosen("Rome");
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+                if (!Controller.game.getPlayer().getControlledCities().get(i).
+                        getName().equalsIgnoreCase("rome")) {
+                    new PopUpWindow("Rome not conquered yet.");
+                } else {
+                    Controller.controlledArmyOfCityChosen("Rome");
+                }
+            }
         });
 
         MyButton spartaButton = new MyButton("Sparta");
@@ -60,7 +74,14 @@ public class ShowControlledArmiesWindow {
         spartaButton.setPadding(new Insets(50, 50, 50, 50));
         spartaButton.setTextFill(Color.DARKGOLDENROD);
         spartaButton.setOnAction(event -> {
-            Controller.controlledArmyOfCityChosen("Sparta");
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+                if (!Controller.game.getPlayer().getControlledCities().get(i).
+                        getName().equalsIgnoreCase("sparta")) {
+                    new PopUpWindow("Sparta not conquered yet.");
+                } else {
+                    Controller.controlledArmyOfCityChosen("Sparta");
+                }
+            }
         });
 
         MyButton backButton = new MyButton("Back");

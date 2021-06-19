@@ -33,7 +33,8 @@ public class ShowDefendingArmyOfCityWindow {
     public static MyLabel defendingArmytitle;
     public static MyButton backButton;
 
-    public ShowDefendingArmyOfCityWindow() {
+    public ShowDefendingArmyOfCityWindow(String city, boolean ofAttack,
+                                         String attacking) {
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -43,7 +44,11 @@ public class ShowDefendingArmyOfCityWindow {
         MyVbox vbox = new MyVbox();
         vbox.setAlignment(Pos.CENTER);
 
-        defendingArmytitle = new MyLabel("CityName Defending Army");
+        if (ofAttack) {
+            defendingArmytitle = new MyLabel(city +" Defending Army");
+        }else {
+            defendingArmytitle = new MyLabel(city +" Defending Army");
+        }
         defendingArmytitle.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 70));
         defendingArmytitle.setTextFill(Color.DARKGOLDENROD);
@@ -93,7 +98,7 @@ public class ShowDefendingArmyOfCityWindow {
 
         defendingArmytableView = new MyTableView();
         defendingArmytableView.setEditable(false);
-        defendingArmytableView.setItems(Controller.putDefendingArmyUnits());
+        defendingArmytableView.setItems(Controller.putDefendingArmyUnits(Controller.inWhatCity));
         defendingArmytableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
                 currentSoldiersColumn);
 

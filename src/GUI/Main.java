@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static Stage window;
+    public static long startTime = System.nanoTime();
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

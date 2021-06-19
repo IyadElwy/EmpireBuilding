@@ -21,7 +21,7 @@ import java.io.File;
 public class SettingsWindow {
     private final MyScene settingsScene;
 
-    public SettingsWindow() {
+    public SettingsWindow(String playerName, String timePlayed) {
 //        Setting the background for page
 
         MyBorderPane settingsLayout = new MyBorderPane();
@@ -92,21 +92,21 @@ public class SettingsWindow {
         playerNameLabel.setTextFill(Color.DARKGOLDENROD);
 
         MyTextField playerNameTextField = new MyTextField();
-        playerNameTextField.setText("Player Name");
+        playerNameTextField.setText(playerName);
         playerNameTextField.setEditable(false);
         playerNameTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));
         playerNameTextField.setStyle("-fx-text-inner-color: #6A1412");
 
 
-        MyLabel timePlayedLabel = new MyLabel("Time Played:");
+        MyLabel timePlayedLabel = new MyLabel("Time played:");
         timePlayedLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));
         timePlayedLabel.setPadding(new Insets(0, 20, 0, 0));
         timePlayedLabel.setTextFill(Color.DARKGOLDENROD);
 
         MyTextField timePlayedTextField = new MyTextField();
-        timePlayedTextField.setText("00:00:00");
+        timePlayedTextField.setText(timePlayed + " seconds");
         timePlayedTextField.setEditable(false);
         timePlayedTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));

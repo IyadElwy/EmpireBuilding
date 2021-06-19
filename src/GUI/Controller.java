@@ -2,15 +2,31 @@ package GUI;
 
 import GUI.BuiltWindow.*;
 import GUI.HelperClasses.UnitsHelperClass;
+import buildings.*;
+import engine.City;
+import engine.Game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import units.Archer;
-import units.Cavalry;
-import units.Infantry;
+import units.*;
 
 public class Controller {
+    public static Game game;
+    public static String playerName;
+    public static String playerCity;
+
+    public static String inWhatCity;
+    public static int farmLevel = 0;
+    public static int marketLevel = 0;
+    public static int archeryRangeLevel = 0;
+    public static int barracksLevel = 0;
+    public static int stableLevel = 0;
+
+    public static void updateInWhatCity(String city) {
+        inWhatCity = city;
+    }
+
 
     //    WelcomeWindow
     public static void welcomeWindowStartGameButtonAction() {
@@ -29,6 +45,7 @@ public class Controller {
             GameDescriptionWindow gameDescriptionWindow =
                     new GameDescriptionWindow();
             Main.window.setScene(gameDescriptionWindow.getGameDescriptionScene());
+            playerName = EnterNameWindow.textField.getText();
         });
     }
 
@@ -46,17 +63,24 @@ public class Controller {
         if (cityName.equals("Cairo")) {
             Main.window.setScene(new MapViewWindow().getMapViewScene());
             Constants.playEffect(Constants.clickButton);
+            playerCity = "Cairo";
         } else if (cityName.equals("Rome")) {
             Main.window.setScene(new MapViewWindow().getMapViewScene());
             Constants.playEffect(Constants.clickButton);
+            playerCity = "Rome";
         } else if (cityName.equals("Sparta")) {
             Main.window.setScene(new MapViewWindow().getMapViewScene());
             Constants.playEffect(Constants.clickButton);
+            playerCity = "Sparta";
+        }
+        try {
+            game = new Game(playerName, playerCity);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
 
-    //    MapViewWindow
     public static void enterCityMapButtonOnAction(String cityName) {
         if (cityName.equals("Cairo")) {
             Constants.playEffect(Constants.clickButton);
@@ -72,10 +96,16 @@ public class Controller {
 
 
     public static Stage showSettingsStage;
+
     public static void settingsButtonPressed() {
+        long endTime = System.nanoTime();
+        long totalTime = endTime - Main.startTime;
+
         showSettingsStage = new Stage();
         showSettingsStage.initModality(Modality.APPLICATION_MODAL);
-        showSettingsStage.setScene(new SettingsWindow().getSettingsScene());
+        showSettingsStage.setScene(new SettingsWindow(game.getPlayer().getName(),
+                Long.toString(totalTime / 1000000000)
+        ).getSettingsScene());
         showSettingsStage.showAndWait();
     }
 
@@ -94,10 +124,138 @@ public class Controller {
 
     //    CityOrArmyWindow
     public static Stage showArmyWindowStage;
+
     public static void chooseCityOrArmy(String choice) {
+        City currentCity = null;
+
+
         if (choice.equals("City")) {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityViewWindow().getCityViewScene());
+            if (inWhatCity.equalsIgnoreCase("cairo")) {
+
+                for (City city : game.getPlayer().getControlledCities()
+                ) {
+                    if (city.getName().equalsIgnoreCase("cairo")) {
+                        currentCity = city;
+                    }
+                }
+
+                for (Building building : currentCity.getEconomicalBuildings()
+                ) {
+                    if (building instanceof Market) {
+                        marketLevel = building.getLevel();
+                    } else {
+                        farmLevel = building.getLevel();
+                    }
+                }
+
+                for (Building building : currentCity.getMilitaryBuildings()
+                ) {
+                    if (building instanceof ArcheryRange) {
+                        archeryRangeLevel = building.getLevel();
+                    } else if (building instanceof Barracks) {
+                        barracksLevel = building.getLevel();
+                    } else {
+                        stableLevel = building.getLevel();
+                    }
+                }
+
+                Main.window.setScene(new CityViewWindow(
+                        inWhatCity
+                        ,
+                        Double.toString(game.getPlayer().getTreasury()),
+                        Double.toString(game.getPlayer().getFood()),
+                        Integer.toString(game.getCurrentTurnCount()), Integer.toString(marketLevel),
+                        Integer.toString(farmLevel),
+                        Integer.toString(archeryRangeLevel),
+                        Integer.toString(stableLevel),
+                        Integer.toString(barracksLevel)
+                ).getCityViewScene());
+
+
+            } else if (inWhatCity.equalsIgnoreCase("rome")) {
+
+                for (City city : game.getPlayer().getControlledCities()
+                ) {
+                    if (city.getName().equalsIgnoreCase("rome")) {
+                        currentCity = city;
+                    }
+                }
+
+                for (Building building : currentCity.getEconomicalBuildings()
+                ) {
+                    if (building instanceof Market) {
+                        marketLevel = building.getLevel();
+                    } else {
+                        farmLevel = building.getLevel();
+                    }
+                }
+
+                for (Building building : currentCity.getMilitaryBuildings()
+                ) {
+                    if (building instanceof ArcheryRange) {
+                        archeryRangeLevel = building.getLevel();
+                    } else if (building instanceof Barracks) {
+                        barracksLevel = building.getLevel();
+                    } else {
+                        stableLevel = building.getLevel();
+                    }
+                }
+
+                Main.window.setScene(new CityViewWindow(
+                        inWhatCity
+                        ,
+                        Double.toString(game.getPlayer().getTreasury()),
+                        Double.toString(game.getPlayer().getFood()),
+                        Integer.toString(game.getCurrentTurnCount()), Integer.toString(marketLevel),
+                        Integer.toString(farmLevel),
+                        Integer.toString(archeryRangeLevel),
+                        Integer.toString(stableLevel),
+                        Integer.toString(barracksLevel)
+                ).getCityViewScene());
+
+            } else if (inWhatCity.equalsIgnoreCase("sparta")) {
+
+                for (City city : game.getPlayer().getControlledCities()
+                ) {
+                    if (city.getName().equalsIgnoreCase("sparta")) {
+                        currentCity = city;
+                    }
+                }
+
+
+                for (Building building : currentCity.getEconomicalBuildings()
+                ) {
+                    if (building instanceof Market) {
+                        marketLevel = building.getLevel();
+                    } else {
+                        farmLevel = building.getLevel();
+                    }
+                }
+
+                for (Building building : currentCity.getMilitaryBuildings()
+                ) {
+                    if (building instanceof ArcheryRange) {
+                        archeryRangeLevel = building.getLevel();
+                    } else if (building instanceof Barracks) {
+                        barracksLevel = building.getLevel();
+                    } else {
+                        stableLevel = building.getLevel();
+                    }
+                }
+
+                Main.window.setScene(new CityViewWindow(
+                        inWhatCity
+                        ,
+                        Double.toString(game.getPlayer().getTreasury()),
+                        Double.toString(game.getPlayer().getFood()),
+                        Integer.toString(game.getCurrentTurnCount()), Integer.toString(marketLevel),
+                        Integer.toString(farmLevel),
+                        Integer.toString(archeryRangeLevel),
+                        Integer.toString(stableLevel),
+                        Integer.toString(barracksLevel)
+                ).getCityViewScene());
+            }
 
         } else {
             Constants.playEffect(Constants.clickButton);
@@ -137,16 +295,29 @@ public class Controller {
     }
 
     public static ObservableList<UnitsHelperClass> putShowArmyWindowUnits() {
-        ObservableList<UnitsHelperClass> unitsObservableList = FXCollections.observableArrayList();
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Infantry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Infantry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
+
+        ObservableList<UnitsHelperClass> unitsObservableList =
+                FXCollections.observableArrayList();
+
+        for (Army army : game.getPlayer().getControlledArmies()
+        ) {
+            System.out.println(army);
+            for (Unit unit : army.getUnits()) {
+                if (unit instanceof Archer) {
+                    unitsObservableList.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
+                            unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+                            unit.getSiegeUpkeep())));
+                } else if (unit instanceof Infantry) {
+                    unitsObservableList.add(new UnitsHelperClass(new Infantry(unit.getLevel(), unit.getMaxSoldierCount(),
+                            unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+                            unit.getSiegeUpkeep())));
+                } else if (unit instanceof Cavalry) {
+                    unitsObservableList.add(new UnitsHelperClass(new Cavalry(unit.getLevel(), unit.getMaxSoldierCount(),
+                            unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+                            unit.getSiegeUpkeep())));
+                }
+            }
+        }
         return unitsObservableList;
     }
 
@@ -163,12 +334,13 @@ public class Controller {
 
     }
 
-//    public static Stage defendingArmyStatusFromBattleField;
+    //    public static Stage defendingArmyStatusFromBattleField;
     public static void showDefendingArmyStatus() {
         Constants.playEffect(Constants.clickButton);
         showDefendingArmiesWindow = new Stage();
         showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
-        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow().getScene());
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(inWhatCity, true,
+                "cityBeingAttacked").getScene());
         showDefendingArmiesWindow.showAndWait();
     }
 
@@ -181,6 +353,7 @@ public class Controller {
     }
 
     public static Stage attackWithWindow;
+
     public static void chooseNextAttack() {
         Constants.playEffect(Constants.clickButton);
         attackWithWindow = new Stage();
@@ -203,17 +376,6 @@ public class Controller {
         Main.window.setScene(new MapViewWindow().getMapViewScene());
     }
 
-    public static void updateCityName() {
-
-    }
-
-    public static void updatePlayerGoldAmount() {
-
-    }
-
-    public static void updatePlayerFoodAmount() {
-
-    }
 
     public static void addBuildingToCity() {
 
@@ -224,15 +386,22 @@ public class Controller {
     }
 
     public static Stage editBuildingwindow;
+
     public static void buildButtonPressed() {
         Constants.playEffect(Constants.clickButton);
+
         editBuildingwindow = new Stage();
         editBuildingwindow.initModality(Modality.APPLICATION_MODAL);
-        editBuildingwindow.setScene(new EditBuildingWindow().getEditBuildingScene());
+        editBuildingwindow.setScene(new EditBuildingWindow(Integer.toString(marketLevel),
+                Integer.toString(farmLevel),
+                Integer.toString(archeryRangeLevel),
+                Integer.toString(stableLevel),
+                Integer.toString(barracksLevel)).getEditBuildingScene());
         editBuildingwindow.showAndWait();
     }
 
     public static Stage showControlledArmiesWindow;
+
     public static void armiesButtonPressed() {
         Constants.playEffect(Constants.clickButton);
         showControlledArmiesWindow = new Stage();
@@ -242,15 +411,18 @@ public class Controller {
     }
 
     public static Stage showDefendingArmiesWindow;
-    public static void defendingArmyButtonPressed() {
+
+    public static void defendingArmyButtonPressed(String city) {
         Constants.playEffect(Constants.clickButton);
         showDefendingArmiesWindow = new Stage();
         showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
-        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow().getScene());
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(inWhatCity,
+                false, "none").getScene());
         showDefendingArmiesWindow.showAndWait();
     }
 
     public static Stage showAttackStrategyWindow;
+
     public static void attackButtonPressed() {
         Constants.playEffect(Constants.clickButton);
         showAttackStrategyWindow = new Stage();
@@ -263,19 +435,107 @@ public class Controller {
 
     public static void goBackToCityFromEditBuilding() {
         Constants.playEffect(Constants.clickButton);
+        Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
         editBuildingwindow.close();
     }
 
-    public static String getValueChoiceBox() {
-        return EditBuildingWindow.buildingChoiceBox.getValue();
+
+    public static void buildButtonPressed(String building) {
+        game.endTurn();
+        City currentCity = null;
+        for (City city : game.getPlayer().getControlledCities()
+        ) {
+            if (city.getName().equalsIgnoreCase(inWhatCity)) {
+                currentCity = city;
+            }
+        }
+        try {
+            game.getPlayer().build(building, currentCity.getName());
+        } catch (Exception e) {
+            new PopUpWindow("Not Enough Gold");
+        }
+        Constants.playEffect(Constants.clickButton);
+        goBackToCityFromEditBuilding();
     }
 
-    public static void upgradeBuildingButtonPressed() {
+    public static void upgradeButtonPressed(String building) {
+        game.endTurn();
+        City currentCity = null;
+        for (City city : game.getPlayer().getControlledCities()
+        ) {
+            if (city.getName().equalsIgnoreCase(inWhatCity)) {
+                currentCity = city;
+            }
+        }
+
+
+        Building buildingToUpgrade = null;
+        for (Building buildingTemp : currentCity.getMilitaryBuildings()
+        ) {
+            if (buildingTemp instanceof ArcheryRange && building.equals("ArcheryRange")) {
+                buildingToUpgrade = buildingTemp;
+            } else if (buildingTemp instanceof Stable && building.equals("Stable")) {
+                buildingToUpgrade = buildingTemp;
+
+            } else if (buildingTemp instanceof Barracks && building.equals(
+                    "Barracks")) {
+                buildingToUpgrade = buildingTemp;
+
+            } else if (buildingTemp instanceof Market && building.equals("Market")) {
+                buildingToUpgrade = buildingTemp;
+
+            } else if (buildingTemp instanceof Farm && building.equals("Farm")) {
+                buildingToUpgrade = buildingTemp;
+
+            }
+        }
+
+        try {
+            game.getPlayer().upgradeBuilding(buildingToUpgrade);
+        } catch (Exception e) {
+            System.out.println(e);
+            new PopUpWindow("Not Enough Gold\nOr Not Built Yet\nOr Building In " +
+                    "Cool Down");
+        }
         Constants.playEffect(Constants.clickButton);
+        goBackToCityFromEditBuilding();
     }
 
-    public static void harvestButtonPressed() {
-        Constants.playEffect(Constants.clickButton);
+    public static void recruitButtonPressed(String building) {
+        game.endTurn();
+        City currentCity = null;
+        for (City city : game.getPlayer().getControlledCities()
+        ) {
+            if (city.getName().equalsIgnoreCase(inWhatCity)) {
+                currentCity = city;
+            }
+        }
+
+
+        String typeToRecruitFrom = null;
+        for (Building buildingTemp : currentCity.getMilitaryBuildings()
+        ) {
+            if (buildingTemp instanceof ArcheryRange && building.equals("ArcheryRange")) {
+                typeToRecruitFrom = "archer";
+            } else if (buildingTemp instanceof Stable && building.equals("Stable")) {
+                typeToRecruitFrom = "cavalry";
+
+            } else if (buildingTemp instanceof Barracks && building.equals(
+                    "Barracks")) {
+                typeToRecruitFrom = "infantry";
+
+            }
+
+            try {
+                game.getPlayer().recruitUnit(typeToRecruitFrom, inWhatCity);
+            } catch (Exception e) {
+                System.out.println(e);
+                new PopUpWindow("Not Enough Gold\nOr Not Built Yet\nOr Building In " +
+                        "Cool Down");
+            }
+            Constants.playEffect(Constants.clickButton);
+            goBackToCityFromEditBuilding();
+        }
     }
 
     public static void recruitButtonPressed() {
@@ -315,17 +575,35 @@ public class Controller {
         showDefendingArmiesWindow.close();
     }
 
-    public static ObservableList<UnitsHelperClass> putDefendingArmyUnits() {
+    public static ObservableList<UnitsHelperClass> putDefendingArmyUnits(String city) {
         ObservableList<UnitsHelperClass> unitsObservableList = FXCollections.observableArrayList();
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Infantry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Infantry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Archer(2, 2, 3.3, 2.3, 3)));
-        unitsObservableList.add(new UnitsHelperClass(new Cavalry(2, 2, 3.3, 2.3, 3)));
+
+        Army army = null;
+
+        System.out.println(game.getPlayer().getControlledCities().get(0).getDefendingArmy().getUnits().size());
+        for (City cityTemp : game.getPlayer().getControlledCities()
+        ) {
+            if (cityTemp.getName().equalsIgnoreCase(city)) {
+                army = cityTemp.getDefendingArmy();
+            }
+        }
+
+        for (Unit unit : army.getUnits()) {
+            if (unit instanceof Archer) {
+                unitsObservableList.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
+                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+                        unit.getSiegeUpkeep())));
+            } else if (unit instanceof Infantry) {
+                unitsObservableList.add(new UnitsHelperClass(new Infantry(unit.getLevel(), unit.getMaxSoldierCount(),
+                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+                        unit.getSiegeUpkeep())));
+            } else if (unit instanceof Cavalry) {
+                unitsObservableList.add(new UnitsHelperClass(new Cavalry(unit.getLevel(), unit.getMaxSoldierCount(),
+                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+                        unit.getSiegeUpkeep())));
+            }
+        }
+
         return unitsObservableList;
     }
 

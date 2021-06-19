@@ -24,9 +24,12 @@ public class EditBuildingWindow {
 
     public static ChoiceBox<String> buildingChoiceBox;
     public static MyLabel buildingLevelLabel;
+    public static MyButton harvestOrRecruitButton;
 
 
-    public EditBuildingWindow() {
+    public EditBuildingWindow(String marketLevel, String farmLevel,
+                              String archeryRangeLevel, String stablesLevel,
+                              String barracksLevel) {
 
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
@@ -39,12 +42,27 @@ public class EditBuildingWindow {
 
 
         buildingChoiceBox = new MyChoiceBox();
-        buildingChoiceBox.getItems().addAll("Stables", "Barracks", "Archery Range"
+        buildingChoiceBox.getItems().addAll("Stable", "Barracks", "ArcheryRange"
                 , "Market", "Farm");
         buildingChoiceBox.setPrefSize(300, 100);
         buildingChoiceBox.setStyle("-fx-font-size : 20pt;");
         buildingChoiceBox.setOnAction(e -> {
-
+            if (buildingChoiceBox.getValue().equals("Stable")) {
+                buildingLevelLabel.setText("Level: " + stablesLevel);
+                harvestOrRecruitButton.setText("Recruit");
+            } else if (buildingChoiceBox.getValue().equals("Barracks")) {
+                buildingLevelLabel.setText("Level: " + barracksLevel);
+                harvestOrRecruitButton.setText("Recruit");
+            } else if (buildingChoiceBox.getValue().equals("ArcheryRange")) {
+                buildingLevelLabel.setText("Level: " + archeryRangeLevel);
+                harvestOrRecruitButton.setText("Recruit");
+            } else if (buildingChoiceBox.getValue().equals("Market")) {
+                buildingLevelLabel.setText("Level: " + marketLevel);
+                harvestOrRecruitButton.setText("Harvest");
+            } else if (buildingChoiceBox.getValue().equals("Farm")) {
+                buildingLevelLabel.setText("Level: " + farmLevel);
+                harvestOrRecruitButton.setText("Harvest");
+            }
         });
 
 
@@ -54,32 +72,29 @@ public class EditBuildingWindow {
         buildingLevelLabel.setTextFill(Color.DARKGOLDENROD);
 
 
-
-        MyButton harvestOrRecruitButton = new MyButton("Action");
+        harvestOrRecruitButton = new MyButton("Action");
         harvestOrRecruitButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         harvestOrRecruitButton.setTextFill(Color.DARKGOLDENROD);
         harvestOrRecruitButton.setOnAction(event -> {
-            Controller.harvestButtonPressed();
+            Controller.recruitButtonPressed(buildingChoiceBox.getValue());
         });
 
-        MyButton upgrade = new MyButton("Upgrade");
+        MyButton upgrade = new MyButton("Build");
         upgrade.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         upgrade.setTextFill(Color.DARKGOLDENROD);
         upgrade.setOnAction(event -> {
-            Controller.upgradeBuildingButtonPressed();
+            Controller.buildButtonPressed(buildingChoiceBox.getValue());
         });
 
-        MyButton backButton = new MyButton("Back");
+        MyButton backButton = new MyButton("Upgrade");
         backButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         backButton.setTextFill(Color.DARKGOLDENROD);
         backButton.setOnAction(event -> {
-            Controller.goBackToCityFromEditBuilding();
-
+            Controller.upgradeButtonPressed(buildingChoiceBox.getValue());
         });
-
 
 
         hboxTop.getChildren().addAll(buildingChoiceBox,

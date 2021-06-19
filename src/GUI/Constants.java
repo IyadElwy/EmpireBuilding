@@ -12,7 +12,6 @@ import java.io.File;
 public class Constants {
 
 
-
     public static final double GAME_WINDOW_SIZE_X =
             Screen.getPrimary().getBounds().getMaxX() - 5;
     public static final double GAME_WINDOW_SIZE_Y =
@@ -25,6 +24,16 @@ public class Constants {
     public static Media cityMusic = new Media(new File("src/GUI/Resources/peace_music.mp3").
             toURI().toString());
     public static Media battleMusic = new Media(new File("src/GUI/Resources/battle_music.mp3")
+            .toURI().toString());
+    public static Media horseSound = new Media(new File("src/GUI/Resources/horse_sound.mp3")
+            .toURI().toString());
+    public static Media archerSound = new Media(new File("src/GUI/Resources/bow_arrow_sound.mp3")
+            .toURI().toString());
+    public static Media infantrySound = new Media(new File("src/GUI/Resources/sword_battle_sound.mp3")
+            .toURI().toString());
+    public static Media harvestFoodSound = new Media(new File("src/GUI/Resources/harvest_sound.mp3")
+            .toURI().toString());
+    public static Media harvestGoldSound = new Media(new File("src/GUI/Resources/harvest_sound.mp3")
             .toURI().toString());
 
     public static MediaPlayer mediaPlayer = new MediaPlayer(openingMusic);
