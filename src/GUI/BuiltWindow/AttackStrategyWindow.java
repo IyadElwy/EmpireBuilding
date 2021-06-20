@@ -7,6 +7,7 @@ import GUI.CustomControllers.MyLabel;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
 import GUI.Scenes.MyScene;
+import engine.City;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
@@ -19,10 +20,15 @@ import java.io.File;
 
 public class AttackStrategyWindow {
 
+    private static MyButton city2Button;
+    private static MyButton city1Button;
+
     private final MyScene scene;
 
     public AttackStrategyWindow(boolean conquoredCairo, boolean conquoredRome,
-                                boolean conquoredSparta) {
+                                boolean conquoredSparta, boolean button1Active,
+                                boolean button2Active) {
+
 
         String[] cities = new String[2];
         cities[0] = "conquered";
@@ -59,22 +65,96 @@ public class AttackStrategyWindow {
                 "-Regular.ttf").toURI().toString(), 130));
         chooseArmyLabel.setTextFill(Color.DARKGOLDENROD);
 
-        MyButton city1Button = new MyButton(cities[0]);
+        city1Button = new MyButton(cities[0]);
         city1Button.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         city1Button.setTextFill(Color.DARKGOLDENROD);
         city1Button.setOnAction(event -> {
             Controller.cityToAttack = cities[0];
-            Controller.cityToAttackButtonPressed();
+            Controller.roundsUntilArrived =
+                    Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget();
+
+            if (!Controller.game.getPlayer().getControlledArmies().get(0).getCurrentLocation().equalsIgnoreCase(cities[0])) {
+                Controller.game.targetCity(Controller.game.getPlayer().getControlledArmies().get(0), cities[0]);
+                Controller.button2Disabled = true;
+            }
+
+            City cityToAttack = null;
+            for (City city : Controller.game.getAvailableCities()
+            ) {
+                if (city.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                    cityToAttack = city;
+                }
+            }
+            if (Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget() <= 0) {
+                try {
+                    Controller.game.getPlayer().laySiege(
+                            Controller.game.getPlayer().getControlledArmies().get(0),
+                            cityToAttack
+
+                    );
+                    Controller.cityToAttackButtonPressed();
+
+                } catch (Exception e) {
+                    new PopUpWindow(e.toString());
+                    System.out.println(
+                            Controller.game.getPlayer().getControlledArmies().get(0).getCurrentLocation() + " o" +
+                                    cityToAttack.getName()
+                    );
+                }
+            } else {
+                new PopUpWindow("Reached In " +
+                        Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget()
+                        + " Turns");
+            }
+
         });
 
-        MyButton city2Button = new MyButton(cities[1]);
+        city2Button = new MyButton(cities[1]);
         city2Button.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         city2Button.setTextFill(Color.DARKGOLDENROD);
         city2Button.setOnAction(event -> {
             Controller.cityToAttack = cities[1];
-            Controller.cityToAttackButtonPressed();
+            Controller.roundsUntilArrived =
+                    Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget();
+
+            if (!Controller.game.getPlayer().getControlledArmies().get(0).getCurrentLocation().equalsIgnoreCase(cities[1])) {
+                Controller.game.targetCity(Controller.game.getPlayer().getControlledArmies().get(0), cities[1]);
+                Controller.button1Disabled = true;
+            }
+
+            City cityToAttack = null;
+            for (City city : Controller.game.getAvailableCities()
+            ) {
+                if (city.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                    cityToAttack = city;
+                }
+            }
+            if (Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget() <= 0) {
+                try {
+                    Controller.game.getPlayer().laySiege(
+                            Controller.game.getPlayer().getControlledArmies().get(0),
+                            cityToAttack
+
+                    );
+                    Controller.cityToAttackButtonPressed();
+
+                } catch (Exception e) {
+                    new PopUpWindow(e.toString());
+                    System.out.println(
+                            Controller.game.getPlayer().getControlledArmies().get(0).getCurrentLocation() + " o" +
+                                    cityToAttack.getName()
+                    );
+
+                }
+            } else {
+                new PopUpWindow("Reached In " +
+                        Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget()
+                        + " Turns");
+
+            }
+
         });
 
         MyButton autoResolveBtn1 = new MyButton("Auto-Resolve");
@@ -100,6 +180,9 @@ public class AttackStrategyWindow {
         vbox.getChildren().addAll(chooseArmyLabel, Constants.spaceButton2(), hbox);
         hbox.getChildren().addAll(vbox2, Constants.spaceButton(),
                 vbox3);
+
+        city1Button.setDisable(Controller.button1Disabled);
+        city2Button.setDisable(Controller.button2Disabled);
 
         this.scene = new MyScene(vbox);
     }

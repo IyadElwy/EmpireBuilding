@@ -1,5 +1,9 @@
 package engine;
 
+import GUI.BuiltWindow.GameOverWindow;
+import GUI.BuiltWindow.PopUpWindow;
+import GUI.Controller;
+import GUI.Main;
 import buildings.EconomicBuilding;
 import buildings.Farm;
 import buildings.Market;
@@ -134,6 +138,15 @@ public class Game {
     }
 
     public void endTurn() {
+        if (isGameOver()) {
+            Main.window.setScene(new GameOverWindow().getGameOverScene());
+        }
+
+        Controller.roundsUntilArrived--;
+        if (Controller.roundsUntilArrived == 1) {
+            new PopUpWindow("Attack Next Round\nOr You Will Miss\nYour Chance");
+        }
+
         currentTurnCount++;
         double totalUpkeep = 0;
         for (City c : player.getControlledCities()) {
@@ -195,6 +208,7 @@ public class Game {
                 }
             }
         }
+
 
     }
 

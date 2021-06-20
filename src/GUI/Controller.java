@@ -1,7 +1,6 @@
 package GUI;
 
 import GUI.BuiltWindow.*;
-import GUI.HelperClasses.UnitsHelperClass;
 import buildings.*;
 import engine.City;
 import engine.Game;
@@ -9,7 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import units.*;
+import units.Army;
+import units.Unit;
 
 public class Controller {
     public static Game game;
@@ -28,6 +28,12 @@ public class Controller {
     public static boolean conquoredSparta;
 
     public static String cityToAttack;
+
+
+    public static boolean button2Disabled = false;
+    public static boolean button1Disabled = false;
+
+    public static int roundsUntilArrived;
 
     public static void updateInWhatCity(String city) {
         inWhatCity = city;
@@ -311,27 +317,18 @@ public class Controller {
         showArmyWindowStage.close();
     }
 
-    public static ObservableList<UnitsHelperClass> putShowArmyWindowUnits() {
+    public static ObservableList<Unit> unitsObservableList;
 
-        ObservableList<UnitsHelperClass> unitsObservableList =
+    public static ObservableList<Unit> putShowArmyWindowUnits() {
+
+        unitsObservableList =
                 FXCollections.observableArrayList();
 
         for (Army army : game.getPlayer().getControlledArmies()
         ) {
             for (Unit unit : army.getUnits()) {
-                if (unit instanceof Archer) {
-                    unitsObservableList.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
-                            unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-                            unit.getSiegeUpkeep())));
-                } else if (unit instanceof Infantry) {
-                    unitsObservableList.add(new UnitsHelperClass(new Infantry(unit.getLevel(), unit.getMaxSoldierCount(),
-                            unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-                            unit.getSiegeUpkeep())));
-                } else if (unit instanceof Cavalry) {
-                    unitsObservableList.add(new UnitsHelperClass(new Cavalry(unit.getLevel(), unit.getMaxSoldierCount(),
-                            unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-                            unit.getSiegeUpkeep())));
-                }
+                unitsObservableList.add(unit);
+
             }
         }
         return unitsObservableList;
@@ -347,7 +344,8 @@ public class Controller {
     }
 
     public static void updateBattleLog() {
-
+//        BattleFieldWindow.battleLogTextArea.appendText("Battle between " + inWhatCity + " and " + cityToAttack
+//                + " may commence!\nMay the most worthy win.");
     }
 
     //    public static Stage defendingArmyStatusFromBattleField;
@@ -355,25 +353,28 @@ public class Controller {
         Constants.playEffect(Constants.clickButton);
         showDefendingArmiesWindow = new Stage();
         showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
-        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(cityToAttack, true).getScene());
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(cityToAttack, true, false).getScene());
         showDefendingArmiesWindow.showAndWait();
     }
 
+    public static void chooseUnitToAttack() {
+        Constants.playEffect(Constants.clickButton);
+        showDefendingArmiesWindow = new Stage();
+        showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(cityToAttack, true, true).getScene());
+        showDefendingArmiesWindow.showAndWait();
+    }
+
+
     public static void showAttackingArmyStatus() {
         Constants.playEffect(Constants.clickButton);
-        Army army = getArmyOfCity();
         showArmyWindowStage = new Stage();
         showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
-        if (army != null) {
-            showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
-                    army.getCurrentStatus().toString(), army.getTarget(),
-                    Integer.toString(army.getDistancetoTarget()), army.getTarget(),
-                    getCityBeingAttacked(army.getTarget()).getName()).getShowArmyScene());
-        } else {
-            showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
-                    "status", "marching\t", "reached in",
-                    "besieging city\t", "turns besieging").getShowArmyScene());
-        }
+
+        showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
+                "status", "marching\t", "reached in",
+                "besieging city\t", "turns besieging").getShowArmyScene());
+
         showArmyWindowStage.showAndWait();
     }
 
@@ -442,7 +443,7 @@ public class Controller {
         showDefendingArmiesWindow = new Stage();
         showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
         showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(inWhatCity,
-                false).getScene());
+                false, false).getScene());
         showDefendingArmiesWindow.showAndWait();
     }
 
@@ -467,7 +468,7 @@ public class Controller {
         showAttackStrategyWindow = new Stage();
         showAttackStrategyWindow.initModality(Modality.APPLICATION_MODAL);
         showAttackStrategyWindow.setScene(new AttackStrategyWindow(conquoredCairo,
-                conquoredRome, conquoredSparta).getScene());
+                conquoredRome, conquoredSparta, button1Disabled, button2Disabled).getScene());
         showAttackStrategyWindow.showAndWait();
     }
 
@@ -675,11 +676,11 @@ public class Controller {
     public static void updateButtonTextRelocate() {
 
     }
-
-    public static void relocateUnitButtonPressed() {
-        Constants.playEffect(Constants.clickButton);
-        UnitsHelperClass.relocateStage.close();
-    }
+//
+//    public static void relocateUnitButtonPressed() {
+//        Constants.playEffect(Constants.clickButton);
+//        UnitsHelperClass.relocateStage.close();
+//    }
 
 
     //    AttackStrategyWindow

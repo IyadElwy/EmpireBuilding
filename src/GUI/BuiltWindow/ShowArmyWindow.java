@@ -6,7 +6,6 @@ import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTableView;
 import GUI.CustomControllers.MyTextField;
-import GUI.HelperClasses.UnitsHelperClass;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
@@ -14,7 +13,6 @@ import GUI.Layouts.MyVbox;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
@@ -33,7 +31,7 @@ public class ShowArmyWindow {
     public static MyTextField statusTextField;
     public static MyTextField marchingToCityTextField;
     public static MyTextField besiegingCityTextField;
-//    public static MyButton relocateButton;
+    //    public static MyButton relocateButton;
     public static MyButton backButton;
 
     public ShowArmyWindow(String cityToAttack, String status, String marchingToCity,
@@ -123,7 +121,7 @@ public class ShowArmyWindow {
         levelColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "level"));
         maxSoldierColumn.setCellValueFactory(new PropertyValueFactory<>(
-                "maxSoldierConunt"));
+                "maxSoldierCount"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
 //        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -142,13 +140,6 @@ public class ShowArmyWindow {
         buttonsHbox.setAlignment(Pos.CENTER);
         buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
 
-//        relocateButton = new MyButton("Relocate");
-//        relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-//                "-Regular.ttf").toURI().toString(), 50));
-//        relocateButton.setTextFill(Color.DARKGOLDENROD);
-//        relocateButton.setOnAction(event -> {
-//            Controller.showArmyWindowRelocateButtonOnAction();
-//        });
 
         MyButton spaceButton = new MyButton("SP");
         spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +

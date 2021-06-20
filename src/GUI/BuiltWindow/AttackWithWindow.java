@@ -5,7 +5,6 @@ import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTableView;
-import GUI.HelperClasses.UnitsHelperClass;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
@@ -13,7 +12,6 @@ import GUI.Layouts.MyVbox;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
@@ -29,6 +27,7 @@ public class AttackWithWindow {
     public static MyLabel title;
 
     private final MyScene attackWithScene;
+    public static Unit currentAttackingUnit;
 
     public AttackWithWindow() {
         MyBorderPane borderPane = new MyBorderPane();
@@ -84,7 +83,7 @@ public class AttackWithWindow {
         levelColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "level"));
         maxSoldierColumn.setCellValueFactory(new PropertyValueFactory<>(
-                "maxSoldierConunt"));
+                "maxSoldierCount"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
 
@@ -95,7 +94,6 @@ public class AttackWithWindow {
                 currentSoldiersColumn
 //                ,radioButtonColumn
         );
-
 
 
         MyButton backButton = new MyButton("Back");
@@ -113,7 +111,10 @@ public class AttackWithWindow {
         chooseAttckButton.setPadding(new Insets(50, 50, 50, 50));
         chooseAttckButton.setTextFill(Color.DARKGOLDENROD);
         chooseAttckButton.setOnAction(event -> {
-            Controller.goBackFromAttackWithWindow();
+            currentAttackingUnit =
+                    (Unit) ShowArmyWindow.tableView.getSelectionModel().getSelectedItem();
+            Controller.chooseUnitToAttack();
+            Controller.updateBattleLog();
         });
 
 
@@ -122,8 +123,6 @@ public class AttackWithWindow {
         buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
         buttonsHbox.getChildren().addAll(backButton, Constants.spaceButton2(),
                 chooseAttckButton);
-
-
 
 
         hbox.getChildren().add(title);

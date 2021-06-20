@@ -77,7 +77,12 @@ public class EditBuildingWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         harvestOrRecruitButton.setTextFill(Color.DARKGOLDENROD);
         harvestOrRecruitButton.setOnAction(event -> {
-            Controller.recruitButtonPressed(buildingChoiceBox.getValue());
+            try {
+                Controller.recruitButtonPressed(buildingChoiceBox.getValue());
+                Controller.game.endTurn();
+            } catch (Exception e) {
+                new PopUpWindow(e.toString());
+            }
         });
 
         MyButton upgrade = new MyButton("Build");
@@ -85,7 +90,12 @@ public class EditBuildingWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         upgrade.setTextFill(Color.DARKGOLDENROD);
         upgrade.setOnAction(event -> {
-            Controller.buildButtonPressed(buildingChoiceBox.getValue());
+            try {
+                Controller.buildButtonPressed(buildingChoiceBox.getValue());
+                Controller.game.endTurn();
+            } catch (Exception e) {
+                new PopUpWindow(e.toString());
+            }
         });
 
         MyButton backButton = new MyButton("Upgrade");
@@ -93,7 +103,12 @@ public class EditBuildingWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         backButton.setTextFill(Color.DARKGOLDENROD);
         backButton.setOnAction(event -> {
-            Controller.upgradeButtonPressed(buildingChoiceBox.getValue());
+            try {
+                Controller.upgradeButtonPressed(buildingChoiceBox.getValue());
+                Controller.game.endTurn();
+            } catch (Exception e) {
+                new PopUpWindow(e.toString());
+            }
         });
 
 

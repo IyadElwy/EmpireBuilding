@@ -10,6 +10,8 @@ import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
 import GUI.Scenes.MyScene;
+import engine.City;
+import exceptions.FriendlyFireException;
 import exceptions.MaxCapacityException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,6 +26,8 @@ import units.Army;
 import units.Unit;
 
 import java.io.File;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class ShowDefendingArmyOfCityWindow {
 
@@ -33,8 +37,10 @@ public class ShowDefendingArmyOfCityWindow {
     public static MyLabel defendingArmytitle;
     public static MyButton backButton;
     public static MyButton relocateButton;
+    public static MyButton chooseToAttackButton;
 
-    public ShowDefendingArmyOfCityWindow(String city, boolean ofAttack) {
+    public ShowDefendingArmyOfCityWindow(String city, boolean ofAttack,
+                                         boolean chooseToAttack) {
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -133,11 +139,101 @@ public class ShowDefendingArmyOfCityWindow {
             Controller.showDefendingArmyWindowBackButtonOnAction();
         });
 
+        chooseToAttackButton = new MyButton("Choose To Attack");
+        chooseToAttackButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 50));
+        chooseToAttackButton.setTextFill(Color.DARKGOLDENROD);
+        chooseToAttackButton.setOnAction(event -> {
+            try {
+                BattleFieldWindow.mapButton.setDisable(true);
+                BattleFieldWindow.battleLogTextArea.appendText("\n" +
+                        AttackWithWindow.currentAttackingUnit + " attacked " + (Unit) ShowDefendingArmyOfCityWindow.
+                        defendingArmytableView.getSelectionModel().getSelectedItem() + "\n" +
+                        "Current Soldier Count of " + ShowDefendingArmyOfCityWindow.
+                        defendingArmytableView.getSelectionModel().getSelectedItem() + " is \n" + ((Unit) ShowDefendingArmyOfCityWindow.
+                        defendingArmytableView.getSelectionModel().getSelectedItem()).getCurrentSoldierCount() + "\n");
+
+
+                for (Unit unit :
+                        Controller.game.getPlayer().getControlledArmies().get(0).getUnits()
+                ) {
+                    if (unit == AttackWithWindow.currentAttackingUnit) {
+                        for (City cityTemp : Controller.game.getAvailableCities()
+                        ) {
+                            for (Unit unitToAttack : cityTemp.getDefendingArmy().getUnits()
+                            ) {
+                                if (unitToAttack == defendingArmytableView.getSelectionModel().getSelectedItem()) {
+                                    unit.attack(unitToAttack);
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                Controller.showDefendingArmiesWindow.close();
+                Controller.game.endTurn();
+                if (ShowDefendingArmyOfCityWindow.defendingArmytableView.getItems().isEmpty()) {
+                    Controller.game.occupy(AttackWithWindow.currentAttackingUnit.getParentArmy(),
+                            Controller.cityToAttack);
+                    BattleFieldWindow.mapButton.setDisable(false);
+                }
+            } catch (Exception e) {
+//                new PopUpWindow(e.toString());
+                e.printStackTrace();
+            }
+
+            Controller.game.endTurn();
+
+
+            BattleFieldWindow.battleLogTextArea.appendText("\n\nWaiting For " +
+                    "Defending Army To Finish Attack\n\n");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+            Random rand = new Random();
+            int int_random =
+                    rand.nextInt(Controller.game.getPlayer().getControlledArmies().get(0).getUnits().size());
+            int int_random2 =
+                    rand.nextInt(defendingArmytableView.getSelectionModel().getSelectedItems().size());
+
+
+            for (City cityTemp : Controller.game.getAvailableCities()
+            ) {
+                for (Unit unitToAttack : cityTemp.getDefendingArmy().getUnits()
+                ) {
+                    if (unitToAttack == defendingArmytableView.getSelectionModel().getSelectedItems().get(int_random2)) {
+                        try {
+                            unitToAttack.attack(Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random));
+
+                        } catch (FriendlyFireException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            BattleFieldWindow.battleLogTextArea.appendText("\n" +
+                    defendingArmytableView.getSelectionModel().getSelectedItems().get(int_random2) + " attacked " +
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random) + "\n" +
+                    "Current Soldier Count of " + Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random) + " is \n" +
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random).getCurrentSoldierCount() + "\n");
+
+            Controller.game.endTurn();
+
+        });
+
         relocateButton = new MyButton("Relocate");
         relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         relocateButton.setTextFill(Color.DARKGOLDENROD);
         relocateButton.setOnAction(event -> {
+
 
             Unit unit = (Unit) ShowDefendingArmyOfCityWindow.
                     defendingArmytableView.getSelectionModel().getSelectedItem();
@@ -173,7 +269,9 @@ public class ShowDefendingArmyOfCityWindow {
         });
 
         buttonsHbox.getChildren().addAll(
-                backButton, Constants.spaceButton2(), relocateButton);
+                backButton, Constants.spaceButton2(),
+                !ofAttack ? relocateButton : Constants.spaceButton3(),
+                chooseToAttack ? chooseToAttackButton : Constants.spaceButton3());
 
 
         hbox.getChildren().add(defendingArmytitle);
