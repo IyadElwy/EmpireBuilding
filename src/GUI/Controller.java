@@ -259,9 +259,20 @@ public class Controller {
 
         } else {
             Constants.playEffect(Constants.clickButton);
+
+            Army army = getArmyOfCity();
             showArmyWindowStage = new Stage();
             showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
-            showArmyWindowStage.setScene(new ShowArmyWindow().getShowArmyScene());
+            if (army != null) {
+                showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
+                        army.getCurrentStatus().toString(), army.getTarget(),
+                        Integer.toString(army.getDistancetoTarget()), army.getTarget(),
+                        getCityBeingAttacked(army.getTarget()).getName()).getShowArmyScene());
+            } else {
+                showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
+                        "status", "marching\t", "reached in",
+                        "besieging city\t", "turns besieging").getShowArmyScene());
+            }
             showArmyWindowStage.showAndWait();
         }
     }
@@ -301,7 +312,6 @@ public class Controller {
 
         for (Army army : game.getPlayer().getControlledArmies()
         ) {
-            System.out.println(army);
             for (Unit unit : army.getUnits()) {
                 if (unit instanceof Archer) {
                     unitsObservableList.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
@@ -346,9 +356,19 @@ public class Controller {
 
     public static void showAttackingArmyStatus() {
         Constants.playEffect(Constants.clickButton);
+        Army army = getArmyOfCity();
         showArmyWindowStage = new Stage();
         showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
-        showArmyWindowStage.setScene(new ShowArmyWindow().getShowArmyScene());
+        if (army != null) {
+            showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
+                    army.getCurrentStatus().toString(), army.getTarget(),
+                    Integer.toString(army.getDistancetoTarget()), army.getTarget(),
+                    getCityBeingAttacked(army.getTarget()).getName()).getShowArmyScene());
+        } else {
+            showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
+                    "status", "marching\t", "reached in",
+                    "besieging city\t", "turns besieging").getShowArmyScene());
+        }
         showArmyWindowStage.showAndWait();
     }
 
@@ -400,14 +420,14 @@ public class Controller {
         editBuildingwindow.showAndWait();
     }
 
-    public static Stage showControlledArmiesWindow;
 
     public static void armiesButtonPressed() {
         Constants.playEffect(Constants.clickButton);
-        showControlledArmiesWindow = new Stage();
-        showControlledArmiesWindow.initModality(Modality.APPLICATION_MODAL);
-        showControlledArmiesWindow.setScene(new ShowControlledArmiesWindow().getScene());
-        showControlledArmiesWindow.showAndWait();
+        showArmyWindowStage = new Stage();
+        showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
+        showArmyWindowStage.setScene(new ShowArmyWindow("", "", "",
+                "", "", "").getShowArmyScene());
+        showArmyWindowStage.showAndWait();
     }
 
     public static Stage showDefendingArmiesWindow;
@@ -554,18 +574,50 @@ public class Controller {
 
 
     //    ShowControlledArmiesWindow
-    public static void controlledArmyOfCityChosen(String city) {
+    public static void controlledArmyOfCityChosen(String cityBeingAttacked) {
+
+        Army army = getArmyOfCity();
+
         Constants.playEffect(Constants.clickButton);
         showArmyWindowStage = new Stage();
         showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
-        showArmyWindowStage.setScene(new ShowArmyWindow().getShowArmyScene());
+        if (army != null) {
+            showArmyWindowStage.setScene(new ShowArmyWindow(cityBeingAttacked,
+                    army.getCurrentStatus().toString(), army.getTarget(),
+                    Integer.toString(army.getDistancetoTarget()), army.getTarget(),
+                    getCityBeingAttacked(army.getTarget()).getName()).getShowArmyScene());
+        } else {
+            showArmyWindowStage.setScene(new ShowArmyWindow(inWhatCity,
+                    "status", "marching\t", "reached in",
+                    "besieging city\t", "turns besieging").getShowArmyScene());
+        }
         showArmyWindowStage.showAndWait();
     }
 
-    public static void goBackControlledArmiesWindow() {
-        Constants.playEffect(Constants.clickButton);
-        showControlledArmiesWindow.close();
+
+    private static City getCityBeingAttacked(String cityBeingAttacked) {
+        for (City city : game.getAvailableCities()
+        ) {
+            if (city.getName().equals(cityBeingAttacked)) {
+                return city;
+            }
+        }
+        return null;
     }
+
+
+    private static Army getArmyOfCity() {
+        try {
+            return game.getPlayer().getControlledArmies().get(0);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+//    public static void goBackControlledArmiesWindow() {
+//        Constants.playEffect(Constants.clickButton);
+//        showControlledArmiesWindow.close();
+//    }
 
 
 //    ShowDefendingArmyOfCityWindow
@@ -575,12 +627,14 @@ public class Controller {
         showDefendingArmiesWindow.close();
     }
 
-    public static ObservableList<UnitsHelperClass> putDefendingArmyUnits(String city) {
-        ObservableList<UnitsHelperClass> unitsObservableList = FXCollections.observableArrayList();
+
+    public static ObservableList<Unit> unitsObservableListDefendingArmy;
+
+    public static ObservableList<Unit> putDefendingputdArmyUnits(String city) {
+        unitsObservableListDefendingArmy = FXCollections.observableArrayList();
 
         Army army = null;
 
-        System.out.println(game.getPlayer().getControlledCities().get(0).getDefendingArmy().getUnits().size());
         for (City cityTemp : game.getPlayer().getControlledCities()
         ) {
             if (cityTemp.getName().equalsIgnoreCase(city)) {
@@ -589,22 +643,23 @@ public class Controller {
         }
 
         for (Unit unit : army.getUnits()) {
-            if (unit instanceof Archer) {
-                unitsObservableList.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
-                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-                        unit.getSiegeUpkeep())));
-            } else if (unit instanceof Infantry) {
-                unitsObservableList.add(new UnitsHelperClass(new Infantry(unit.getLevel(), unit.getMaxSoldierCount(),
-                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-                        unit.getSiegeUpkeep())));
-            } else if (unit instanceof Cavalry) {
-                unitsObservableList.add(new UnitsHelperClass(new Cavalry(unit.getLevel(), unit.getMaxSoldierCount(),
-                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-                        unit.getSiegeUpkeep())));
-            }
+            unitsObservableListDefendingArmy.add(unit);
+//            if (unit instanceof Archer) {
+//                unitsObservableListDefendingArmy.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
+//                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+//                        unit.getSiegeUpkeep())));
+//            } else if (unit instanceof Infantry) {
+//                unitsObservableListDefendingArmy.add(new UnitsHelperClass(new Infantry(unit.getLevel(), unit.getMaxSoldierCount(),
+//                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+//                        unit.getSiegeUpkeep())));
+//            } else if (unit instanceof Cavalry) {
+//                unitsObservableListDefendingArmy.add(new UnitsHelperClass(new Cavalry(unit.getLevel(), unit.getMaxSoldierCount(),
+//                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
+//                        unit.getSiegeUpkeep())));
+//            }
         }
 
-        return unitsObservableList;
+        return unitsObservableListDefendingArmy;
     }
 
 

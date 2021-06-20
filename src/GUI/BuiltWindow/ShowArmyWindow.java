@@ -35,7 +35,9 @@ public class ShowArmyWindow {
     public static MyButton relocateButton;
     public static MyButton backButton;
 
-    public ShowArmyWindow() {
+    public ShowArmyWindow(String cityToAttack, String status, String marchingToCity,
+                          String reachedIn, String besiegingCity,
+                          String turnsBesieging) {
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -45,13 +47,13 @@ public class ShowArmyWindow {
         MyVbox vbox = new MyVbox();
         vbox.setAlignment(Pos.CENTER);
 
-        title = new MyLabel("CityName Army");
+        title = new MyLabel("Controlled Armies");
         title.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 70));
         title.setTextFill(Color.DARKGOLDENROD);
 
         statusTextField = new MyTextField();
-        statusTextField.setText("Status: ");
+        statusTextField.setText("Status: " + status);
         statusTextField.setEditable(false);
         statusTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 20));
@@ -59,7 +61,9 @@ public class ShowArmyWindow {
 
 
         marchingToCityTextField = new MyTextField();
-        marchingToCityTextField.setText("Marching to 'city'. Target Reached In ..." +
+        marchingToCityTextField.setText("Marching to " + cityToAttack + "Target " +
+                "Reached In " +
+                reachedIn +
                 " Turns");
         marchingToCityTextField.setEditable(false);
         marchingToCityTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
@@ -68,7 +72,9 @@ public class ShowArmyWindow {
         marchingToCityTextField.setPrefWidth(600);
 
         besiegingCityTextField = new MyTextField();
-        besiegingCityTextField.setText("Besieging 'city'. ... Turns Besieging");
+        besiegingCityTextField.setText("Besieging " + besiegingCity + ". " + turnsBesieging + "Turns" +
+                " " +
+                "Besieging");
         besiegingCityTextField.setEditable(false);
         besiegingCityTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 20));
@@ -87,27 +93,27 @@ public class ShowArmyWindow {
                 new TableColumn<>(
                         "Relocate");
 
-        typeColumn.setMinWidth(390);
+        typeColumn.setMinWidth(478);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        levelColumn.setMinWidth(390);
+        levelColumn.setMinWidth(478);
         levelColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        maxSoldierColumn.setMinWidth(390);
+        maxSoldierColumn.setMinWidth(478);
         maxSoldierColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        currentSoldiersColumn.setMinWidth(390);
+        currentSoldiersColumn.setMinWidth(478);
         currentSoldiersColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        radioButtonColumn.setMinWidth(390);
+//        radioButtonColumn.setMinWidth(390);
 
 
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -127,21 +133,20 @@ public class ShowArmyWindow {
         tableView.setEditable(false);
         tableView.setItems(Controller.putShowArmyWindowUnits());
         tableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
-                currentSoldiersColumn,
-                radioButtonColumn);
+                currentSoldiersColumn);
 
 
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
         buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
 
-        relocateButton = new MyButton("Relocate");
-        relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
-        relocateButton.setTextFill(Color.DARKGOLDENROD);
-        relocateButton.setOnAction(event -> {
-            Controller.showArmyWindowRelocateButtonOnAction();
-        });
+//        relocateButton = new MyButton("Relocate");
+//        relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+//                "-Regular.ttf").toURI().toString(), 50));
+//        relocateButton.setTextFill(Color.DARKGOLDENROD);
+//        relocateButton.setOnAction(event -> {
+//            Controller.showArmyWindowRelocateButtonOnAction();
+//        });
 
         MyButton spaceButton = new MyButton("SP");
         spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +

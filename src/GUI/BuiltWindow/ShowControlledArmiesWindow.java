@@ -90,7 +90,7 @@ public class ShowControlledArmiesWindow {
         backButton.setPadding(new Insets(40, 40, 40, 40));
         backButton.setTextFill(Color.DARKGOLDENROD);
         backButton.setOnAction(event -> {
-            Controller.goBackControlledArmiesWindow();
+//            Controller.goBackControlledArmiesWindow();
         });
 
         vbox.getChildren().addAll(chooseArmyLabel, Constants.spaceButton2(), hbox,

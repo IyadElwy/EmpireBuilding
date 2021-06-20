@@ -5,16 +5,14 @@ import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.CustomControllers.MyTableView;
-import GUI.CustomControllers.MyTextField;
-import GUI.HelperClasses.UnitsHelperClass;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
 import GUI.Scenes.MyScene;
+import exceptions.MaxCapacityException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
@@ -22,6 +20,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import units.Army;
+import units.Unit;
 
 import java.io.File;
 
@@ -32,6 +32,7 @@ public class ShowDefendingArmyOfCityWindow {
     public static MyTableView defendingArmytableView;
     public static MyLabel defendingArmytitle;
     public static MyButton backButton;
+    public static MyButton relocateButton;
 
     public ShowDefendingArmyOfCityWindow(String city, boolean ofAttack,
                                          String attacking) {
@@ -45,23 +46,26 @@ public class ShowDefendingArmyOfCityWindow {
         vbox.setAlignment(Pos.CENTER);
 
         if (ofAttack) {
-            defendingArmytitle = new MyLabel(city +" Defending Army");
-        }else {
-            defendingArmytitle = new MyLabel(city +" Defending Army");
+            defendingArmytitle = new MyLabel(city + " Defending Army");
+        } else {
+            defendingArmytitle = new MyLabel(city + " Defending Army");
         }
         defendingArmytitle.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 70));
         defendingArmytitle.setTextFill(Color.DARKGOLDENROD);
 
 
-        TableColumn<UnitsHelperClass, String> typeColumn = new TableColumn<>(
+        TableColumn<Unit, String> typeColumn = new TableColumn<>(
                 "Type");
-        TableColumn<UnitsHelperClass, String> levelColumn = new TableColumn<>(
+        TableColumn<Unit, String> levelColumn = new TableColumn<>(
                 "Level");
-        TableColumn<UnitsHelperClass, String> maxSoldierColumn = new TableColumn<>(
+        TableColumn<Unit, String> maxSoldierColumn = new TableColumn<>(
                 "Max Soldiers");
-        TableColumn<UnitsHelperClass, String> currentSoldiersColumn = new TableColumn<>(
+        TableColumn<Unit, String> currentSoldiersColumn = new TableColumn<>(
                 "Current Soldiers");
+//        TableColumn<UnitsHelperClass, RadioButton> radioButtonColumn =
+//                new TableColumn<>(
+//                        "Relocate");
 
 
         typeColumn.setMinWidth(478);
@@ -84,6 +88,7 @@ public class ShowDefendingArmyOfCityWindow {
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
+//        radioButtonColumn.setMinWidth(390);
 
 
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -91,16 +96,20 @@ public class ShowDefendingArmyOfCityWindow {
         levelColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "level"));
         maxSoldierColumn.setCellValueFactory(new PropertyValueFactory<>(
-                "maxSoldierConunt"));
+                "maxSoldierCount"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
+//        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
+//                "relocateButton"));
 
 
         defendingArmytableView = new MyTableView();
         defendingArmytableView.setEditable(false);
-        defendingArmytableView.setItems(Controller.putDefendingArmyUnits(Controller.inWhatCity));
+        defendingArmytableView.setItems(Controller.putDefendingputdArmyUnits(Controller.inWhatCity));
         defendingArmytableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
-                currentSoldiersColumn);
+                currentSoldiersColumn
+//                , radioButtonColumn
+        );
 
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
@@ -121,8 +130,47 @@ public class ShowDefendingArmyOfCityWindow {
             Controller.showDefendingArmyWindowBackButtonOnAction();
         });
 
+        relocateButton = new MyButton("Relocate");
+        relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 50));
+        relocateButton.setTextFill(Color.DARKGOLDENROD);
+        relocateButton.setOnAction(event -> {
+
+            Unit unit = (Unit) ShowDefendingArmyOfCityWindow.
+                    defendingArmytableView.getSelectionModel().getSelectedItem();
+
+            if (Controller.game.getPlayer().getControlledArmies().isEmpty()) {
+                Controller.game.getPlayer().initiateArmy(Controller.game.getPlayer().getControlledCities().get(0),
+                        unit);
+                for (Army army : Controller.game.getPlayer().getControlledArmies()
+                ) {
+                    try {
+                        army.relocateUnit(unit);
+                    } catch (MaxCapacityException maxCapacityException) {
+                        new PopUpWindow(maxCapacityException.toString());
+                    }
+                }
+            } else {
+                for (Army army : Controller.game.getPlayer().getControlledArmies()
+                ) {
+                    try {
+                        army.relocateUnit(unit);
+                    } catch (MaxCapacityException maxCapacityException) {
+                        new PopUpWindow(maxCapacityException.toString());
+                    }
+                }
+            }
+
+            ShowDefendingArmyOfCityWindow.defendingArmytableView.getItems().remove(unit);
+
+            Controller.showDefendingArmiesWindow.close();
+            Constants.playEffect(Constants.clickButton);
+
+
+        });
+
         buttonsHbox.getChildren().addAll(
-                backButton);
+                backButton, Constants.spaceButton2(), relocateButton);
 
 
         hbox.getChildren().add(defendingArmytitle);
@@ -134,7 +182,6 @@ public class ShowDefendingArmyOfCityWindow {
         vbox.getChildren().addAll(hbox, gridPane, Constants.spaceButton2(),
                 defendingArmytableView, Constants.spaceButton2(), buttonsHbox);
         borderPane.setTop(vbox);
-
 
 
         this.scene = new MyScene(borderPane);

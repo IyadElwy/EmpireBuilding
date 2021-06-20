@@ -6,7 +6,6 @@ import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyHbox;
-import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Pos;
 import javafx.scene.effect.InnerShadow;
@@ -62,7 +61,6 @@ public class WelcomeWindow {
         startGameButton.setMinSize(200, 200);
         startGameButton.setOpacity(0.9);
         Controller.welcomeWindowStartGameButtonAction();
-
 
 
         welcomeSceneLayout.setTop(welcomeTitleHbox);
