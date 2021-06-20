@@ -21,7 +21,25 @@ public class AttackStrategyWindow {
 
     private final MyScene scene;
 
-    public AttackStrategyWindow() {
+    public AttackStrategyWindow(boolean conquoredCairo, boolean conquoredRome,
+                                boolean conquoredSparta) {
+
+        String[] cities = new String[2];
+        cities[0] = "conquered";
+        cities[1] = "conquered";
+        for (int i = 0; i < cities.length; i++) {
+            if (conquoredCairo == false) {
+                cities[i] = "Cairo";
+                conquoredCairo = true;
+            } else if (conquoredRome == false) {
+                cities[i] = "Rome";
+                conquoredRome = true;
+            } else if (conquoredSparta == false) {
+                cities[i] = "Sparta";
+                conquoredSparta = true;
+            }
+        }
+
 
         MyVbox vbox = new MyVbox();
         MyHbox hbox = new MyHbox();
@@ -36,24 +54,26 @@ public class AttackStrategyWindow {
         vbox3.setAlignment(Pos.CENTER);
 
 
-        MyLabel chooseArmyLabel = new MyLabel("Relocate To");
+        MyLabel chooseArmyLabel = new MyLabel("Attack: ");
         chooseArmyLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 130));
         chooseArmyLabel.setTextFill(Color.DARKGOLDENROD);
 
-        MyButton city1Button = new MyButton("Attack City1");
+        MyButton city1Button = new MyButton(cities[0]);
         city1Button.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         city1Button.setTextFill(Color.DARKGOLDENROD);
         city1Button.setOnAction(event -> {
+            Controller.cityToAttack = cities[0];
             Controller.cityToAttackButtonPressed();
         });
 
-        MyButton city2Button = new MyButton("Attack City2");
+        MyButton city2Button = new MyButton(cities[1]);
         city2Button.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 50));
         city2Button.setTextFill(Color.DARKGOLDENROD);
         city2Button.setOnAction(event -> {
+            Controller.cityToAttack = cities[1];
             Controller.cityToAttackButtonPressed();
         });
 
@@ -74,8 +94,9 @@ public class AttackStrategyWindow {
         });
 
 
-        vbox2.getChildren().addAll(city1Button, autoResolveBtn1);
-        vbox3.getChildren().addAll(city2Button, autoResolveBtn2);
+        vbox2.getChildren().addAll(city1Button, Constants.spaceButton(),
+                autoResolveBtn1);
+        vbox3.getChildren().addAll(city2Button, Constants.spaceButton(), autoResolveBtn2);
         vbox.getChildren().addAll(chooseArmyLabel, Constants.spaceButton2(), hbox);
         hbox.getChildren().addAll(vbox2, Constants.spaceButton(),
                 vbox3);

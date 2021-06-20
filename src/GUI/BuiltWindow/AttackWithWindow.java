@@ -21,6 +21,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import units.Unit;
 
 import java.io.File;
 
@@ -45,39 +46,37 @@ public class AttackWithWindow {
         title.setTextFill(Color.DARKGOLDENROD);
 
 
-        TableColumn<UnitsHelperClass, String> typeColumn = new TableColumn<>(
+        TableColumn<Unit, String> typeColumn = new TableColumn<>(
                 "Type");
-        TableColumn<UnitsHelperClass, String> levelColumn = new TableColumn<>(
+        TableColumn<Unit, String> levelColumn = new TableColumn<>(
                 "Level");
-        TableColumn<UnitsHelperClass, String> maxSoldierColumn = new TableColumn<>(
+        TableColumn<Unit, String> maxSoldierColumn = new TableColumn<>(
                 "Max Soldiers");
-        TableColumn<UnitsHelperClass, String> currentSoldiersColumn = new TableColumn<>(
+        TableColumn<Unit, String> currentSoldiersColumn = new TableColumn<>(
                 "Current Soldiers");
-        TableColumn<UnitsHelperClass, RadioButton> radioButtonColumn =
-                new TableColumn<>(
-                        "Attacking Unit");
 
-        typeColumn.setMinWidth(390);
+
+        typeColumn.setMinWidth(478);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        levelColumn.setMinWidth(390);
+        levelColumn.setMinWidth(478);
         levelColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        maxSoldierColumn.setMinWidth(390);
+        maxSoldierColumn.setMinWidth(478);
         maxSoldierColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        currentSoldiersColumn.setMinWidth(390);
+        currentSoldiersColumn.setMinWidth(478);
         currentSoldiersColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        radioButtonColumn.setMinWidth(390);
+//        radioButtonColumn.setMinWidth(390);
 
 
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -88,15 +87,14 @@ public class AttackWithWindow {
                 "maxSoldierConunt"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
-        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
-                "attackButton"));
 
         ShowArmyWindow.tableView = new MyTableView();
         ShowArmyWindow.tableView.setEditable(false);
         ShowArmyWindow.tableView.setItems(Controller.putShowArmyWindowUnits());
         ShowArmyWindow.tableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
-                currentSoldiersColumn,
-                radioButtonColumn);
+                currentSoldiersColumn
+//                ,radioButtonColumn
+        );
 
 
 
@@ -109,11 +107,21 @@ public class AttackWithWindow {
             Controller.goBackFromAttackWithWindow();
         });
 
+        MyButton chooseAttckButton = new MyButton("Attack");
+        chooseAttckButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 50));
+        chooseAttckButton.setPadding(new Insets(50, 50, 50, 50));
+        chooseAttckButton.setTextFill(Color.DARKGOLDENROD);
+        chooseAttckButton.setOnAction(event -> {
+            Controller.goBackFromAttackWithWindow();
+        });
+
 
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
         buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
-        buttonsHbox.getChildren().add(backButton);
+        buttonsHbox.getChildren().addAll(backButton, Constants.spaceButton2(),
+                chooseAttckButton);
 
 
 

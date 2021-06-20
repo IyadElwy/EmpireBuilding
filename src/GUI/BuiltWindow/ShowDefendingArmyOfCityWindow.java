@@ -34,8 +34,7 @@ public class ShowDefendingArmyOfCityWindow {
     public static MyButton backButton;
     public static MyButton relocateButton;
 
-    public ShowDefendingArmyOfCityWindow(String city, boolean ofAttack,
-                                         String attacking) {
+    public ShowDefendingArmyOfCityWindow(String city, boolean ofAttack) {
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -48,7 +47,7 @@ public class ShowDefendingArmyOfCityWindow {
         if (ofAttack) {
             defendingArmytitle = new MyLabel(city + " Defending Army");
         } else {
-            defendingArmytitle = new MyLabel(city + " Defending Army");
+            defendingArmytitle = new MyLabel(Controller.inWhatCity + " Defending Army");
         }
         defendingArmytitle.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 70));
@@ -105,7 +104,11 @@ public class ShowDefendingArmyOfCityWindow {
 
         defendingArmytableView = new MyTableView();
         defendingArmytableView.setEditable(false);
-        defendingArmytableView.setItems(Controller.putDefendingputdArmyUnits(Controller.inWhatCity));
+        if (ofAttack) {
+            defendingArmytableView.setItems(Controller.putDefendingputdArmyUnits(Controller.cityToAttack));
+        } else {
+            defendingArmytableView.setItems(Controller.putDefendingputdArmyUnits(Controller.inWhatCity));
+        }
         defendingArmytableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
                 currentSoldiersColumn
 //                , radioButtonColumn

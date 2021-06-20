@@ -12,7 +12,7 @@ public class Archer extends Unit {
     public Archer(int level, int maxSoldierConunt, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
         super(level, maxSoldierConunt, idleUpkeep, marchingUpkeep, siegeUpkeep);
         type = "Archer";
-        level = super.getLevel();
+        this.level = super.getLevel();
         maxSoldierCount = super.getMaxSoldierCount();
         currentSoldierCount = super.getCurrentSoldierCount();
 

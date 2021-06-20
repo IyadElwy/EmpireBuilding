@@ -13,7 +13,7 @@ public class Cavalry extends Unit {
     public Cavalry(int level, int maxSoldierConunt, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
         super(level, maxSoldierConunt, idleUpkeep, marchingUpkeep, siegeUpkeep);
         type = "Cavalry";
-        level = super.getLevel();
+        this.level = super.getLevel();
         maxSoldierCount = super.getMaxSoldierCount();
         currentSoldierCount = super.getCurrentSoldierCount();
     }

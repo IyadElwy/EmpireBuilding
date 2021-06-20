@@ -74,7 +74,7 @@ public class BattleFieldWindow {
         battleLogTextArea.setStyle("-fx-text-inner-color: #6A1412");
         battleLogTextArea.setOpacity(0.8);
 
-        defendingArmyStatusButton = new MyButton("Defending\nArmy\nStatus");
+        defendingArmyStatusButton = new MyButton("Opposing\nArmy\nStatus");
         defendingArmyStatusButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 25));
         defendingArmyStatusButton.setTextFill(Color.DARKGOLDENROD);
@@ -84,7 +84,7 @@ public class BattleFieldWindow {
             Controller.showDefendingArmyStatus();
         });
 
-        attackingArmyStatusButton = new MyButton("Attacking\nArmy\nStatus");
+        attackingArmyStatusButton = new MyButton("Your\nArmy\nStatus");
         attackingArmyStatusButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 25));
         attackingArmyStatusButton.setTextFill(Color.DARKGOLDENROD);

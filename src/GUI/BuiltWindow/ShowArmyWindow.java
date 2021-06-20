@@ -22,6 +22,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import units.Unit;
 
 import java.io.File;
 
@@ -32,12 +33,13 @@ public class ShowArmyWindow {
     public static MyTextField statusTextField;
     public static MyTextField marchingToCityTextField;
     public static MyTextField besiegingCityTextField;
-    public static MyButton relocateButton;
+//    public static MyButton relocateButton;
     public static MyButton backButton;
 
     public ShowArmyWindow(String cityToAttack, String status, String marchingToCity,
                           String reachedIn, String besiegingCity,
                           String turnsBesieging) {
+
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -81,17 +83,17 @@ public class ShowArmyWindow {
         besiegingCityTextField.setStyle("-fx-text-inner-color: #6A1412");
         besiegingCityTextField.setPrefWidth(550);
 
-        TableColumn<UnitsHelperClass, String> typeColumn = new TableColumn<>(
+        TableColumn<Unit, String> typeColumn = new TableColumn<>(
                 "Type");
-        TableColumn<UnitsHelperClass, String> levelColumn = new TableColumn<>(
+        TableColumn<Unit, String> levelColumn = new TableColumn<>(
                 "Level");
-        TableColumn<UnitsHelperClass, String> maxSoldierColumn = new TableColumn<>(
+        TableColumn<Unit, String> maxSoldierColumn = new TableColumn<>(
                 "Max Soldiers");
-        TableColumn<UnitsHelperClass, String> currentSoldiersColumn = new TableColumn<>(
+        TableColumn<Unit, String> currentSoldiersColumn = new TableColumn<>(
                 "Current Soldiers");
-        TableColumn<UnitsHelperClass, RadioButton> radioButtonColumn =
-                new TableColumn<>(
-                        "Relocate");
+//        TableColumn<UnitsHelperClass, RadioButton> radioButtonColumn =
+//                new TableColumn<>(
+//                        "Relocate");
 
         typeColumn.setMinWidth(478);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
@@ -124,8 +126,8 @@ public class ShowArmyWindow {
                 "maxSoldierConunt"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
-        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
-                "relocateButton"));
+//        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
+//                "relocateButton"));
 
         tableView = new MyTableView();
 //        tableView.setBackground(new Background(new BackgroundFill(Color.DARKGOLDENROD,

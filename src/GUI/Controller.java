@@ -23,6 +23,12 @@ public class Controller {
     public static int barracksLevel = 0;
     public static int stableLevel = 0;
 
+    public static boolean conquoredCairo;
+    public static boolean conquoredRome;
+    public static boolean conquoredSparta;
+
+    public static String cityToAttack;
+
     public static void updateInWhatCity(String city) {
         inWhatCity = city;
     }
@@ -349,8 +355,7 @@ public class Controller {
         Constants.playEffect(Constants.clickButton);
         showDefendingArmiesWindow = new Stage();
         showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
-        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(inWhatCity, true,
-                "cityBeingAttacked").getScene());
+        showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(cityToAttack, true).getScene());
         showDefendingArmiesWindow.showAndWait();
     }
 
@@ -437,17 +442,32 @@ public class Controller {
         showDefendingArmiesWindow = new Stage();
         showDefendingArmiesWindow.initModality(Modality.APPLICATION_MODAL);
         showDefendingArmiesWindow.setScene(new ShowDefendingArmyOfCityWindow(inWhatCity,
-                false, "none").getScene());
+                false).getScene());
         showDefendingArmiesWindow.showAndWait();
     }
 
     public static Stage showAttackStrategyWindow;
 
     public static void attackButtonPressed() {
+
+        for (City city : game.getPlayer().getControlledCities()
+        ) {
+            if (city.getName().equalsIgnoreCase("Cairo")) {
+                conquoredCairo = true;
+            }
+            if (city.getName().equalsIgnoreCase("Rome")) {
+                conquoredRome = true;
+            }
+            if (city.getName().equalsIgnoreCase("Sparta")) {
+                conquoredSparta = true;
+            }
+        }
+
         Constants.playEffect(Constants.clickButton);
         showAttackStrategyWindow = new Stage();
         showAttackStrategyWindow.initModality(Modality.APPLICATION_MODAL);
-        showAttackStrategyWindow.setScene(new AttackStrategyWindow().getScene());
+        showAttackStrategyWindow.setScene(new AttackStrategyWindow(conquoredCairo,
+                conquoredRome, conquoredSparta).getScene());
         showAttackStrategyWindow.showAndWait();
     }
 
@@ -635,7 +655,7 @@ public class Controller {
 
         Army army = null;
 
-        for (City cityTemp : game.getPlayer().getControlledCities()
+        for (City cityTemp : game.getAvailableCities()
         ) {
             if (cityTemp.getName().equalsIgnoreCase(city)) {
                 army = cityTemp.getDefendingArmy();
@@ -644,19 +664,7 @@ public class Controller {
 
         for (Unit unit : army.getUnits()) {
             unitsObservableListDefendingArmy.add(unit);
-//            if (unit instanceof Archer) {
-//                unitsObservableListDefendingArmy.add(new UnitsHelperClass(new Archer(unit.getLevel(), unit.getMaxSoldierCount(),
-//                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-//                        unit.getSiegeUpkeep())));
-//            } else if (unit instanceof Infantry) {
-//                unitsObservableListDefendingArmy.add(new UnitsHelperClass(new Infantry(unit.getLevel(), unit.getMaxSoldierCount(),
-//                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-//                        unit.getSiegeUpkeep())));
-//            } else if (unit instanceof Cavalry) {
-//                unitsObservableListDefendingArmy.add(new UnitsHelperClass(new Cavalry(unit.getLevel(), unit.getMaxSoldierCount(),
-//                        unit.getIdleUpkeep(), unit.getMarchingUpkeep(),
-//                        unit.getSiegeUpkeep())));
-//            }
+
         }
 
         return unitsObservableListDefendingArmy;

@@ -13,7 +13,7 @@ public class Infantry extends Unit {
     public Infantry(int level, int maxSoldierConunt, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
         super(level, maxSoldierConunt, idleUpkeep, marchingUpkeep, siegeUpkeep);
         type = "Infantry";
-        level = super.getLevel();
+        this.level = super.getLevel();
         maxSoldierCount = super.getMaxSoldierCount();
         currentSoldierCount = super.getCurrentSoldierCount();
     }
