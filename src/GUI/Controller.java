@@ -4,6 +4,7 @@ import GUI.BuiltWindow.*;
 import buildings.*;
 import engine.City;
 import engine.Game;
+import exceptions.FriendlyFireException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Modality;
@@ -35,7 +36,7 @@ public class Controller {
     public static boolean button2Disabled = false;
     public static boolean button1Disabled = false;
 
-    public static int roundsUntilArrived = -1;
+    public static int roundsUntilArrived = -200;
 
     public static void updateInWhatCity(String city) {
         inWhatCity = city;
@@ -278,14 +279,14 @@ public class Controller {
             showArmyWindowStage = new Stage();
             showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
             if (army != null) {
-                showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
-                        army.getCurrentStatus().toString(), army.getTarget(),
-                        Integer.toString(army.getDistancetoTarget()), army.getTarget(),
-                        getCityBeingAttacked(army.getTarget()).getName()).getShowArmyScene());
+                showArmyWindowStage.setScene(new ShowArmyWindow(cityToAttack,
+                        game.getPlayer().getControlledArmies().get(0).getCurrentStatus().toString(),
+                        roundsUntilArrived != -1 ? "" : Integer.toString(roundsUntilArrived),
+                        game.getPlayer().getControlledArmies().get(0).getCurrentLocation(),
+                        cityToAttack).getShowArmyScene());
             } else {
-                showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
-                        "status", "marching\t", "reached in",
-                        "besieging city\t", "turns besieging").getShowArmyScene());
+                showArmyWindowStage.setScene(new ShowArmyWindow("",
+                        "", "", "", "").getShowArmyScene());
             }
             showArmyWindowStage.showAndWait();
         }
@@ -373,9 +374,11 @@ public class Controller {
         showArmyWindowStage = new Stage();
         showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
 
-        showArmyWindowStage.setScene(new ShowArmyWindow("City To Attack",
-                "status", "marching\t", "reached in",
-                "besieging city\t", "turns besieging").getShowArmyScene());
+        showArmyWindowStage.setScene(new ShowArmyWindow(cityToAttack,
+                game.getPlayer().getControlledArmies().get(0).getCurrentStatus().toString(),
+                roundsUntilArrived != -1 ? "" : Integer.toString(roundsUntilArrived),
+                game.getPlayer().getControlledArmies().get(0).getCurrentLocation(),
+                cityToAttack).getShowArmyScene());
 
         showArmyWindowStage.showAndWait();
     }
@@ -433,8 +436,17 @@ public class Controller {
         Constants.playEffect(Constants.clickButton);
         showArmyWindowStage = new Stage();
         showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
-        showArmyWindowStage.setScene(new ShowArmyWindow("", "", "",
-                "", "", "").getShowArmyScene());
+        Army army = getArmyOfCity();
+        if (army != null) {
+            showArmyWindowStage.setScene(new ShowArmyWindow(cityToAttack,
+                    game.getPlayer().getControlledArmies().get(0).getCurrentStatus().toString(),
+                    roundsUntilArrived != -1 ? "" : Integer.toString(roundsUntilArrived),
+                    game.getPlayer().getControlledArmies().get(0).getCurrentLocation(),
+                    cityToAttack).getShowArmyScene());
+        } else {
+            showArmyWindowStage.setScene(new ShowArmyWindow("",
+                    "", "", "", "").getShowArmyScene());
+        }
         showArmyWindowStage.showAndWait();
     }
 
@@ -523,7 +535,13 @@ public class Controller {
                     "Barracks")) {
                 buildingToUpgrade = buildingTemp;
 
-            } else if (buildingTemp instanceof Market && building.equals("Market")) {
+            }
+        }
+
+
+        for (Building buildingTemp : currentCity.getEconomicalBuildings()
+        ) {
+            if (buildingTemp instanceof Market && building.equals("Market")) {
                 buildingToUpgrade = buildingTemp;
 
             } else if (buildingTemp instanceof Farm && building.equals("Farm")) {
@@ -535,9 +553,8 @@ public class Controller {
         try {
             game.getPlayer().upgradeBuilding(buildingToUpgrade);
         } catch (Exception e) {
-            System.out.println(e);
-            new PopUpWindow("Not Enough Gold\nOr Not Built Yet\nOr Building In " +
-                    "Cool Down");
+            new PopUpWindow("Not Enough Gold\nOr Not Built\nOr Building " +
+                    "Cool Down\n Or Max Level");
         }
         Constants.playEffect(Constants.clickButton);
         goBackToCityFromEditBuilding();
@@ -615,14 +632,14 @@ public class Controller {
         showArmyWindowStage = new Stage();
         showArmyWindowStage.initModality(Modality.APPLICATION_MODAL);
         if (army != null) {
-            showArmyWindowStage.setScene(new ShowArmyWindow(cityBeingAttacked,
-                    army.getCurrentStatus().toString(), army.getTarget(),
-                    Integer.toString(army.getDistancetoTarget()), army.getTarget(),
-                    getCityBeingAttacked(army.getTarget()).getName()).getShowArmyScene());
+            showArmyWindowStage.setScene(new ShowArmyWindow(cityToAttack,
+                    game.getPlayer().getControlledArmies().get(0).getCurrentStatus().toString(),
+                    roundsUntilArrived != -1 ? "" : Integer.toString(roundsUntilArrived),
+                    game.getPlayer().getControlledArmies().get(0).getCurrentLocation(),
+                    cityBeingAttacked).getShowArmyScene());
         } else {
-            showArmyWindowStage.setScene(new ShowArmyWindow(inWhatCity,
-                    "status", "marching\t", "reached in",
-                    "besieging city\t", "turns besieging").getShowArmyScene());
+            showArmyWindowStage.setScene(new ShowArmyWindow("", "",
+                    "", "", "").getShowArmyScene());
         }
         showArmyWindowStage.showAndWait();
     }
@@ -677,7 +694,6 @@ public class Controller {
 
         for (Unit unit : army.getUnits()) {
             unitsObservableListDefendingArmy.add(unit);
-
         }
 
         return unitsObservableListDefendingArmy;
@@ -702,8 +718,13 @@ public class Controller {
         Main.window.setScene(new BattleFieldWindow().getScene());
     }
 
-    public static void autoresolveButtonPressed() {
+    public static void autoresolveButtonPressed(Army attacker, Army defender) {
         Constants.playEffect(Constants.clickButton);
+        try {
+            game.autoResolve(attacker, defender);
+        } catch (FriendlyFireException e) {
+            new PopUpWindow(e.toString());
+        }
     }
 
 

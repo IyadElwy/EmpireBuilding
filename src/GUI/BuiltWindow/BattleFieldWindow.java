@@ -26,6 +26,8 @@ public class BattleFieldWindow {
     public static MyButton attackingArmyStatusButton;
     public static MyButton chooseNextAttackButton;
 
+    public static MyImageView currentAttacker;
+
     public BattleFieldWindow() {
         Controller.playFirstTime = true;
         Constants.playMusic(Constants.battleMusic);
@@ -103,7 +105,7 @@ public class BattleFieldWindow {
         chooseNextAttackButton.setOpacity(0.8);
         chooseNextAttackButton.setOnAction(e -> {
             Controller.chooseNextAttack();
-            mapButton.setDisable(true);
+            mapButton.setDisable(false);
 
         });
 
@@ -157,6 +159,14 @@ public class BattleFieldWindow {
 
         battleFieldPane.setLeft(armyImgsLeft);
         battleFieldPane.setRight(armyImgsRight);
+
+
+        currentAttacker = new MyImageView();
+        currentAttacker.setFitHeight(180);
+        currentAttacker.setFitWidth(180);
+
+//        battleFieldPane.setCenter(currentAttacker == null ?
+//                Constants.spaceButton2() : currentAttacker);
 
 
         hboxForMap.getChildren().addAll(

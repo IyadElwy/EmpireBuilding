@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.CustomControllers.MyButton;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -127,5 +128,27 @@ public class Constants {
         spaceButton.setOpacity(0);
         return spaceButton;
     }
+
+
+    public static Image cavalryLeft = new Image(new File("src/GUI/Resources/" +
+            "CavalryYemin.png").toURI().toString());
+
+
+    public static Image cavalryRight = new Image(new File("src/GUI/Resources/" +
+            "CavalryShemal.png").toURI().toString());
+
+    public static Image archeryLeft = new Image(new File("src/GUI/Resources/" +
+            "ArcheryYemin.png").toURI().toString());
+
+    public static Image archeryRight = new Image(new File("src/GUI/Resources/" +
+            "ArcheryShemal.png").toURI().toString());
+
+
+    public static Image infantryLeft = new Image(new File("src/GUI/Resources/" +
+            "InfantryYemin.png").toURI().toString());
+
+    public static Image infantryRight = new Image(new File("src/GUI/Resources/" +
+            "InfantryShemal.png").toURI().toString());
+
 
 }

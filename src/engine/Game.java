@@ -1,7 +1,6 @@
 package engine;
 
 import GUI.BuiltWindow.GameOverWindow;
-import GUI.BuiltWindow.PopUpWindow;
 import GUI.Controller;
 import GUI.Main;
 import buildings.EconomicBuilding;
@@ -37,21 +36,21 @@ public class Game {
             }
         }
         if (playerCity.toLowerCase().equals("cairo")) {
-            loadArmy("Rome", "C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\rome_army.csv");
-            loadArmy("Sparta", "C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\sparta_army.csv");
+            loadArmy("Rome", "src/rome_army.csv");
+            loadArmy("Sparta", "src/sparta_army.csv");
         } else if (playerCity.toLowerCase().equals("rome")) {
-            loadArmy("Cairo", "C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\cairo_army.csv");
-            loadArmy("sparta", "C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\sparta_army.csv");
+            loadArmy("Cairo", "src/cairo_army.csv");
+            loadArmy("sparta", "src/sparta_army.csv");
         } else {
-            loadArmy("Rome", "C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\rome_army.csv");
-            loadArmy("Cairo", "C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\cairo_army.csv");
+            loadArmy("Rome", "src/rome_army.csv");
+            loadArmy("Cairo", "src/cairo_army.csv");
         }
 
     }
 
     private void loadCitiesAndDistances() throws IOException {
 
-        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\iyade\\IdeaProjects\\Java\\PersonalProjects\\EmpireBuilding\\src\\distances.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("src/distances.csv"));
         String currentLine = br.readLine();
         ArrayList<String> names = new ArrayList<String>();
 
@@ -142,9 +141,6 @@ public class Game {
             Main.window.setScene(new GameOverWindow().getGameOverScene());
         }
 
-        if (Controller.roundsUntilArrived == 1) {
-            new PopUpWindow("Attack Next Round\nOr You Will Miss\nYour Chance");
-        }
         Controller.roundsUntilArrived--;
 
         currentTurnCount++;
@@ -215,6 +211,7 @@ public class Game {
     public void autoResolve(Army attacker, Army defender) throws FriendlyFireException {
         int turn = 1;
         while (attacker.getUnits().size() != 0 && defender.getUnits().size() != 0) {
+            System.out.println("still");
             Unit unit1 = attacker.getUnits().get((int) (Math.random() * attacker.getUnits().size()));
             Unit unit2 = defender.getUnits().get((int) (Math.random() * defender.getUnits().size()));
             if (turn == 1)

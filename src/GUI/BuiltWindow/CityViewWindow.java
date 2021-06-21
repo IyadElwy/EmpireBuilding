@@ -82,9 +82,13 @@ public class CityViewWindow {
                 "-Regular.ttf").toURI().toString(), 30));
         playerFoodAmountLabel.setTextFill(Color.MAROON);
 
-        turnsLabel = new MyLabel("Turns: " + turns);
+        turnsLabel = new MyLabel("Turns: " + turns + " | Turns until arrived: " +
+                (Controller.roundsUntilArrived > -1 ?
+                        Integer.toString(Controller.roundsUntilArrived - 1)
+                        : "0"
+                ));
         turnsLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 30));
+                "-Regular.ttf").toURI().toString(), 23));
         turnsLabel.setTextFill(Color.MAROON);
 
 
@@ -125,7 +129,11 @@ public class CityViewWindow {
         attackButton.setMinSize(50, 50);
         attackButton.setOpacity(0.8);
         attackButton.setOnAction(e -> {
-            Controller.attackButtonPressed();
+            if (Controller.roundsUntilArrived <= 1 && Controller.roundsUntilArrived > -100) {
+                Controller.cityToAttackButtonPressed();
+            } else {
+                Controller.attackButtonPressed();
+            }
         });
 
 

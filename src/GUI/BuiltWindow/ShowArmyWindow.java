@@ -34,7 +34,7 @@ public class ShowArmyWindow {
     //    public static MyButton relocateButton;
     public static MyButton backButton;
 
-    public ShowArmyWindow(String cityToAttack, String status, String marchingToCity,
+    public ShowArmyWindow(String cityToAttack, String status,
                           String reachedIn, String besiegingCity,
                           String turnsBesieging) {
 
@@ -61,7 +61,7 @@ public class ShowArmyWindow {
 
 
         marchingToCityTextField = new MyTextField();
-        marchingToCityTextField.setText("Marching to " + cityToAttack + "   And " +
+        marchingToCityTextField.setText("Marching to: " + cityToAttack + "   And " +
                 "Reached In " +
                 reachedIn +
                 " Turns");
@@ -72,9 +72,7 @@ public class ShowArmyWindow {
         marchingToCityTextField.setPrefWidth(600);
 
         besiegingCityTextField = new MyTextField();
-        besiegingCityTextField.setText("Besieging " + besiegingCity + ".  " + turnsBesieging + "Turns" +
-                " " +
-                "Besieging");
+        besiegingCityTextField.setText("Besieging: " + besiegingCity);
         besiegingCityTextField.setEditable(false);
         besiegingCityTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 20));

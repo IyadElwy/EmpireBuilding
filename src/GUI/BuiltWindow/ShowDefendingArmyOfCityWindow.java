@@ -147,6 +147,7 @@ public class ShowDefendingArmyOfCityWindow {
         chooseToAttackButton.setTextFill(Color.DARKGOLDENROD);
         chooseToAttackButton.setOnAction(event -> {
 
+
             if ((Unit) ShowDefendingArmyOfCityWindow.
                     defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Archer) {
                 Constants.playEffect(Constants.archerSound);
@@ -158,13 +159,21 @@ public class ShowDefendingArmyOfCityWindow {
             }
 
             try {
-                BattleFieldWindow.mapButton.setDisable(true);
+                BattleFieldWindow.mapButton.setDisable(false);
                 BattleFieldWindow.battleLogTextArea.appendText("\n" +
                         AttackWithWindow.currentAttackingUnit + " attacked " + (Unit) ShowDefendingArmyOfCityWindow.
                         defendingArmytableView.getSelectionModel().getSelectedItem() + "\n" +
                         "Current Soldier Count of " + ShowDefendingArmyOfCityWindow.
                         defendingArmytableView.getSelectionModel().getSelectedItem() + " is \n" + ((Unit) ShowDefendingArmyOfCityWindow.
                         defendingArmytableView.getSelectionModel().getSelectedItem()).getCurrentSoldierCount() + "\n");
+
+
+                try {
+                    AttackWithWindow.currentAttackingUnit.attack(((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()));
+                } catch (FriendlyFireException e) {
+                    e.printStackTrace();
+                }
+
 
 
                 for (Unit unit :
@@ -177,6 +186,15 @@ public class ShowDefendingArmyOfCityWindow {
                             ) {
                                 if (unitToAttack == defendingArmytableView.getSelectionModel().getSelectedItem()) {
                                     unit.attack(unitToAttack);
+                                    if (unit instanceof Archer) {
+                                        BattleFieldWindow.currentAttacker.setImage(Constants.archeryRight);
+                                    } else if (unit instanceof Cavalry) {
+                                        BattleFieldWindow.currentAttacker.setImage(Constants.cavalryRight);
+                                    } else {
+                                        BattleFieldWindow.currentAttacker.setImage(Constants.infantryRight);
+                                    }
+
+
                                 }
                             }
                         }
@@ -197,7 +215,7 @@ public class ShowDefendingArmyOfCityWindow {
             }
 
             Controller.game.endTurn();
-
+            Controller.attackWithWindow.close();
 
             BattleFieldWindow.battleLogTextArea.appendText("\n\nWaiting For " +
                     "Defending Army To Finish Attack\n\n");
@@ -215,7 +233,11 @@ public class ShowDefendingArmyOfCityWindow {
             int int_random2 =
                     rand.nextInt(defendingArmytableView.getSelectionModel().getSelectedItems().size());
 
-
+            try {
+                ((Unit) defendingArmytableView.getItems().get(int_random2)).attack(((Unit) ShowArmyWindow.tableView.getItems().get(int_random)));
+            } catch (FriendlyFireException e) {
+                e.printStackTrace();
+            }
             for (City cityTemp : Controller.game.getAvailableCities()
             ) {
                 for (Unit unitToAttack : cityTemp.getDefendingArmy().getUnits()
@@ -223,13 +245,20 @@ public class ShowDefendingArmyOfCityWindow {
                     if (unitToAttack == defendingArmytableView.getSelectionModel().getSelectedItems().get(int_random2)) {
                         try {
                             unitToAttack.attack(Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random));
-
+                            if (unitToAttack instanceof Archer) {
+                                BattleFieldWindow.currentAttacker.setImage(Constants.archeryLeft);
+                            } else if (unitToAttack instanceof Cavalry) {
+                                BattleFieldWindow.currentAttacker.setImage(Constants.archeryLeft);
+                            } else {
+                                BattleFieldWindow.currentAttacker.setImage(Constants.archeryLeft);
+                            }
                         } catch (FriendlyFireException e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
+
 
             BattleFieldWindow.battleLogTextArea.appendText("\n" +
                     defendingArmytableView.getSelectionModel().getSelectedItems().get(int_random2) + " attacked " +
@@ -238,6 +267,7 @@ public class ShowDefendingArmyOfCityWindow {
                     Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random).getCurrentSoldierCount() + "\n");
 
             Controller.game.endTurn();
+
 
         });
 
