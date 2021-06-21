@@ -21,7 +21,7 @@ public class MapViewWindow {
     public MapViewWindow() {
 
 
-        Constants.playMusic(Constants.openingMusic);
+//        Constants.playMusic(Constants.openingMusic);
         BackgroundImage backgroundImage = new BackgroundImage(
                 new Image(new File("src/GUI/Resources/mapGame.jpg")
                         .toURI().toString()),

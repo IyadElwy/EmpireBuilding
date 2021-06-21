@@ -29,15 +29,13 @@ public class CityViewWindow {
     public static MyGridPane cityViewGridPane;
 
     public CityViewWindow(
-            String city
-            ,
+            String city,
             String playerGold, String playerFood,
             String turns, String marketLevel, String farmLevel,
             String archeryRangeLevel, String stablesLevel,
             String barracksLevel
     ) {
 
-        Constants.playMusic(Constants.cityMusic);
 
         MyBorderPane borderPane = new MyBorderPane();
         MyHbox hboxForTopControllers = new MyHbox();

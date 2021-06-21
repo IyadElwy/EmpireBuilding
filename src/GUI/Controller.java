@@ -29,11 +29,13 @@ public class Controller {
 
     public static String cityToAttack;
 
+    public static boolean playFirstTime = true;
+
 
     public static boolean button2Disabled = false;
     public static boolean button1Disabled = false;
 
-    public static int roundsUntilArrived;
+    public static int roundsUntilArrived = -1;
 
     public static void updateInWhatCity(String city) {
         inWhatCity = city;
@@ -482,7 +484,6 @@ public class Controller {
 
 
     public static void buildButtonPressed(String building) {
-        game.endTurn();
         City currentCity = null;
         for (City city : game.getPlayer().getControlledCities()
         ) {
@@ -494,13 +495,13 @@ public class Controller {
             game.getPlayer().build(building, currentCity.getName());
         } catch (Exception e) {
             new PopUpWindow("Not Enough Gold");
+            e.printStackTrace();
         }
         Constants.playEffect(Constants.clickButton);
         goBackToCityFromEditBuilding();
     }
 
     public static void upgradeButtonPressed(String building) {
-        game.endTurn();
         City currentCity = null;
         for (City city : game.getPlayer().getControlledCities()
         ) {
@@ -543,7 +544,6 @@ public class Controller {
     }
 
     public static void recruitButtonPressed(String building) {
-        game.endTurn();
         City currentCity = null;
         for (City city : game.getPlayer().getControlledCities()
         ) {
@@ -553,30 +553,42 @@ public class Controller {
         }
 
 
-        String typeToRecruitFrom = null;
+        String typeToRecruitFrom = "";
         for (Building buildingTemp : currentCity.getMilitaryBuildings()
         ) {
             if (buildingTemp instanceof ArcheryRange && building.equals("ArcheryRange")) {
                 typeToRecruitFrom = "archer";
             } else if (buildingTemp instanceof Stable && building.equals("Stable")) {
                 typeToRecruitFrom = "cavalry";
-
             } else if (buildingTemp instanceof Barracks && building.equals(
                     "Barracks")) {
                 typeToRecruitFrom = "infantry";
-
             }
-
-            try {
-                game.getPlayer().recruitUnit(typeToRecruitFrom, inWhatCity);
-            } catch (Exception e) {
-                System.out.println(e);
-                new PopUpWindow("Not Enough Gold\nOr Not Built Yet\nOr Building In " +
-                        "Cool Down");
-            }
-            Constants.playEffect(Constants.clickButton);
-            goBackToCityFromEditBuilding();
         }
+
+        try {
+            game.getPlayer().recruitUnit(typeToRecruitFrom, inWhatCity);
+            game.endTurn();
+        } catch (Exception ignored) {
+
+        }
+        Constants.playEffect(Constants.clickButton);
+        goBackToCityFromEditBuilding();
+
+
+//        City currentCity2 = null;
+//        for (City city : game.getPlayer().getControlledCities()
+//        ) {
+//            if (city.getName().equalsIgnoreCase(inWhatCity)) {
+//                currentCity2 = city;
+//            }
+//        }
+//        System.out.println("defend " + currentCity2.getDefendingArmy().getUnits().size());
+//
+//        System.out.println("control " +
+//                game.getPlayer().getControlledArmies().get(0).getUnits().size());
+
+
     }
 
     public static void recruitButtonPressed() {

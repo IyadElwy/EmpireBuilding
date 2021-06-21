@@ -61,7 +61,7 @@ public class ShowArmyWindow {
 
 
         marchingToCityTextField = new MyTextField();
-        marchingToCityTextField.setText("Marching to " + cityToAttack + "Target " +
+        marchingToCityTextField.setText("Marching to " + cityToAttack + "   And " +
                 "Reached In " +
                 reachedIn +
                 " Turns");
@@ -72,7 +72,7 @@ public class ShowArmyWindow {
         marchingToCityTextField.setPrefWidth(600);
 
         besiegingCityTextField = new MyTextField();
-        besiegingCityTextField.setText("Besieging " + besiegingCity + ". " + turnsBesieging + "Turns" +
+        besiegingCityTextField.setText("Besieging " + besiegingCity + ".  " + turnsBesieging + "Turns" +
                 " " +
                 "Besieging");
         besiegingCityTextField.setEditable(false);
@@ -89,9 +89,7 @@ public class ShowArmyWindow {
                 "Max Soldiers");
         TableColumn<Unit, String> currentSoldiersColumn = new TableColumn<>(
                 "Current Soldiers");
-//        TableColumn<UnitsHelperClass, RadioButton> radioButtonColumn =
-//                new TableColumn<>(
-//                        "Relocate");
+
 
         typeColumn.setMinWidth(478);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
@@ -113,7 +111,6 @@ public class ShowArmyWindow {
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-//        radioButtonColumn.setMinWidth(390);
 
 
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -124,12 +121,8 @@ public class ShowArmyWindow {
                 "maxSoldierCount"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
-//        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
-//                "relocateButton"));
 
         tableView = new MyTableView();
-//        tableView.setBackground(new Background(new BackgroundFill(Color.DARKGOLDENROD,
-//                new CornerRadii(60,false), new Insets(300,300,300,300))));
         tableView.setEditable(false);
         tableView.setItems(Controller.putShowArmyWindowUnits());
         tableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,

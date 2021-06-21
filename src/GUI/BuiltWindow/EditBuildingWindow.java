@@ -77,11 +77,13 @@ public class EditBuildingWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         harvestOrRecruitButton.setTextFill(Color.DARKGOLDENROD);
         harvestOrRecruitButton.setOnAction(event -> {
+
+
             try {
                 Controller.recruitButtonPressed(buildingChoiceBox.getValue());
-                Controller.game.endTurn();
             } catch (Exception e) {
-                new PopUpWindow(e.toString());
+//                new PopUpWindow(e.toString());
+                e.printStackTrace();
             }
         });
 

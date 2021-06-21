@@ -86,7 +86,7 @@ public class AttackStrategyWindow {
                     cityToAttack = city;
                 }
             }
-            if (Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget() <= 0) {
+            if (Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget() < 1) {
                 try {
                     Controller.game.getPlayer().laySiege(
                             Controller.game.getPlayer().getControlledArmies().get(0),

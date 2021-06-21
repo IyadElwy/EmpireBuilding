@@ -27,6 +27,7 @@ public class BattleFieldWindow {
     public static MyButton chooseNextAttackButton;
 
     public BattleFieldWindow() {
+        Controller.playFirstTime = true;
         Constants.playMusic(Constants.battleMusic);
 
         MyBorderPane borderPane = new MyBorderPane();

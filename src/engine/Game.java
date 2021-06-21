@@ -142,10 +142,10 @@ public class Game {
             Main.window.setScene(new GameOverWindow().getGameOverScene());
         }
 
-        Controller.roundsUntilArrived--;
         if (Controller.roundsUntilArrived == 1) {
             new PopUpWindow("Attack Next Round\nOr You Will Miss\nYour Chance");
         }
+        Controller.roundsUntilArrived--;
 
         currentTurnCount++;
         double totalUpkeep = 0;

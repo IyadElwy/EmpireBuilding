@@ -4,7 +4,6 @@ import GUI.Constants;
 import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.Layouts.MyHbox;
-import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +19,12 @@ public class CityOrArmyWindow {
     private final MyScene cityOrArmyWindow;
 
     public CityOrArmyWindow() {
+
+        if (Controller.playFirstTime) {
+            Constants.playMusic(Constants.cityMusic);
+            Controller.playFirstTime = false;
+        }
+
         MyHbox hbox = new MyHbox();
         hbox.setAlignment(Pos.CENTER);
         hbox.setBackground(new Background(new BackgroundFill(Color.MAROON,

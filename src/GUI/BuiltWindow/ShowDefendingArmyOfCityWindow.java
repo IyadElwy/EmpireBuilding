@@ -22,7 +22,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import units.Archer;
 import units.Army;
+import units.Cavalry;
 import units.Unit;
 
 import java.io.File;
@@ -144,6 +146,17 @@ public class ShowDefendingArmyOfCityWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         chooseToAttackButton.setTextFill(Color.DARKGOLDENROD);
         chooseToAttackButton.setOnAction(event -> {
+
+            if ((Unit) ShowDefendingArmyOfCityWindow.
+                    defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Archer) {
+                Constants.playEffect(Constants.archerSound);
+            } else if ((Unit) ShowDefendingArmyOfCityWindow.
+                    defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Cavalry) {
+                Constants.playEffect(Constants.horseSound);
+            } else {
+                Constants.playEffect(Constants.infantrySound);
+            }
+
             try {
                 BattleFieldWindow.mapButton.setDisable(true);
                 BattleFieldWindow.battleLogTextArea.appendText("\n" +
@@ -234,6 +247,7 @@ public class ShowDefendingArmyOfCityWindow {
         relocateButton.setTextFill(Color.DARKGOLDENROD);
         relocateButton.setOnAction(event -> {
 
+            Controller.game.endTurn();
 
             Unit unit = (Unit) ShowDefendingArmyOfCityWindow.
                     defendingArmytableView.getSelectionModel().getSelectedItem();
