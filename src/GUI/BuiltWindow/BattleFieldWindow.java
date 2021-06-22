@@ -181,7 +181,6 @@ public class BattleFieldWindow {
         takeActionPane.getChildren().addAll(armyStatusPane, nextAttackPane);
         bottomPane.getChildren().addAll(battleLogPane, Constants.spaceButton2(),
                 Constants.spaceButton2(),
-                Constants.spaceButton2(),
                 Constants.spaceButton2(), takeActionPane);
         borderPane.setBottom(bottomPane);
 

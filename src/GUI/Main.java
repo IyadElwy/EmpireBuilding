@@ -17,8 +17,8 @@ public class Main extends Application {
         window = primaryStage;
 
 
-        window.setMinWidth(720);
-        window.setMinWidth(1080);
+        window.setHeight(763);
+        window.setMaxWidth(1355);
 
         window.setResizable(false);
 

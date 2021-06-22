@@ -5,7 +5,6 @@ import GUI.Controller;
 import GUI.CustomControllers.MyButton;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
-import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,12 +25,12 @@ public class ChooseCityWindow {
 
     public ChooseCityWindow() {
 
-        double buttonWidth = 200;
+        double buttonWidth = 188.3;
 
 //        Setting up the layouts and properties
         MyHbox allCitiesHbox = new MyHbox();
-        BackgroundSize vboxBackgroundSize = new BackgroundSize(Constants.GAME_WINDOW_SIZE_X,
-                Constants.GAME_WINDOW_SIZE_Y, false,
+        BackgroundSize vboxBackgroundSize = new BackgroundSize(50,
+                50, false,
                 false, false, true);
 
 
@@ -45,10 +44,10 @@ public class ChooseCityWindow {
         cairoButton = new MyButton("Cairo");
         cairoButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-        cairoButton.setPadding(new Insets(0,
-                buttonWidth
-                , 0,
-                buttonWidth));
+//        cairoButton.setPadding(new Insets(0,
+//                buttonWidth
+//                , 0,
+//                buttonWidth));
         cairoButton.setTextFill(Color.WHITE);
         cairoButton.setOnMouseEntered(e -> {
             cairoButton.setTextFill(Color.RED);
@@ -63,8 +62,8 @@ public class ChooseCityWindow {
         });
 
         cairoButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
-                "/BerkshireSwash-Regular.ttf").toURI().toString(), 35));
-        cairoVbox.getChildren().add(cairoButton);
+                "/BerkshireSwash-Regular.ttf").toURI().toString(), 20));
+        cairoVbox.getChildren().addAll(cairoButton, Constants.spaceButton4());
         cairoVbox.setAlignment(Pos.CENTER);
 
 
@@ -79,12 +78,12 @@ public class ChooseCityWindow {
         romeButton.setTextFill(Color.WHITE);
         romeButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-        romeButton.setPadding(new Insets(0,
-                buttonWidth + 30
-                , 0,
-                buttonWidth +30));
+//        romeButton.setPadding(new Insets(0,
+//                buttonWidth + 30
+//                , 0,
+//                buttonWidth + 30));
         romeButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
-                "/BerkshireSwash-Regular.ttf").toURI().toString(), 35));
+                "/BerkshireSwash-Regular.ttf").toURI().toString(), 20));
         romeButton.setOnMouseEntered(e -> {
             romeButton.setTextFill(Color.RED);
             romeButton.setEffect(new InnerShadow());
@@ -96,7 +95,7 @@ public class ChooseCityWindow {
         romeButton.setOnAction(e -> {
             Controller.chooseCityWindowButtonOnAction("Rome");
         });
-        romeVbox.getChildren().add(romeButton);
+        romeVbox.getChildren().addAll(romeButton, Constants.spaceButton4());
         romeVbox.setAlignment(Pos.CENTER);
 
 
@@ -112,11 +111,11 @@ public class ChooseCityWindow {
         spartaButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
         spartaButton.setTextFill(Color.WHITE);
-        spartaButton.setPadding(new Insets(0, buttonWidth
-                , 0,
-                buttonWidth));
+//        spartaButton.setPadding(new Insets(0, buttonWidth
+//                , 0,
+//                buttonWidth));
         spartaButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
-                "/BerkshireSwash-Regular.ttf").toURI().toString(), 35));
+                "/BerkshireSwash-Regular.ttf").toURI().toString(), 20));
         spartaButton.setOnMouseEntered(e -> {
             spartaButton.setTextFill(Color.RED);
             spartaButton.setEffect(new InnerShadow());
@@ -128,7 +127,7 @@ public class ChooseCityWindow {
         spartaButton.setOnAction(e -> {
             Controller.chooseCityWindowButtonOnAction("Sparta");
         });
-        spartaVbox.getChildren().add(spartaButton);
+        spartaVbox.getChildren().addAll(spartaButton, Constants.spaceButton4());
         spartaVbox.setAlignment(Pos.CENTER);
 
         allCitiesHbox.getChildren().addAll(cairoVbox, romeVbox, spartaVbox);

@@ -80,7 +80,6 @@ public class MapViewWindow {
         romeButton.setOpacity(0);
         romeButton.setOnAction(e -> {
             for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
-
                 if (Controller.game.getPlayer().getControlledCities().get(i).getName().
                         equalsIgnoreCase("rome")) {
                     Controller.updateInWhatCity("Rome");
@@ -89,6 +88,7 @@ public class MapViewWindow {
                 } else {
                     if (spartaButton.isDisabled()) {
                         new PopUpWindow("Rome not conquered yet.");
+                        break;
                     }
                 }
             }
@@ -110,6 +110,7 @@ public class MapViewWindow {
                 } else {
                     if (spartaButton.isDisabled()) {
                         new PopUpWindow("Rome not conquered yet.");
+                        break;
                     }
                 }
             }
@@ -182,7 +183,7 @@ public class MapViewWindow {
 
         settingsButton = new MyButton("settings");
         settingsButton.setPrefWidth(400);
-        settingsButton.setPrefHeight(320);
+        settingsButton.setPrefHeight(400);
         settingsButton.setOpacity(0);
 
         settingsButton.setOnAction(e -> {
