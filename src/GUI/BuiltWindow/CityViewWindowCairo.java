@@ -48,8 +48,7 @@ public class CityViewWindowCairo {
         cityViewGridPaneCairo.setPadding(new Insets(30, 30, 30, 30));
 
         BackgroundImage backgroundImage = new BackgroundImage(
-                new Image(new File("src/GUI/Resources/city_background.jpg")
-                        .toURI().toString()),
+                Constants.egyptBack,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(Constants.GAME_WINDOW_SIZE_X,
                         Constants.GAME_WINDOW_SIZE_Y + 20, false,
