@@ -44,7 +44,7 @@ public class EnterNameWindow {
         //        setting the label properties
         enterNameLabel = new MyLabel("Please Enter Your Name:");
         enterNameLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 70));
+                "-Regular.ttf").toURI().toString(), 60));
         enterNameLabel.setTextFill(Color.DARKGOLDENROD);
         MyHbox enterNameTitleHbox = new MyHbox();
         enterNameTitleHbox.setAlignment(Pos.BASELINE_CENTER);
@@ -70,7 +70,7 @@ public class EnterNameWindow {
         readyButtonHbox.setPadding(new Insets(0, 0, 50, 0));
         readyButton = new MyButton("Ready");
         readyButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 40));
         readyButton.setTextFill(Color.DARKGOLDENROD);
         readyButton.setShape(new Circle(1.5));
         readyButton.setMinSize(200, 200);

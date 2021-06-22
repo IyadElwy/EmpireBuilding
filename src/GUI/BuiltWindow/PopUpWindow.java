@@ -32,8 +32,8 @@ public class PopUpWindow {
         borderPane.setCenter(msgLabel);
         Scene scene = new Scene(borderPane);
         Stage window = new Stage();
-        window.setMinWidth(500);
-        window.setMinHeight(500);
+        window.setMinWidth(350);
+        window.setMinHeight(350);
         window.setScene(scene);
         window.initModality(Modality.APPLICATION_MODAL);
         window.showAndWait();

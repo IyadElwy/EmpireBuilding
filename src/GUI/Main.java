@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.BuiltWindow.*;
+import GUI.BuiltWindow.WelcomeWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -17,11 +17,17 @@ public class Main extends Application {
         window = primaryStage;
 
 
+        window.setMinWidth(720);
+        window.setMinWidth(1080);
+
+        window.setResizable(false);
+
+
 //        Setting the first scene to the welcome scene and setting the title
         window.setScene(new WelcomeWindow().getWelcomeScene());
         window.setTitle("Empire Building");
-        window.setMinWidth(800);
-        window.setMinHeight(800);
+
+
         window.show();
 
     }

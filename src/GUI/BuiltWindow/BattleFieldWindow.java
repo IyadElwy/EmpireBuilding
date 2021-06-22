@@ -57,14 +57,14 @@ public class BattleFieldWindow {
         battleLogPane.setAlignment(Pos.BOTTOM_LEFT);
         battleLogPane.setPadding(new Insets(10, 10, 10, 10));
         bottomPane.setAlignment(Pos.BOTTOM_CENTER);
-        nextAttackPane.setPadding(new Insets(10, 10, 10, 10));
+        nextAttackPane.setPadding(new Insets(5, 5, 5, 5));
 
 
         mapButton = new MyButton("Map");
         mapButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 30));
+                "-Regular.ttf").toURI().toString(), 25));
         mapButton.setTextFill(Color.DARKGOLDENROD);
-        mapButton.setMinSize(50, 50);
+        mapButton.setMinSize(30, 30);
         mapButton.setOpacity(0.8);
         mapButton.setOnAction(e -> {
             Controller.mapButtonPressedBattleField();
@@ -81,7 +81,7 @@ public class BattleFieldWindow {
         defendingArmyStatusButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 25));
         defendingArmyStatusButton.setTextFill(Color.DARKGOLDENROD);
-        defendingArmyStatusButton.setMinSize(50, 50);
+        defendingArmyStatusButton.setMinSize(30, 30);
         defendingArmyStatusButton.setOpacity(0.8);
         defendingArmyStatusButton.setOnAction(e -> {
             Controller.showDefendingArmyStatus();
@@ -91,7 +91,7 @@ public class BattleFieldWindow {
         attackingArmyStatusButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 25));
         attackingArmyStatusButton.setTextFill(Color.DARKGOLDENROD);
-        attackingArmyStatusButton.setMinSize(50, 50);
+        attackingArmyStatusButton.setMinSize(30, 30);
         attackingArmyStatusButton.setOpacity(0.8);
         attackingArmyStatusButton.setOnAction(e -> {
             Controller.showAttackingArmyStatus();
@@ -99,9 +99,9 @@ public class BattleFieldWindow {
 
         chooseNextAttackButton = new MyButton("Choose Next Attack");
         chooseNextAttackButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 29.6));
+                "-Regular.ttf").toURI().toString(), 20));
         chooseNextAttackButton.setTextFill(Color.DARKGOLDENROD);
-        chooseNextAttackButton.setMinSize(50, 100);
+        chooseNextAttackButton.setMinSize(30, 60);
         chooseNextAttackButton.setOpacity(0.8);
         chooseNextAttackButton.setOnAction(e -> {
             Controller.chooseNextAttack();
@@ -113,43 +113,43 @@ public class BattleFieldWindow {
                 "CavalryYemin.png").toURI().toString());
         MyImageView cavalryLeftImg = new MyImageView();
         cavalryLeftImg.setImage(cavalryLeft);
-        cavalryLeftImg.setFitHeight(180);
-        cavalryLeftImg.setFitWidth(180);
+        cavalryLeftImg.setFitHeight(110);
+        cavalryLeftImg.setFitWidth(110);
 
         Image cavalryRight = new Image(new File("src/GUI/Resources/" +
                 "CavalryShemal.png").toURI().toString());
         MyImageView cavalryRightImg = new MyImageView();
         cavalryRightImg.setImage(cavalryRight);
-        cavalryRightImg.setFitHeight(180);
-        cavalryRightImg.setFitWidth(180);
+        cavalryRightImg.setFitHeight(110);
+        cavalryRightImg.setFitWidth(110);
 
         Image archeryLeft = new Image(new File("src/GUI/Resources/" +
                 "ArcheryYemin.png").toURI().toString());
         MyImageView archeryLeftImg = new MyImageView();
         archeryLeftImg.setImage(archeryLeft);
-        archeryLeftImg.setFitHeight(180);
-        archeryLeftImg.setFitWidth(180);
+        archeryLeftImg.setFitHeight(110);
+        archeryLeftImg.setFitWidth(110);
 
         Image archeryRight = new Image(new File("src/GUI/Resources/" +
                 "ArcheryShemal.png").toURI().toString());
         MyImageView archeryRightImg = new MyImageView();
         archeryRightImg.setImage(archeryRight);
-        archeryRightImg.setFitHeight(180);
-        archeryRightImg.setFitWidth(180);
+        archeryRightImg.setFitHeight(110);
+        archeryRightImg.setFitWidth(110);
 
         Image infantryLeft = new Image(new File("src/GUI/Resources/" +
                 "InfantryYemin.png").toURI().toString());
         MyImageView infantryLeftImg = new MyImageView();
         infantryLeftImg.setImage(infantryLeft);
-        infantryLeftImg.setFitHeight(180);
-        infantryLeftImg.setFitWidth(180);
+        infantryLeftImg.setFitHeight(110);
+        infantryLeftImg.setFitWidth(110);
 
         Image infantryRight = new Image(new File("src/GUI/Resources/" +
                 "InfantryShemal.png").toURI().toString());
         MyImageView infantryRightImg = new MyImageView();
         infantryRightImg.setImage(infantryRight);
-        infantryRightImg.setFitHeight(180);
-        infantryRightImg.setFitWidth(180);
+        infantryRightImg.setFitHeight(110);
+        infantryRightImg.setFitWidth(110);
 
 
         armyImgsLeft.getChildren().addAll(infantryLeftImg, cavalryLeftImg,
@@ -162,8 +162,8 @@ public class BattleFieldWindow {
 
 
         currentAttacker = new MyImageView();
-        currentAttacker.setFitHeight(180);
-        currentAttacker.setFitWidth(180);
+        currentAttacker.setFitHeight(110);
+        currentAttacker.setFitWidth(110);
 
 //        battleFieldPane.setCenter(currentAttacker == null ?
 //                Constants.spaceButton2() : currentAttacker);
@@ -182,11 +182,7 @@ public class BattleFieldWindow {
         bottomPane.getChildren().addAll(battleLogPane, Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 Constants.spaceButton2(),
-                Constants.spaceButton2(),
-                Constants.spaceButton2(),
-                Constants.spaceButton2(),
-                Constants.spaceButton2(),
-                takeActionPane);
+                Constants.spaceButton2(), takeActionPane);
         borderPane.setBottom(bottomPane);
 
         this.scene = new MyScene(borderPane);

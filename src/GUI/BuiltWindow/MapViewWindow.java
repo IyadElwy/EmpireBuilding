@@ -54,6 +54,25 @@ public class MapViewWindow {
                 }
             }
         });
+        MyButton cairoButton2 = new MyButton("cairo");
+        cairoButton2.setPrefWidth(400);
+        cairoButton2.setPrefHeight(250);
+        cairoButton2.setOpacity(0);
+        cairoButton2.setOnAction(e -> {
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("cairo")) {
+                    Controller.updateInWhatCity("Cairo");
+                    Controller.enterCityMapButtonOnAction("Cairo");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Cairo not conquered yet.");
+                    }
+                }
+            }
+        });
 
         romeButton = new MyButton("rome");
         romeButton.setPrefWidth(400);
@@ -70,6 +89,48 @@ public class MapViewWindow {
                 } else {
                     if (spartaButton.isDisabled()) {
                         new PopUpWindow("Rome not conquered yet.");
+                    }
+                }
+            }
+        });
+
+
+        MyButton romeButton2 = new MyButton("rome");
+        romeButton2.setPrefWidth(400);
+        romeButton2.setPrefHeight(150);
+        romeButton2.setOpacity(0);
+        romeButton2.setOnAction(e -> {
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("rome")) {
+                    Controller.updateInWhatCity("Rome");
+                    Controller.enterCityMapButtonOnAction("Rome");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Rome not conquered yet.");
+                    }
+                }
+            }
+        });
+
+        MyButton spartaButton3 = new MyButton("sparta");
+        spartaButton3.setPrefWidth(330);
+        spartaButton3.setPrefHeight(220);
+        spartaButton3.setOpacity(0);
+
+        spartaButton3.setOnAction(e -> {
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("sparta")) {
+                    Controller.updateInWhatCity("Sparta");
+                    Controller.enterCityMapButtonOnAction("Sparta");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Sparta not conquered yet.");
                     }
                 }
             }
@@ -97,6 +158,28 @@ public class MapViewWindow {
             }
         });
 
+
+        MyButton spartaButton2 = new MyButton("sparta");
+        spartaButton2.setPrefWidth(330);
+        spartaButton2.setPrefHeight(220);
+        spartaButton2.setOpacity(0);
+
+        spartaButton2.setOnAction(e -> {
+            for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("sparta")) {
+                    Controller.updateInWhatCity("Sparta");
+                    Controller.enterCityMapButtonOnAction("Sparta");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Sparta not conquered yet.");
+                    }
+                }
+            }
+        });
+
         settingsButton = new MyButton("settings");
         settingsButton.setPrefWidth(400);
         settingsButton.setPrefHeight(320);
@@ -108,7 +191,7 @@ public class MapViewWindow {
         });
 
 
-        mapViewSceneLayout.add(Constants.spaceButton(), 0, 0);
+        mapViewSceneLayout.add(cairoButton2, 0, 0);
         mapViewSceneLayout.add(Constants.spaceButton(), 0, 1);
         mapViewSceneLayout.add(settingsButton, 0, 2);
         mapViewSceneLayout.add(Constants.spaceButton(), 0, 3);
@@ -116,18 +199,16 @@ public class MapViewWindow {
         mapViewSceneLayout.add(cairoButton, 1, 1);
         mapViewSceneLayout.add(Constants.spaceButton(), 1, 2);
         mapViewSceneLayout.add(Constants.spaceButton(), 1, 3);
-        mapViewSceneLayout.add(Constants.spaceButton(), 2, 0);
-        mapViewSceneLayout.add(Constants.spaceButton(), 2, 1);
+        mapViewSceneLayout.add(romeButton2, 2, 0);
+        mapViewSceneLayout.add(spartaButton2, 2, 1);
         mapViewSceneLayout.add(Constants.spaceButton(), 2, 2);
-        mapViewSceneLayout.add(Constants.spaceButton(), 2, 3);
         mapViewSceneLayout.add(romeButton, 3, 0);
-        mapViewSceneLayout.add(Constants.spaceButton(), 3, 1);
+        mapViewSceneLayout.add(spartaButton3, 3, 1);
         mapViewSceneLayout.add(spartaButton, 3, 2);
         mapViewSceneLayout.add(Constants.spaceButton(), 3, 3);
         mapViewSceneLayout.add(Constants.spaceButton(), 4, 0);
         mapViewSceneLayout.add(Constants.spaceButton(), 4, 1);
         mapViewSceneLayout.add(Constants.spaceButton(), 4, 2);
-        mapViewSceneLayout.add(Constants.spaceButton(), 4, 3);
 
 
         this.mapViewScene = new MyScene(mapViewSceneLayout);

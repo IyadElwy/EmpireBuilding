@@ -31,7 +31,7 @@ public class WelcomeWindow {
                 new Image(new File("src/GUI/Resources/background_welcome.png")
                         .toURI().toString()),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
+                    BackgroundSize.DEFAULT);
 
         MyBorderPane welcomeSceneLayout = new MyBorderPane();
         welcomeSceneLayout.setBackground(new Background(backgroundImage));
@@ -39,7 +39,7 @@ public class WelcomeWindow {
 //        setting the label properties
         MyLabel welcomeLabel = new MyLabel("Welcome To Empire Building");
         welcomeLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 130));
+                "-Regular.ttf").toURI().toString(), 60));
         welcomeLabel.setTextFill(Color.DARKGOLDENROD);
         InnerShadow shadow = new InnerShadow();
         shadow.setOffsetX(4.0f);
@@ -55,7 +55,7 @@ public class WelcomeWindow {
 //        Setting button properties
         startGameButton = new MyButton("Start Game");
         startGameButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 40));
         startGameButton.setTextFill(Color.DARKGOLDENROD);
         startGameButton.setShape(new Circle(1.5));
         startGameButton.setMinSize(200, 200);

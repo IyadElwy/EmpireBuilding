@@ -55,7 +55,7 @@ public class AttackStrategyWindow {
         vbox.setAlignment(Pos.CENTER);
         vbox.setBackground(new Background(new BackgroundFill(Color.MAROON,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-        vbox.setPadding(new Insets(0, 0, 100, 0));
+        vbox.setPadding(new Insets(0, 0, 60, 0));
         hbox.setAlignment(Pos.CENTER);
         MyVbox vbox2 = new MyVbox();
         vbox2.setAlignment(Pos.CENTER);
@@ -65,12 +65,12 @@ public class AttackStrategyWindow {
 
         MyLabel chooseArmyLabel = new MyLabel("Attack: ");
         chooseArmyLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 130));
+                "-Regular.ttf").toURI().toString(), 80));
         chooseArmyLabel.setTextFill(Color.DARKGOLDENROD);
 
         city1Button = new MyButton(cities[0]);
         city1Button.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 30));
         city1Button.setTextFill(Color.DARKGOLDENROD);
         city1Button.setOnAction(event -> {
             Controller.cityToAttack = cities[0];
@@ -122,7 +122,7 @@ public class AttackStrategyWindow {
 
         city2Button = new MyButton(cities[1]);
         city2Button.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 30));
         city2Button.setTextFill(Color.DARKGOLDENROD);
         city2Button.setOnAction(event -> {
             Controller.cityToAttack = cities[1];
@@ -174,7 +174,7 @@ public class AttackStrategyWindow {
 
         MyButton autoResolveBtn1 = new MyButton("Auto-Resolve");
         autoResolveBtn1.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 30));
         autoResolveBtn1.setTextFill(Color.DARKGOLDENROD);
         autoResolveBtn1.setOnAction(event -> {
 
@@ -236,7 +236,7 @@ public class AttackStrategyWindow {
 
                 toURI().
 
-                toString(), 50));
+                toString(), 30));
         autoResolveBtn2.setTextFill(Color.DARKGOLDENROD);
         autoResolveBtn2.setOnAction(event -> {
 

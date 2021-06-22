@@ -29,7 +29,7 @@ public class GameOverWindow {
 
         gameResultLabel = new MyLabel("GAME OVER\nYOU " + result);
         gameResultLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 250));
+                "-Regular.ttf").toURI().toString(), 150));
         gameResultLabel.setTextFill(Color.DARKGOLDENROD);
 
         hbox.getChildren().add(gameResultLabel);

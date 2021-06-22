@@ -83,7 +83,6 @@ public class EditBuildingWindow {
                 Controller.recruitButtonPressed(buildingChoiceBox.getValue());
             } catch (Exception e) {
 //                new PopUpWindow(e.toString());
-                e.printStackTrace();
             }
         });
 

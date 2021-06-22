@@ -41,7 +41,7 @@ public class GameDescriptionWindow {
         //        setting the label properties
         MyLabel gamDescriptionLabel = new MyLabel("Game Description");
         gamDescriptionLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 70));
+                "-Regular.ttf").toURI().toString(), 40));
         gamDescriptionLabel.setTextFill(Color.DARKGOLDENROD);
         MyHbox gameDescriptionTextTitleHbox = new MyHbox();
         gameDescriptionTextTitleHbox.setAlignment(Pos.CENTER);
@@ -54,19 +54,19 @@ public class GameDescriptionWindow {
         MyTextArea gameDescriptionText = new MyTextArea(Constants.gameDescription);
         gameDescriptionText.setEditable(false);
         gameDescriptionText.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 40));
+                "-Regular.ttf").toURI().toString(), 30));
         gameDescriptionText.setStyle("-fx-text-inner-color: #6A1412");
         gameDescriptionText.setOpacity(0.8);
-        gameDescriptionTextHbox.setPadding(new Insets(50, 0, 50, 50));
+        gameDescriptionTextHbox.setPadding(new Insets(50, 50, 50, 50));
         gameDescriptionTextHbox.getChildren().add(gameDescriptionText);
 
 
 //        Setting button properties and hbox for button
         MyHbox readyButtonHbox = new MyHbox();
-        readyButtonHbox.setPadding(new Insets(0, 0, 100, 850));
+        readyButtonHbox.setPadding(new Insets(10, 600 , 10, 565));
         readyButton = new MyButton("Proceed");
         readyButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 40));
         readyButton.setTextFill(Color.DARKGOLDENROD);
         readyButton.setShape(new Circle(1.5));
         readyButton.setMinSize(200, 200);

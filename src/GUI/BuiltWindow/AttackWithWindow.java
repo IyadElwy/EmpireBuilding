@@ -41,7 +41,7 @@ public class AttackWithWindow {
 
         title = new MyLabel("Choose Attacking Unit");
         title.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 70));
+                "-Regular.ttf").toURI().toString(), 50));
         title.setTextFill(Color.DARKGOLDENROD);
 
 
@@ -55,22 +55,22 @@ public class AttackWithWindow {
                 "Current Soldiers");
 
 
-        typeColumn.setMinWidth(478);
+        typeColumn.setMinWidth(400);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        levelColumn.setMinWidth(478);
+        levelColumn.setMinWidth(400);
         levelColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        maxSoldierColumn.setMinWidth(478);
+        maxSoldierColumn.setMinWidth(400);
         maxSoldierColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        currentSoldiersColumn.setMinWidth(478);
+        currentSoldiersColumn.setMinWidth(400);
         currentSoldiersColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
@@ -98,8 +98,8 @@ public class AttackWithWindow {
 
         MyButton backButton = new MyButton("Back");
         backButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
-        backButton.setPadding(new Insets(50, 50, 50, 50));
+                "-Regular.ttf").toURI().toString(), 30));
+        backButton.setPadding(new Insets(30, 30, 30, 30));
         backButton.setTextFill(Color.DARKGOLDENROD);
         backButton.setOnAction(event -> {
             Controller.goBackFromAttackWithWindow();
@@ -107,8 +107,8 @@ public class AttackWithWindow {
 
         MyButton chooseAttckButton = new MyButton("Attack");
         chooseAttckButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
-        chooseAttckButton.setPadding(new Insets(50, 50, 50, 50));
+                "-Regular.ttf").toURI().toString(), 30));
+        chooseAttckButton.setPadding(new Insets(30, 30, 30, 30));
         chooseAttckButton.setTextFill(Color.DARKGOLDENROD);
         chooseAttckButton.setOnAction(event -> {
 
@@ -128,7 +128,7 @@ public class AttackWithWindow {
 
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
-        buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
+        buttonsHbox.setPadding(new Insets(0, 0, 110, 0));
         buttonsHbox.getChildren().addAll(backButton, Constants.spaceButton2(),
                 chooseAttckButton);
 
@@ -138,8 +138,8 @@ public class AttackWithWindow {
         gridPane.add(Constants.spaceButton2(), 2, 0);
         gridPane.add(Constants.spaceButton2(), 4, 0);
         gridPane.add(Constants.spaceButton2(), 6, 0);
-        vbox.getChildren().addAll(hbox, gridPane, Constants.spaceButton2(),
-                ShowArmyWindow.tableView, Constants.spaceButton2(), buttonsHbox);
+        vbox.getChildren().addAll(hbox, gridPane, Constants.spaceButton3(),
+                ShowArmyWindow.tableView, Constants.spaceButton3(), buttonsHbox);
         borderPane.setTop(vbox);
 
 

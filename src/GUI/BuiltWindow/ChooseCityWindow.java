@@ -26,8 +26,7 @@ public class ChooseCityWindow {
 
     public ChooseCityWindow() {
 
-        double buttonWidth =
-                Constants.GAME_WINDOW_SIZE_X - Constants.GAME_WINDOW_SIZE_X * 0.8799;
+        double buttonWidth = 200;
 
 //        Setting up the layouts and properties
         MyHbox allCitiesHbox = new MyHbox();
@@ -64,7 +63,7 @@ public class ChooseCityWindow {
         });
 
         cairoButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
-                "/BerkshireSwash-Regular.ttf").toURI().toString(), 70));
+                "/BerkshireSwash-Regular.ttf").toURI().toString(), 35));
         cairoVbox.getChildren().add(cairoButton);
         cairoVbox.setAlignment(Pos.CENTER);
 
@@ -81,11 +80,11 @@ public class ChooseCityWindow {
         romeButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
         romeButton.setPadding(new Insets(0,
-                buttonWidth
+                buttonWidth + 30
                 , 0,
-                buttonWidth));
+                buttonWidth +30));
         romeButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
-                "/BerkshireSwash-Regular.ttf").toURI().toString(), 70));
+                "/BerkshireSwash-Regular.ttf").toURI().toString(), 35));
         romeButton.setOnMouseEntered(e -> {
             romeButton.setTextFill(Color.RED);
             romeButton.setEffect(new InnerShadow());
@@ -117,7 +116,7 @@ public class ChooseCityWindow {
                 , 0,
                 buttonWidth));
         spartaButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
-                "/BerkshireSwash-Regular.ttf").toURI().toString(), 70));
+                "/BerkshireSwash-Regular.ttf").toURI().toString(), 35));
         spartaButton.setOnMouseEntered(e -> {
             spartaButton.setTextFill(Color.RED);
             spartaButton.setEffect(new InnerShadow());

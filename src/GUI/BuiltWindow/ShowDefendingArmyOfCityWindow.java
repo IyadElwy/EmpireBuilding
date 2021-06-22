@@ -54,7 +54,7 @@ public class ShowDefendingArmyOfCityWindow {
             defendingArmytitle = new MyLabel(Controller.inWhatCity + " Defending Army");
         }
         defendingArmytitle.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 70));
+                "-Regular.ttf").toURI().toString(), 50));
         defendingArmytitle.setTextFill(Color.DARKGOLDENROD);
 
 
@@ -68,22 +68,22 @@ public class ShowDefendingArmyOfCityWindow {
                 "Current Soldiers");
 
 
-        typeColumn.setMinWidth(478);
+        typeColumn.setMinWidth(400);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        levelColumn.setMinWidth(478);
+        levelColumn.setMinWidth(400);
         levelColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        maxSoldierColumn.setMinWidth(478);
+        maxSoldierColumn.setMinWidth(400);
         maxSoldierColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        currentSoldiersColumn.setMinWidth(478);
+        currentSoldiersColumn.setMinWidth(400);
         currentSoldiersColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
@@ -113,18 +113,18 @@ public class ShowDefendingArmyOfCityWindow {
 
         MyHbox buttonsHbox = new MyHbox();
         buttonsHbox.setAlignment(Pos.CENTER);
-        buttonsHbox.setPadding(new Insets(0, 0, 160, 0));
+        buttonsHbox.setPadding(new Insets(0, 0, 80, 0));
 
 
         MyButton spaceButton = new MyButton("SP");
         spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 30));
         spaceButton.setTextFill(Color.DARKGOLDENROD);
         spaceButton.setOpacity(0);
 
         backButton = new MyButton("Back");
         backButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 30));
         backButton.setTextFill(Color.DARKGOLDENROD);
         backButton.setOnAction(event -> {
             Controller.showDefendingArmyWindowBackButtonOnAction();
@@ -132,7 +132,7 @@ public class ShowDefendingArmyOfCityWindow {
 
         chooseToAttackButton = new MyButton("Choose To Attack");
         chooseToAttackButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+                "-Regular.ttf").toURI().toString(), 30));
         chooseToAttackButton.setTextFill(Color.DARKGOLDENROD);
         chooseToAttackButton.setOnAction(event -> {
 
@@ -350,7 +350,7 @@ public class ShowDefendingArmyOfCityWindow {
 
                 toURI().
 
-                toString(), 50));
+                toString(), 30));
         relocateButton.setTextFill(Color.DARKGOLDENROD);
         relocateButton.setOnAction(event ->
 
@@ -409,9 +409,9 @@ public class ShowDefendingArmyOfCityWindow {
 
         vbox.getChildren().
 
-                addAll(hbox, gridPane, Constants.spaceButton2(),
+                addAll(hbox, gridPane,
 
-                        defendingArmytableView, Constants.spaceButton2(), buttonsHbox);
+                        defendingArmytableView, buttonsHbox);
         borderPane.setTop(vbox);
 
 
