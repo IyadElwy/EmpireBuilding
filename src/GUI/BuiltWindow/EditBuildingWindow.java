@@ -93,7 +93,7 @@ public class EditBuildingWindow {
         upgrade.setTextFill(Color.DARKGOLDENROD);
         upgrade.setOnAction(event -> {
             try {
-                Controller.buildButtonPressed(buildingChoiceBox.getValue());
+                Controller.buildButtonPressedCairo(buildingChoiceBox.getValue());
                 Controller.game.endTurn();
             } catch (Exception e) {
                 new PopUpWindow(e.toString());

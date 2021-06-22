@@ -19,7 +19,7 @@ public class GameOverWindow {
     public static MyLabel gameResultLabel;
 
 
-    public GameOverWindow() {
+    public GameOverWindow(String result) {
 
         MyBorderPane borderPane = new MyBorderPane();
         borderPane.setBackground(new Background(new BackgroundFill(Color.MAROON,
@@ -27,7 +27,7 @@ public class GameOverWindow {
         MyHbox hbox = new MyHbox();
         hbox.setAlignment(Pos.CENTER);
 
-        gameResultLabel = new MyLabel("GAME OVER\nYOU RESULT");
+        gameResultLabel = new MyLabel("GAME OVER\nYOU " + result);
         gameResultLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 250));
         gameResultLabel.setTextFill(Color.DARKGOLDENROD);

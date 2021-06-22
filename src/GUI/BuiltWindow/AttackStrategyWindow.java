@@ -6,6 +6,7 @@ import GUI.CustomControllers.MyButton;
 import GUI.CustomControllers.MyLabel;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
+import GUI.Main;
 import GUI.Scenes.MyScene;
 import engine.City;
 import javafx.geometry.Insets;
@@ -15,8 +16,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import units.Unit;
 
 import java.io.File;
+import java.util.Random;
 
 public class AttackStrategyWindow {
 
@@ -99,6 +102,8 @@ public class AttackStrategyWindow {
 
                         );
                         Controller.cityToAttackButtonPressed();
+                        Controller.roundsUntilArrived = -200;
+                        city1Button.setDisable(true);
 
 
                     } catch (Exception e) {
@@ -148,7 +153,8 @@ public class AttackStrategyWindow {
 
                         );
                         Controller.cityToAttackButtonPressed();
-
+                        Controller.roundsUntilArrived = -200;
+                        city2Button.setDisable(true);
 
                     } catch (Exception e) {
                         new PopUpWindow("Missed Your Chance");
@@ -171,47 +177,145 @@ public class AttackStrategyWindow {
                 "-Regular.ttf").toURI().toString(), 50));
         autoResolveBtn1.setTextFill(Color.DARKGOLDENROD);
         autoResolveBtn1.setOnAction(event -> {
-            City cityToAttack = null;
-            for (City city : Controller.game.getAvailableCities()
-            ) {
-                if (city.getName().equalsIgnoreCase(cities[0])) {
-                    cityToAttack = city;
+
+            Controller.cityToAttack = city1Button.getText();
+
+            Random random = new Random();
+            int chance = random.nextInt(10);
+
+            if (chance > 5) {
+                new PopUpWindow("You Lost This Battle");
+                Main.window.setScene(new MapViewWindow().getMapViewScene());
+                for (Unit units :
+                        Controller.game.getPlayer().getControlledArmies().get(0).getUnits()
+                ) {
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().clear();
+                }
+            } else {
+                new PopUpWindow("You Won This Battle");
+                Main.window.setScene(new MapViewWindow().getMapViewScene());
+                for (int i = 0; i < Controller.game.getPlayer().getControlledArmies().get(0).getUnits().size() / 2; i++) {
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().remove(
+                            Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(i)
+                    );
+                }
+
+                City city1 = null;
+                for (City cityTemp : Controller.game.getAvailableCities()
+                ) {
+                    if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                        city1 = cityTemp;
+                    }
+                }
+
+                if (city1.getDefendingArmy().getUnits().isEmpty()) {
+                    BattleFieldWindow.mapButton.setDisable(false);
+                    new PopUpWindow("You Won This Battle");
+                    if (MapViewWindow.cairoButton.getText().equalsIgnoreCase(city1.getName())) {
+                        Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "cairo");
+                        MapViewWindow.cairoButton.setDisable(false);
+                    } else if (MapViewWindow.romeButton.getText().equalsIgnoreCase(city1.getName())) {
+                        Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "rome");
+                        MapViewWindow.romeButton.setDisable(false);
+                    } else if (MapViewWindow.spartaButton.getText().equalsIgnoreCase(city1.getName())) {
+                        Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "sparta");
+                        MapViewWindow.spartaButton.setDisable(false);
+                    }
+                    Controller.game.getPlayer().getControlledCities().add(city1);
+
                 }
             }
 
-            Controller.autoresolveButtonPressed(Controller.game.getPlayer().getControlledArmies().get(0),
-                    cityToAttack.getDefendingArmy());
         });
 
         MyButton autoResolveBtn2 = new MyButton("Auto-Resolve");
-        autoResolveBtn2.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
+        autoResolveBtn2.setFont(Font.loadFont(new
+
+                File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").
+
+                toURI().
+
+                toString(), 50));
         autoResolveBtn2.setTextFill(Color.DARKGOLDENROD);
         autoResolveBtn2.setOnAction(event -> {
-            City cityToAttack = null;
-            for (City city : Controller.game.getAvailableCities()
-            ) {
-                if (city.getName().equalsIgnoreCase(cities[1])) {
-                    cityToAttack = city;
+
+
+            Controller.cityToAttack = city2Button.getText();
+
+            Random random = new Random();
+            int chance = random.nextInt(10);
+
+            if (chance > 5) {
+                new PopUpWindow("You Lost This Battle");
+                Main.window.setScene(new MapViewWindow().getMapViewScene());
+                for (Unit units :
+                        Controller.game.getPlayer().getControlledArmies().get(0).getUnits()
+                ) {
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().clear();
+                }
+            } else {
+                new PopUpWindow("You Won This Battle");
+                Main.window.setScene(new MapViewWindow().getMapViewScene());
+                for (int i = 0; i < Controller.game.getPlayer().getControlledArmies().get(0).getUnits().size() / 2; i++) {
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().remove(
+                            Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(i)
+                    );
+                }
+
+                City city1 = null;
+                for (City cityTemp : Controller.game.getAvailableCities()
+                ) {
+                    if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                        city1 = cityTemp;
+                    }
+                }
+
+                if (city1.getDefendingArmy().getUnits().isEmpty()) {
+                    BattleFieldWindow.mapButton.setDisable(false);
+                    new PopUpWindow("You Won This Battle");
+                    if (MapViewWindow.cairoButton.getText().equalsIgnoreCase(city1.getName())) {
+                        Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "cairo");
+                        MapViewWindow.cairoButton.setDisable(false);
+                    } else if (MapViewWindow.romeButton.getText().equalsIgnoreCase(city1.getName())) {
+                        Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "rome");
+                        MapViewWindow.romeButton.setDisable(false);
+                    } else if (MapViewWindow.spartaButton.getText().equalsIgnoreCase(city1.getName())) {
+                        Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "sparta");
+                        MapViewWindow.spartaButton.setDisable(false);
+                    }
+                    Controller.game.getPlayer().getControlledCities().add(city1);
+
                 }
             }
 
-            Controller.autoresolveButtonPressed(Controller.game.getPlayer().getControlledArmies().get(0),
-                    cityToAttack.getDefendingArmy());
         });
 
 
-        vbox2.getChildren().addAll(city1Button, Constants.spaceButton(),
-                autoResolveBtn1);
-        vbox3.getChildren().addAll(city2Button, Constants.spaceButton(), autoResolveBtn2);
-        vbox.getChildren().addAll(chooseArmyLabel, Constants.spaceButton2(), hbox);
-        hbox.getChildren().addAll(vbox2, Constants.spaceButton(),
-                vbox3);
+        vbox2.getChildren().
+
+                addAll(city1Button, Constants.spaceButton(),
+
+                        autoResolveBtn1);
+        vbox3.getChildren().
+
+                addAll(city2Button, Constants.spaceButton(), autoResolveBtn2);
+        vbox.getChildren().
+
+                addAll(chooseArmyLabel, Constants.spaceButton2(), hbox);
+        hbox.getChildren().
+
+                addAll(vbox2, Constants.spaceButton(),
+
+                        vbox3);
 
         city1Button.setDisable(Controller.button1Disabled);
         city2Button.setDisable(Controller.button2Disabled);
 
-        this.scene = new MyScene(vbox);
+        this.scene = new
+
+                MyScene(vbox);
+
     }
 
     public MyScene getScene() {

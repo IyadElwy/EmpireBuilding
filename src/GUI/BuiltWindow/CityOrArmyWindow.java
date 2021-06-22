@@ -18,7 +18,7 @@ import java.io.File;
 public class CityOrArmyWindow {
     private final MyScene cityOrArmyWindow;
 
-    public CityOrArmyWindow() {
+    public CityOrArmyWindow(String city) {
 
         if (Controller.playFirstTime) {
             Constants.playMusic(Constants.cityMusic);
@@ -36,7 +36,7 @@ public class CityOrArmyWindow {
         armyButton.setPadding(new Insets(50, 50, 50, 50));
         armyButton.setTextFill(Color.DARKGOLDENROD);
         armyButton.setOnAction(event -> {
-            Controller.chooseCityOrArmy("Army");
+            Controller.chooseCityOrArmy("Army", city);
         });
 
         MyButton cityButton = new MyButton("Show City");
@@ -45,7 +45,7 @@ public class CityOrArmyWindow {
         cityButton.setPadding(new Insets(50, 50, 50, 50));
         cityButton.setTextFill(Color.DARKGOLDENROD);
         cityButton.setOnAction(event -> {
-            Controller.chooseCityOrArmy("City");
+            Controller.chooseCityOrArmy("City", city);
         });
 
         hbox.getChildren().addAll(armyButton, Constants.spaceButton(), cityButton);

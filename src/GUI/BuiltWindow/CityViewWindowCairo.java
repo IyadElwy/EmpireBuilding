@@ -18,17 +18,17 @@ import javafx.scene.text.Font;
 
 import java.io.File;
 
-public class CityViewWindow {
+public class CityViewWindowCairo {
 
-    public static MyLabel cityNameLabel;
+    public static MyLabel cityNameLabelCairo;
     public static MyLabel playerGoldAmountLabel;
     public static MyLabel playerFoodAmountLabel;
     public static MyLabel turnsLabel;
 
     private final MyScene cityViewScene;
-    public static MyGridPane cityViewGridPane;
+    public static MyGridPane cityViewGridPaneCairo;
 
-    public CityViewWindow(
+    public CityViewWindowCairo(
             String city,
             String playerGold, String playerFood,
             String turns, String marketLevel, String farmLevel,
@@ -39,13 +39,13 @@ public class CityViewWindow {
 
         MyBorderPane borderPane = new MyBorderPane();
         MyHbox hboxForTopControllers = new MyHbox();
-        cityViewGridPane = new MyGridPane();
+        cityViewGridPaneCairo = new MyGridPane();
         MyHbox bottomHbox = new MyHbox();
 
         hboxForTopControllers.setAlignment(Pos.CENTER);
         bottomHbox.setAlignment(Pos.CENTER);
-        cityViewGridPane.setAlignment(Pos.CENTER);
-        cityViewGridPane.setPadding(new Insets(30, 30, 30, 30));
+        cityViewGridPaneCairo.setAlignment(Pos.CENTER);
+        cityViewGridPaneCairo.setPadding(new Insets(30, 30, 30, 30));
 
         BackgroundImage backgroundImage = new BackgroundImage(
                 new Image(new File("src/GUI/Resources/city_background.jpg")
@@ -67,22 +67,22 @@ public class CityViewWindow {
         });
 
 
-        cityNameLabel = new MyLabel(city);
-        cityNameLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 30));
-        cityNameLabel.setTextFill(Color.MAROON);
+        cityNameLabelCairo = new MyLabel(city);
+        cityNameLabelCairo.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 24));
+        cityNameLabelCairo.setTextFill(Color.MAROON);
 
         playerGoldAmountLabel = new MyLabel("Gold: " + playerGold);
         playerGoldAmountLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 30));
+                "-Regular.ttf").toURI().toString(), 24));
         playerGoldAmountLabel.setTextFill(Color.MAROON);
 
         playerFoodAmountLabel = new MyLabel("Food: " + playerFood);
         playerFoodAmountLabel.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 30));
+                "-Regular.ttf").toURI().toString(), 24));
         playerFoodAmountLabel.setTextFill(Color.MAROON);
 
-        turnsLabel = new MyLabel("Turns: " + turns + " | Turns until arrived: " +
+        turnsLabel = new MyLabel("Turns: " + turns + "/100 | Turns until arrived: " +
                 (Controller.roundsUntilArrived > -1 ?
                         Integer.toString(Controller.roundsUntilArrived - 1)
                         : "0"
@@ -99,7 +99,7 @@ public class CityViewWindow {
         buildButton.setMinSize(50, 50);
         buildButton.setOpacity(0.8);
         buildButton.setOnAction(e -> {
-            Controller.buildButtonPressed();
+            Controller.buildButtonPressedCairo();
         });
 
         MyButton armiesButton = new MyButton("Armies");
@@ -203,7 +203,7 @@ public class CityViewWindow {
                 turnsLabel,
                 Constants.spaceButton2(),
                 Constants.spaceButton2(),
-                cityNameLabel,
+                cityNameLabelCairo,
                 Constants.spaceButton2(),
                 Constants.spaceButton2(),
                 playerGoldAmountLabel,
@@ -215,32 +215,32 @@ public class CityViewWindow {
                 mapButton);
 
 
-        cityViewGridPane.add(Integer.parseInt(stablesLevel) > 0 ? stablesImg :
+        cityViewGridPaneCairo.add(Integer.parseInt(stablesLevel) > 0 ? stablesImg :
                 Constants.spaceButton(), 0, 0);
-        cityViewGridPane.add(tree0Img, 0, 1);
+        cityViewGridPaneCairo.add(tree0Img, 0, 1);
 
-        cityViewGridPane.add(tree1Img, 1, 0);
-        cityViewGridPane.add(Integer.parseInt(archeryRangeLevel) > 0 ? archeryRangeImg :
+        cityViewGridPaneCairo.add(tree1Img, 1, 0);
+        cityViewGridPaneCairo.add(Integer.parseInt(archeryRangeLevel) > 0 ? archeryRangeImg :
                 Constants.spaceButton(), 1, 1);
 
-        cityViewGridPane.add(Integer.parseInt(farmLevel) > 0 ? farmImg :
+        cityViewGridPaneCairo.add(Integer.parseInt(farmLevel) > 0 ? farmImg :
                 Constants.spaceButton(), 2, 0);
-        cityViewGridPane.add(Integer.parseInt(marketLevel) > 0 ? marketImg :
+        cityViewGridPaneCairo.add(Integer.parseInt(marketLevel) > 0 ? marketImg :
                 Constants.spaceButton(), 2, 1);
 
-        cityViewGridPane.add(tree3Img, 3, 0);
-        cityViewGridPane.add(tree2Img, 3, 1);
+        cityViewGridPaneCairo.add(tree3Img, 3, 0);
+        cityViewGridPaneCairo.add(tree2Img, 3, 1);
 
-        cityViewGridPane.add(Integer.parseInt(barracksLevel) > 0 ? barracksImg :
+        cityViewGridPaneCairo.add(Integer.parseInt(barracksLevel) > 0 ? barracksImg :
                 Constants.spaceButton(), 4, 0);
-        cityViewGridPane.add(tree4Img, 4, 1);
+        cityViewGridPaneCairo.add(tree4Img, 4, 1);
 
         bottomHbox.getChildren().addAll(buildButton, Constants.spaceButton3(),
                 armiesButton, Constants.spaceButton3(),
                 defendingArmyButton, Constants.spaceButton3(), attackButton);
 
         borderPane.setTop(hboxForTopControllers);
-        borderPane.setCenter(cityViewGridPane);
+        borderPane.setCenter(cityViewGridPaneCairo);
         borderPane.setBottom(bottomHbox);
 
         this.cityViewScene = new MyScene(borderPane);

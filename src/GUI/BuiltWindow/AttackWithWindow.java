@@ -111,8 +111,16 @@ public class AttackWithWindow {
         chooseAttckButton.setPadding(new Insets(50, 50, 50, 50));
         chooseAttckButton.setTextFill(Color.DARKGOLDENROD);
         chooseAttckButton.setOnAction(event -> {
-            currentAttackingUnit =
-                    (Unit) ShowArmyWindow.tableView.getSelectionModel().getSelectedItem();
+
+
+            currentAttackingUnit = null;
+            for (Unit unit : Controller.game.getPlayer().getControlledArmies().get(0).getUnits()
+            ) {
+                if (unit == ((Unit) ShowArmyWindow.tableView.getSelectionModel().getSelectedItem())) {
+                    currentAttackingUnit = unit;
+                }
+            }
+
             Controller.chooseUnitToAttack();
             Controller.updateBattleLog();
         });

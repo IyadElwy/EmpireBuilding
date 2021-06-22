@@ -105,7 +105,7 @@ public class BattleFieldWindow {
         chooseNextAttackButton.setOpacity(0.8);
         chooseNextAttackButton.setOnAction(e -> {
             Controller.chooseNextAttack();
-            mapButton.setDisable(false);
+            mapButton.setDisable(true);
 
         });
 

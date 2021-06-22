@@ -2,7 +2,7 @@ package units;
 
 import exceptions.FriendlyFireException;
 
-public class Archer extends Unit {
+public class Archer extends Unit implements Cloneable {
 
     private String type;
     private int level;
@@ -16,6 +16,11 @@ public class Archer extends Unit {
         this.maxSoldierCount = super.getMaxSoldierCount();
         currentSoldierCount = super.getCurrentSoldierCount();
 
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public String getType() {

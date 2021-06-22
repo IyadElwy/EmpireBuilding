@@ -41,12 +41,16 @@ public class MapViewWindow {
 
         cairoButton.setOnAction(e -> {
             for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
-                if (!Controller.game.getPlayer().getControlledCities().get(i).
-                        getName().equalsIgnoreCase("cairo")) {
-                    new PopUpWindow("Cairo not conquered yet.");
-                } else {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("cairo")) {
                     Controller.updateInWhatCity("Cairo");
                     Controller.enterCityMapButtonOnAction("Cairo");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Cairo not conquered yet.");
+                    }
                 }
             }
         });
@@ -57,12 +61,16 @@ public class MapViewWindow {
         romeButton.setOpacity(0);
         romeButton.setOnAction(e -> {
             for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
-                if (!Controller.game.getPlayer().getControlledCities().get(i).
-                        getName().equalsIgnoreCase("rome")) {
-                    new PopUpWindow("Rome not conquered yet.");
-                } else {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("rome")) {
                     Controller.updateInWhatCity("Rome");
                     Controller.enterCityMapButtonOnAction("Rome");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Rome not conquered yet.");
+                    }
                 }
             }
         });
@@ -75,12 +83,16 @@ public class MapViewWindow {
 
         spartaButton.setOnAction(e -> {
             for (int i = 0; i < Controller.game.getPlayer().getControlledCities().size(); i++) {
-                if (!Controller.game.getPlayer().getControlledCities().get(i).
-                        getName().equalsIgnoreCase("sparta")) {
-                    new PopUpWindow("Sparta not conquered yet.");
-                } else {
+
+                if (Controller.game.getPlayer().getControlledCities().get(i).getName().
+                        equalsIgnoreCase("sparta")) {
                     Controller.updateInWhatCity("Sparta");
                     Controller.enterCityMapButtonOnAction("Sparta");
+                    break;
+                } else {
+                    if (spartaButton.isDisabled()) {
+                        new PopUpWindow("Sparta not conquered yet.");
+                    }
                 }
             }
         });

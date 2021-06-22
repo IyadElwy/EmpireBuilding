@@ -19,7 +19,7 @@ public class Game {
     private Player player;
     private ArrayList<City> availableCities;
     private ArrayList<Distance> distances;
-    private final int maxTurnCount = 30;
+    private final int maxTurnCount = 100;
     private int currentTurnCount;
 
     public Game(String playerName, String playerCity) throws IOException {
@@ -137,8 +137,10 @@ public class Game {
     }
 
     public void endTurn() {
+
+
         if (isGameOver()) {
-            Main.window.setScene(new GameOverWindow().getGameOverScene());
+            Main.window.setScene(new GameOverWindow("Lost").getGameOverScene());
         }
 
         Controller.roundsUntilArrived--;

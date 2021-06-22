@@ -18,11 +18,23 @@ public class Controller {
     public static String playerCity;
 
     public static String inWhatCity;
-    public static int farmLevel = 0;
-    public static int marketLevel = 0;
-    public static int archeryRangeLevel = 0;
-    public static int barracksLevel = 0;
-    public static int stableLevel = 0;
+    public static int farmLevelCairo = 0;
+    public static int marketLevelCairo = 0;
+    public static int archeryRangeLevelCairo = 0;
+    public static int barracksLevelCairo = 0;
+    public static int stableLevelCairo = 0;
+
+    public static int farmLevelRome = 0;
+    public static int marketLevelRome = 0;
+    public static int archeryRangeLevelRome = 0;
+    public static int barracksLevelRome = 0;
+    public static int stableLevelRome = 0;
+
+    public static int farmLevelSparta = 0;
+    public static int marketLevelSparta = 0;
+    public static int archeryRangeLevelSparta = 0;
+    public static int barracksLevelSparta = 0;
+    public static int stableLevelSparta = 0;
 
     public static boolean conquoredCairo;
     public static boolean conquoredRome;
@@ -99,13 +111,13 @@ public class Controller {
     public static void enterCityMapButtonOnAction(String cityName) {
         if (cityName.equals("Cairo")) {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+            Main.window.setScene(new CityOrArmyWindow("Cairo").getCityOrArmyWindow());
         } else if (cityName.equals("Rome")) {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+            Main.window.setScene(new CityOrArmyWindow("Rome").getCityOrArmyWindow());
         } else if (cityName.equals("Sparta")) {
             Constants.playEffect(Constants.clickButton);
-            Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+            Main.window.setScene(new CityOrArmyWindow("Sparta").getCityOrArmyWindow());
         }
     }
 
@@ -140,7 +152,7 @@ public class Controller {
     //    CityOrArmyWindow
     public static Stage showArmyWindowStage;
 
-    public static void chooseCityOrArmy(String choice) {
+    public static void chooseCityOrArmy(String choice, String cityToEnter) {
         City currentCity = null;
 
 
@@ -158,33 +170,34 @@ public class Controller {
                 for (Building building : currentCity.getEconomicalBuildings()
                 ) {
                     if (building instanceof Market) {
-                        marketLevel = building.getLevel();
+                        marketLevelCairo = building.getLevel();
                     } else {
-                        farmLevel = building.getLevel();
+                        farmLevelCairo = building.getLevel();
                     }
                 }
 
                 for (Building building : currentCity.getMilitaryBuildings()
                 ) {
                     if (building instanceof ArcheryRange) {
-                        archeryRangeLevel = building.getLevel();
+                        archeryRangeLevelCairo = building.getLevel();
                     } else if (building instanceof Barracks) {
-                        barracksLevel = building.getLevel();
+                        barracksLevelCairo = building.getLevel();
                     } else {
-                        stableLevel = building.getLevel();
+                        stableLevelCairo = building.getLevel();
                     }
                 }
 
-                Main.window.setScene(new CityViewWindow(
+                Main.window.setScene(new CityViewWindowCairo(
                         inWhatCity
                         ,
                         Double.toString(game.getPlayer().getTreasury()),
                         Double.toString(game.getPlayer().getFood()),
-                        Integer.toString(game.getCurrentTurnCount()), Integer.toString(marketLevel),
-                        Integer.toString(farmLevel),
-                        Integer.toString(archeryRangeLevel),
-                        Integer.toString(stableLevel),
-                        Integer.toString(barracksLevel)
+                        Integer.toString(game.getCurrentTurnCount()),
+                        Integer.toString(marketLevelCairo),
+                        Integer.toString(farmLevelCairo),
+                        Integer.toString(archeryRangeLevelCairo),
+                        Integer.toString(stableLevelCairo),
+                        Integer.toString(barracksLevelCairo)
                 ).getCityViewScene());
 
 
@@ -200,33 +213,34 @@ public class Controller {
                 for (Building building : currentCity.getEconomicalBuildings()
                 ) {
                     if (building instanceof Market) {
-                        marketLevel = building.getLevel();
+                        marketLevelRome = building.getLevel();
                     } else {
-                        farmLevel = building.getLevel();
+                        farmLevelRome = building.getLevel();
                     }
                 }
 
                 for (Building building : currentCity.getMilitaryBuildings()
                 ) {
                     if (building instanceof ArcheryRange) {
-                        archeryRangeLevel = building.getLevel();
+                        archeryRangeLevelRome = building.getLevel();
                     } else if (building instanceof Barracks) {
-                        barracksLevel = building.getLevel();
+                        barracksLevelRome = building.getLevel();
                     } else {
-                        stableLevel = building.getLevel();
+                        stableLevelRome = building.getLevel();
                     }
                 }
 
-                Main.window.setScene(new CityViewWindow(
+                Main.window.setScene(new CityViewWindowRome(
                         inWhatCity
                         ,
                         Double.toString(game.getPlayer().getTreasury()),
                         Double.toString(game.getPlayer().getFood()),
-                        Integer.toString(game.getCurrentTurnCount()), Integer.toString(marketLevel),
-                        Integer.toString(farmLevel),
-                        Integer.toString(archeryRangeLevel),
-                        Integer.toString(stableLevel),
-                        Integer.toString(barracksLevel)
+                        Integer.toString(game.getCurrentTurnCount()),
+                        Integer.toString(marketLevelRome),
+                        Integer.toString(farmLevelRome),
+                        Integer.toString(archeryRangeLevelRome),
+                        Integer.toString(stableLevelRome),
+                        Integer.toString(barracksLevelRome)
                 ).getCityViewScene());
 
             } else if (inWhatCity.equalsIgnoreCase("sparta")) {
@@ -242,33 +256,34 @@ public class Controller {
                 for (Building building : currentCity.getEconomicalBuildings()
                 ) {
                     if (building instanceof Market) {
-                        marketLevel = building.getLevel();
+                        marketLevelSparta = building.getLevel();
                     } else {
-                        farmLevel = building.getLevel();
+                        farmLevelSparta = building.getLevel();
                     }
                 }
 
                 for (Building building : currentCity.getMilitaryBuildings()
                 ) {
                     if (building instanceof ArcheryRange) {
-                        archeryRangeLevel = building.getLevel();
+                        archeryRangeLevelSparta = building.getLevel();
                     } else if (building instanceof Barracks) {
-                        barracksLevel = building.getLevel();
+                        barracksLevelSparta = building.getLevel();
                     } else {
-                        stableLevel = building.getLevel();
+                        stableLevelSparta = building.getLevel();
                     }
                 }
 
-                Main.window.setScene(new CityViewWindow(
+                Main.window.setScene(new CityViewWindowSparta(
                         inWhatCity
                         ,
                         Double.toString(game.getPlayer().getTreasury()),
                         Double.toString(game.getPlayer().getFood()),
-                        Integer.toString(game.getCurrentTurnCount()), Integer.toString(marketLevel),
-                        Integer.toString(farmLevel),
-                        Integer.toString(archeryRangeLevel),
-                        Integer.toString(stableLevel),
-                        Integer.toString(barracksLevel)
+                        Integer.toString(game.getCurrentTurnCount()),
+                        Integer.toString(marketLevelSparta),
+                        Integer.toString(farmLevelSparta),
+                        Integer.toString(archeryRangeLevelSparta),
+                        Integer.toString(stableLevelSparta),
+                        Integer.toString(barracksLevelSparta)
                 ).getCityViewScene());
             }
 
@@ -418,16 +433,42 @@ public class Controller {
 
     public static Stage editBuildingwindow;
 
-    public static void buildButtonPressed() {
+    public static void buildButtonPressedCairo() {
         Constants.playEffect(Constants.clickButton);
 
         editBuildingwindow = new Stage();
         editBuildingwindow.initModality(Modality.APPLICATION_MODAL);
-        editBuildingwindow.setScene(new EditBuildingWindow(Integer.toString(marketLevel),
-                Integer.toString(farmLevel),
-                Integer.toString(archeryRangeLevel),
-                Integer.toString(stableLevel),
-                Integer.toString(barracksLevel)).getEditBuildingScene());
+        editBuildingwindow.setScene(new EditBuildingWindow(Integer.toString(marketLevelCairo),
+                Integer.toString(farmLevelCairo),
+                Integer.toString(archeryRangeLevelCairo),
+                Integer.toString(stableLevelCairo),
+                Integer.toString(barracksLevelCairo)).getEditBuildingScene());
+        editBuildingwindow.showAndWait();
+    }
+
+    public static void buildButtonPressedRome() {
+        Constants.playEffect(Constants.clickButton);
+
+        editBuildingwindow = new Stage();
+        editBuildingwindow.initModality(Modality.APPLICATION_MODAL);
+        editBuildingwindow.setScene(new EditBuildingWindow(Integer.toString(marketLevelRome),
+                Integer.toString(farmLevelRome),
+                Integer.toString(archeryRangeLevelRome),
+                Integer.toString(stableLevelRome),
+                Integer.toString(barracksLevelRome)).getEditBuildingScene());
+        editBuildingwindow.showAndWait();
+    }
+
+    public static void buildButtonPressedSparta() {
+        Constants.playEffect(Constants.clickButton);
+
+        editBuildingwindow = new Stage();
+        editBuildingwindow.initModality(Modality.APPLICATION_MODAL);
+        editBuildingwindow.setScene(new EditBuildingWindow(Integer.toString(marketLevelSparta),
+                Integer.toString(farmLevelSparta),
+                Integer.toString(archeryRangeLevelSparta),
+                Integer.toString(stableLevelSparta),
+                Integer.toString(barracksLevelSparta)).getEditBuildingScene());
         editBuildingwindow.showAndWait();
     }
 
@@ -490,12 +531,12 @@ public class Controller {
 
     public static void goBackToCityFromEditBuilding() {
         Constants.playEffect(Constants.clickButton);
-        Main.window.setScene(new CityOrArmyWindow().getCityOrArmyWindow());
+        Main.window.setScene(new CityOrArmyWindow(inWhatCity).getCityOrArmyWindow());
         editBuildingwindow.close();
     }
 
 
-    public static void buildButtonPressed(String building) {
+    public static void buildButtonPressedCairo(String building) {
         City currentCity = null;
         for (City city : game.getPlayer().getControlledCities()
         ) {
@@ -590,7 +631,8 @@ public class Controller {
 
         }
         Constants.playEffect(Constants.clickButton);
-        goBackToCityFromEditBuilding();
+        editBuildingwindow.close();
+//        goBackToCityFromEditBuilding();
 
 
 //        City currentCity2 = null;

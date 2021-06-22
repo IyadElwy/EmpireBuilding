@@ -9,9 +9,9 @@ import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
+import GUI.Main;
 import GUI.Scenes.MyScene;
 import engine.City;
-import exceptions.FriendlyFireException;
 import exceptions.MaxCapacityException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,14 +22,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import units.Archer;
-import units.Army;
-import units.Cavalry;
-import units.Unit;
+import units.*;
 
 import java.io.File;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class ShowDefendingArmyOfCityWindow {
 
@@ -70,9 +66,6 @@ public class ShowDefendingArmyOfCityWindow {
                 "Max Soldiers");
         TableColumn<Unit, String> currentSoldiersColumn = new TableColumn<>(
                 "Current Soldiers");
-//        TableColumn<UnitsHelperClass, RadioButton> radioButtonColumn =
-//                new TableColumn<>(
-//                        "Relocate");
 
 
         typeColumn.setMinWidth(478);
@@ -95,7 +88,6 @@ public class ShowDefendingArmyOfCityWindow {
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-//        radioButtonColumn.setMinWidth(390);
 
 
         typeColumn.setCellValueFactory(new PropertyValueFactory<>(
@@ -106,8 +98,6 @@ public class ShowDefendingArmyOfCityWindow {
                 "maxSoldierCount"));
         currentSoldiersColumn.setCellValueFactory(new PropertyValueFactory<>(
                 "currentSoldierCount"));
-//        radioButtonColumn.setCellValueFactory(new PropertyValueFactory<>(
-//                "relocateButton"));
 
 
         defendingArmytableView = new MyTableView();
@@ -119,7 +109,6 @@ public class ShowDefendingArmyOfCityWindow {
         }
         defendingArmytableView.getColumns().addAll(typeColumn, levelColumn, maxSoldierColumn,
                 currentSoldiersColumn
-//                , radioButtonColumn
         );
 
         MyHbox buttonsHbox = new MyHbox();
@@ -147,137 +136,227 @@ public class ShowDefendingArmyOfCityWindow {
         chooseToAttackButton.setTextFill(Color.DARKGOLDENROD);
         chooseToAttackButton.setOnAction(event -> {
 
-
-            if ((Unit) ShowDefendingArmyOfCityWindow.
-                    defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Archer) {
-                Constants.playEffect(Constants.archerSound);
-            } else if ((Unit) ShowDefendingArmyOfCityWindow.
-                    defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Cavalry) {
-                Constants.playEffect(Constants.horseSound);
-            } else {
-                Constants.playEffect(Constants.infantrySound);
-            }
-
-            try {
-                BattleFieldWindow.mapButton.setDisable(false);
-                BattleFieldWindow.battleLogTextArea.appendText("\n" +
-                        AttackWithWindow.currentAttackingUnit + " attacked " + (Unit) ShowDefendingArmyOfCityWindow.
-                        defendingArmytableView.getSelectionModel().getSelectedItem() + "\n" +
-                        "Current Soldier Count of " + ShowDefendingArmyOfCityWindow.
-                        defendingArmytableView.getSelectionModel().getSelectedItem() + " is \n" + ((Unit) ShowDefendingArmyOfCityWindow.
-                        defendingArmytableView.getSelectionModel().getSelectedItem()).getCurrentSoldierCount() + "\n");
+            BattleFieldWindow.mapButton.setDisable(true);
 
 
-                try {
-                    AttackWithWindow.currentAttackingUnit.attack(((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()));
-                } catch (FriendlyFireException e) {
-                    e.printStackTrace();
+            if (AttackWithWindow.currentAttackingUnit instanceof Archer) {
+                double factor = 0;
+                if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Archer) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.3;
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.4;
+                    } else {
+                        factor = 0.5;
+                    }
+                } else if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Infantry) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.2;
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.3;
+                    } else {
+                        factor = 0.4;
+                    }
+                } else if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Cavalry) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1 ||
+                            ((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.1;
+                    } else {
+                        factor = 0.2;
+                    }
                 }
 
-
-
-                for (Unit unit :
-                        Controller.game.getPlayer().getControlledArmies().get(0).getUnits()
+                City city1 = null;
+                for (City cityTemp : Controller.game.getAvailableCities()
                 ) {
-                    if (unit == AttackWithWindow.currentAttackingUnit) {
-                        for (City cityTemp : Controller.game.getAvailableCities()
-                        ) {
-                            for (Unit unitToAttack : cityTemp.getDefendingArmy().getUnits()
-                            ) {
-                                if (unitToAttack == defendingArmytableView.getSelectionModel().getSelectedItem()) {
-                                    unit.attack(unitToAttack);
-                                    if (unit instanceof Archer) {
-                                        BattleFieldWindow.currentAttacker.setImage(Constants.archeryRight);
-                                    } else if (unit instanceof Cavalry) {
-                                        BattleFieldWindow.currentAttacker.setImage(Constants.cavalryRight);
-                                    } else {
-                                        BattleFieldWindow.currentAttacker.setImage(Constants.infantryRight);
-                                    }
-
-
-                                }
-                            }
-                        }
+                    if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                        city1 = cityTemp;
                     }
                 }
 
 
-                Controller.showDefendingArmiesWindow.close();
-                Controller.game.endTurn();
-                if (ShowDefendingArmyOfCityWindow.defendingArmytableView.getItems().isEmpty()) {
-                    Controller.game.occupy(AttackWithWindow.currentAttackingUnit.getParentArmy(),
-                            Controller.cityToAttack);
-                    BattleFieldWindow.mapButton.setDisable(false);
+                city1.getDefendingArmy().getUnits().remove(((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()));
+
+            } else if (AttackWithWindow.currentAttackingUnit instanceof Cavalry) {
+                double factor = 0;
+
+                if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Archer) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.5;
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.6;
+                    } else {
+                        factor = 0.7;
+                    }
+                } else if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Infantry) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.3;
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.4;
+                    } else {
+                        factor = 0.5;
+                    }
+                } else if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Cavalry) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1 ||
+                            ((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.2;
+                    } else {
+                        factor = 0.3;
+                    }
                 }
-            } catch (Exception e) {
-//                new PopUpWindow(e.toString());
-                e.printStackTrace();
+
+
+                City city1 = null;
+                for (City cityTemp : Controller.game.getAvailableCities()
+                ) {
+                    if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                        city1 = cityTemp;
+                    }
+                }
+
+                city1.getDefendingArmy().getUnits().remove(((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()));
+
+            } else if (AttackWithWindow.currentAttackingUnit instanceof Infantry) {
+                double factor = 0;
+                if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Archer) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.3;
+
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.4;
+                    } else {
+                        factor = 0.5;
+                    }
+                } else if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Infantry) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.1;
+
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.2;
+                    } else {
+                        factor = 0.3;
+                    }
+                } else if (defendingArmytableView.getSelectionModel().getSelectedItem() instanceof Cavalry) {
+                    if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 2) {
+                        factor = 0.1;
+                    } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()).getLevel() == 1) {
+                        factor = 0.2;
+                    } else {
+                        factor = 0.25;
+                    }
+                }
+
+
+                City city1 = null;
+                for (City cityTemp : Controller.game.getAvailableCities()
+                ) {
+                    if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                        city1 = cityTemp;
+                    }
+                }
+
+                if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()) instanceof Archer) {
+                    BattleFieldWindow.battleLogTextArea.appendText("Your Opponent " +
+                            "lost an Archer Unit");
+                } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()) instanceof Cavalry) {
+                    BattleFieldWindow.battleLogTextArea.appendText("Your Opponent " +
+                            "lost a Cavalry Unit");
+                } else {
+                    BattleFieldWindow.battleLogTextArea.appendText("Your Opponent " +
+                            "lost an Infantry Unit");
+                }
+
+                city1.getDefendingArmy().getUnits().remove(((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()));
+
             }
 
-            Controller.game.endTurn();
-            Controller.attackWithWindow.close();
 
-            BattleFieldWindow.battleLogTextArea.appendText("\n\nWaiting For " +
-                    "Defending Army To Finish Attack\n\n");
-            try {
-                TimeUnit.SECONDS.sleep(1);
+//            Oponents turn:
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            BattleFieldWindow.battleLogTextArea.appendText("\n\nYour Opponent Will" +
+                    " " +
+                    "Strike Now....\n\n");
 
 
             Random rand = new Random();
-            int int_random =
+            int upperBound =
                     rand.nextInt(Controller.game.getPlayer().getControlledArmies().get(0).getUnits().size());
-            int int_random2 =
-                    rand.nextInt(defendingArmytableView.getSelectionModel().getSelectedItems().size());
 
-            try {
-                ((Unit) defendingArmytableView.getItems().get(int_random2)).attack(((Unit) ShowArmyWindow.tableView.getItems().get(int_random)));
-            } catch (FriendlyFireException e) {
-                e.printStackTrace();
+            if (Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(upperBound) instanceof Archer) {
+                BattleFieldWindow.battleLogTextArea.appendText("You lost " +
+                        "lost an Archer Unit");
+            } else if (Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(upperBound) instanceof Cavalry) {
+                BattleFieldWindow.battleLogTextArea.appendText("You lost " +
+                        "lost a Cavalry Unit");
+            } else {
+                BattleFieldWindow.battleLogTextArea.appendText("You lost " +
+                        "lost an Infantry Unit");
             }
+
+            Controller.game.getPlayer().getControlledArmies().get(0).getUnits().remove(
+                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(upperBound)
+            );
+
+            Controller.game.endTurn();
+            Controller.showDefendingArmiesWindow.close();
+
+
+//            Checking if battle lost or won
+            City city1 = null;
             for (City cityTemp : Controller.game.getAvailableCities()
             ) {
-                for (Unit unitToAttack : cityTemp.getDefendingArmy().getUnits()
-                ) {
-                    if (unitToAttack == defendingArmytableView.getSelectionModel().getSelectedItems().get(int_random2)) {
-                        try {
-                            unitToAttack.attack(Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random));
-                            if (unitToAttack instanceof Archer) {
-                                BattleFieldWindow.currentAttacker.setImage(Constants.archeryLeft);
-                            } else if (unitToAttack instanceof Cavalry) {
-                                BattleFieldWindow.currentAttacker.setImage(Constants.archeryLeft);
-                            } else {
-                                BattleFieldWindow.currentAttacker.setImage(Constants.archeryLeft);
-                            }
-                        } catch (FriendlyFireException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
+                    city1 = cityTemp;
                 }
             }
 
+            if (city1.getDefendingArmy().getUnits().isEmpty()) {
+                BattleFieldWindow.mapButton.setDisable(false);
+                new PopUpWindow("You Won This Battle");
+                if (MapViewWindow.cairoButton.getText().equalsIgnoreCase(city1.getName())) {
+                    Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "cairo");
+                    MapViewWindow.cairoButton.setDisable(false);
+                } else if (MapViewWindow.romeButton.getText().equalsIgnoreCase(city1.getName())) {
+                    Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "rome");
+                    MapViewWindow.romeButton.setDisable(false);
+                } else if (MapViewWindow.spartaButton.getText().equalsIgnoreCase(city1.getName())) {
+                    Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "sparta");
+                    MapViewWindow.spartaButton.setDisable(false);
+                }
+                Controller.game.getPlayer().getControlledCities().add(city1);
+                Main.window.setScene(new MapViewWindow().getMapViewScene());
 
-            BattleFieldWindow.battleLogTextArea.appendText("\n" +
-                    defendingArmytableView.getSelectionModel().getSelectedItems().get(int_random2) + " attacked " +
-                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random) + "\n" +
-                    "Current Soldier Count of " + Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random) + " is \n" +
-                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(int_random).getCurrentSoldierCount() + "\n");
+                if (Controller.game.isGameOver()) {
+                    Main.window.setScene(new GameOverWindow("Won").getGameOverScene());
+                }
+            }
 
-            Controller.game.endTurn();
+            if (Controller.game.getPlayer().getControlledArmies().get(0).getUnits().isEmpty()) {
+                BattleFieldWindow.mapButton.setDisable(false);
+                new PopUpWindow("You Lost This Battle");
+                Main.window.setScene(new MapViewWindow().getMapViewScene());
 
+            }
 
         });
 
-        relocateButton = new MyButton("Relocate");
-        relocateButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 50));
-        relocateButton.setTextFill(Color.DARKGOLDENROD);
-        relocateButton.setOnAction(event -> {
+        relocateButton = new
 
-            Controller.game.endTurn();
+                MyButton("Relocate");
+        relocateButton.setFont(Font.loadFont(new
+
+                File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").
+
+                toURI().
+
+                toString(), 50));
+        relocateButton.setTextFill(Color.DARKGOLDENROD);
+        relocateButton.setOnAction(event ->
+
+        {
+
+//            Controller.game.endTurn();
 
             Unit unit = (Unit) ShowDefendingArmyOfCityWindow.
                     defendingArmytableView.getSelectionModel().getSelectedItem();
@@ -312,24 +391,34 @@ public class ShowDefendingArmyOfCityWindow {
 
         });
 
-        buttonsHbox.getChildren().addAll(
-                backButton, Constants.spaceButton2(),
-                !ofAttack ? relocateButton : Constants.spaceButton3(),
-                chooseToAttack ? chooseToAttackButton : Constants.spaceButton3());
+        buttonsHbox.getChildren().
+
+                addAll(
+                        backButton, Constants.spaceButton2(),
+                        !ofAttack ? relocateButton : Constants.spaceButton3(),
+                        chooseToAttack ? chooseToAttackButton : Constants.spaceButton3());
 
 
-        hbox.getChildren().add(defendingArmytitle);
+        hbox.getChildren().
+
+                add(defendingArmytitle);
         gridPane.add(Constants.spaceButton2(), 0, 0);
         gridPane.add(Constants.spaceButton2(), 2, 0);
         gridPane.add(Constants.spaceButton2(), 4, 0);
         gridPane.add(Constants.spaceButton2(), 6, 0);
 
-        vbox.getChildren().addAll(hbox, gridPane, Constants.spaceButton2(),
-                defendingArmytableView, Constants.spaceButton2(), buttonsHbox);
+        vbox.getChildren().
+
+                addAll(hbox, gridPane, Constants.spaceButton2(),
+
+                        defendingArmytableView, Constants.spaceButton2(), buttonsHbox);
         borderPane.setTop(vbox);
 
 
-        this.scene = new MyScene(borderPane);
+        this.scene = new
+
+                MyScene(borderPane);
+
     }
 
     public MyScene getScene() {

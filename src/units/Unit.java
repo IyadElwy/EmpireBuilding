@@ -2,7 +2,7 @@ package units;
 
 import exceptions.FriendlyFireException;
 
-public abstract class Unit {
+public abstract class Unit implements Cloneable {
     private int level;
     private int maxSoldierCount;
     private int currentSoldierCount;
@@ -11,14 +11,30 @@ public abstract class Unit {
     private double siegeUpkeep;
     private Army parentArmy;
 
-    public Unit(int level, int maxSoldierConunt, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
+    public Unit(int level, int maxSoldierCount, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
         this.level = level;
-        this.maxSoldierCount = maxSoldierConunt;
-        this.currentSoldierCount = maxSoldierConunt;
+        this.maxSoldierCount = maxSoldierCount;
+        this.currentSoldierCount = maxSoldierCount;
         this.idleUpkeep = idleUpkeep;
         this.marchingUpkeep = marchingUpkeep;
         this.siegeUpkeep = siegeUpkeep;
 
+    }
+
+    public Unit(Unit unit) {
+        this.level = unit.level;
+        this.maxSoldierCount = unit.maxSoldierCount;
+        this.currentSoldierCount = unit.maxSoldierCount;
+        this.idleUpkeep = unit.idleUpkeep;
+        this.marchingUpkeep = unit.marchingUpkeep;
+        this.siegeUpkeep = unit.siegeUpkeep;
+
+    }
+
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public void attack(Unit target) throws FriendlyFireException {
