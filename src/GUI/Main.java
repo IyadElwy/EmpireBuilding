@@ -20,8 +20,8 @@ public class Main extends Application {
 //        Setting the first scene to the welcome scene and setting the title
         window.setScene(new WelcomeWindow().getWelcomeScene());
         window.setTitle("Empire Building");
-        window.setMinWidth(Constants.GAME_WINDOW_SIZE_X);
-        window.setMinHeight(Constants.GAME_WINDOW_SIZE_Y);
+        window.setMinWidth(800);
+        window.setMinHeight(800);
         window.show();
 
     }
