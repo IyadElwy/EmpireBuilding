@@ -109,6 +109,8 @@ public class BattleFieldWindow {
         chooseNextAttackButton.setOnAction(e -> {
             Controller.chooseNextAttack();
             mapButton.setDisable(true);
+            AttackStrategyWindow.city1Button.setDisable(false);
+            AttackStrategyWindow.city2Button.setDisable(false);
 
         });
 

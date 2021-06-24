@@ -23,8 +23,8 @@ import java.util.Random;
 
 public class AttackStrategyWindow {
 
-    private static MyButton city2Button;
-    private static MyButton city1Button;
+    public static MyButton city2Button;
+    public static MyButton city1Button;
 
     private final MyScene scene;
 
