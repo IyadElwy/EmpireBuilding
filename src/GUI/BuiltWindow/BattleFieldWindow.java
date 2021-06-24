@@ -25,12 +25,14 @@ public class BattleFieldWindow {
     public static MyButton defendingArmyStatusButton;
     public static MyButton attackingArmyStatusButton;
     public static MyButton chooseNextAttackButton;
+    public static MyButton letOpponentAttackButton;
 
     public static MyImageView currentAttacker;
 
     public BattleFieldWindow() {
         Controller.playFirstTime = true;
         Constants.playMusic(Constants.battleMusic);
+        Controller.roundsUntilArrived = -200;
 
         MyBorderPane borderPane = new MyBorderPane();
         MyHbox hboxForMap = new MyHbox();
@@ -58,6 +60,7 @@ public class BattleFieldWindow {
         battleLogPane.setPadding(new Insets(10, 10, 10, 10));
         bottomPane.setAlignment(Pos.BOTTOM_CENTER);
         nextAttackPane.setPadding(new Insets(5, 5, 5, 5));
+        armyStatusPane.setPadding(new Insets(0, 0, 70, 0));
 
 
         mapButton = new MyButton("Map");
@@ -77,36 +80,46 @@ public class BattleFieldWindow {
         battleLogTextArea.setStyle("-fx-text-inner-color: #6A1412");
         battleLogTextArea.setOpacity(0.8);
 
-        defendingArmyStatusButton = new MyButton("Opposing\nArmy\nStatus");
+        defendingArmyStatusButton = new MyButton("Opposing Army\nStatus");
         defendingArmyStatusButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 25));
+                "-Regular.ttf").toURI().toString(), 19));
         defendingArmyStatusButton.setTextFill(Color.DARKGOLDENROD);
-        defendingArmyStatusButton.setMinSize(30, 30);
+        defendingArmyStatusButton.setMinSize(18, 18);
         defendingArmyStatusButton.setOpacity(0.8);
         defendingArmyStatusButton.setOnAction(e -> {
             Controller.showDefendingArmyStatus();
         });
 
-        attackingArmyStatusButton = new MyButton("Your\nArmy\nStatus");
+        attackingArmyStatusButton = new MyButton("Your Army\nStatus");
         attackingArmyStatusButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 25));
+                "-Regular.ttf").toURI().toString(), 19));
         attackingArmyStatusButton.setTextFill(Color.DARKGOLDENROD);
-        attackingArmyStatusButton.setMinSize(30, 30);
+        attackingArmyStatusButton.setMinSize(18, 18);
         attackingArmyStatusButton.setOpacity(0.8);
         attackingArmyStatusButton.setOnAction(e -> {
             Controller.showAttackingArmyStatus();
         });
 
-        chooseNextAttackButton = new MyButton("Choose Next Attack");
+        chooseNextAttackButton = new MyButton("Choose Next\nAttack");
         chooseNextAttackButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 24));
+                "-Regular.ttf").toURI().toString(), 19));
         chooseNextAttackButton.setTextFill(Color.DARKGOLDENROD);
-        chooseNextAttackButton.setMinSize(30, 60);
+        chooseNextAttackButton.setMinSize(18, 18);
         chooseNextAttackButton.setOpacity(0.8);
         chooseNextAttackButton.setOnAction(e -> {
             Controller.chooseNextAttack();
             mapButton.setDisable(true);
 
+        });
+
+        letOpponentAttackButton = new MyButton("Let Opponent\nAttack");
+        letOpponentAttackButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 19));
+        letOpponentAttackButton.setTextFill(Color.DARKGOLDENROD);
+        letOpponentAttackButton.setMinSize(18, 18);
+        letOpponentAttackButton.setOpacity(0.8);
+        letOpponentAttackButton.setOnAction(e -> {
+            Controller.letOpponentAttack();
         });
 
         Image cavalryLeft = new Image(new File("src/GUI/Resources/" +
@@ -174,7 +187,8 @@ public class BattleFieldWindow {
         battleLogPane.getChildren().add(battleLogTextArea);
         armyStatusPane.getChildren().addAll(defendingArmyStatusButton, Constants.spaceButton3(),
                 attackingArmyStatusButton);
-        nextAttackPane.getChildren().addAll(chooseNextAttackButton);
+        nextAttackPane.getChildren().addAll(letOpponentAttackButton,
+                Constants.spaceButton3(), chooseNextAttackButton);
 
         borderPane.setTop(hboxForMap);
         borderPane.setCenter(battleFieldPane);

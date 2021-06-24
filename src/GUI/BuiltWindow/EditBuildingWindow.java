@@ -81,7 +81,7 @@ public class EditBuildingWindow {
                     upgradeButton.setText("Upgrade: 0");
                     buildButton.setText("Build: " + getCost("Stable",
                             Integer.parseInt(stablesLevel)));
-                } else if (Integer.parseInt(stablesLevel) > 0){
+                } else if (Integer.parseInt(stablesLevel) > 0) {
                     buildButton.setText("Build: 0");
                     upgradeButton.setText("Upgrade: " + getCost("Stable",
                             Integer.parseInt(stablesLevel)));
@@ -96,7 +96,7 @@ public class EditBuildingWindow {
                     upgradeButton.setText("Upgrade: 0");
                     buildButton.setText("Build: " + getCost("Barracks",
                             Integer.parseInt(barracksLevel)));
-                } else if (Integer.parseInt(barracksLevel) > 0){
+                } else if (Integer.parseInt(barracksLevel) > 0) {
                     buildButton.setText("Build: 0");
                     upgradeButton.setText("Upgrade: " + getCost("Barracks",
                             Integer.parseInt(barracksLevel)));
@@ -110,7 +110,7 @@ public class EditBuildingWindow {
                     upgradeButton.setText("Upgrade: 0");
                     buildButton.setText("Build: " + getCost("ArcheryRange",
                             Integer.parseInt(archeryRangeLevel)));
-                } else if (Integer.parseInt(archeryRangeLevel) > 0){
+                } else if (Integer.parseInt(archeryRangeLevel) > 0) {
                     buildButton.setText("Build: 0");
                     upgradeButton.setText("Upgrade: " + getCost("ArcheryRange",
                             Integer.parseInt(archeryRangeLevel)));
@@ -122,7 +122,7 @@ public class EditBuildingWindow {
                     upgradeButton.setText("Upgrade: 0");
                     buildButton.setText("Build: " + getCost("Market",
                             Integer.parseInt(marketLevel)));
-                } else if (Integer.parseInt(marketLevel) > 0){
+                } else if (Integer.parseInt(marketLevel) > 0) {
                     buildButton.setText("Build: 0");
                     upgradeButton.setText("Upgrade: " + getCost("Market",
                             Integer.parseInt(marketLevel)));
@@ -134,7 +134,7 @@ public class EditBuildingWindow {
                     upgradeButton.setText("Upgrade: 0");
                     buildButton.setText("Build: " + getCost("Farm",
                             Integer.parseInt(farmLevel)));
-                } else if (Integer.parseInt(farmLevel) > 0){
+                } else if (Integer.parseInt(farmLevel) > 0) {
                     buildButton.setText("Build: 0");
                     upgradeButton.setText("Upgrade: " + getCost("Farm",
                             Integer.parseInt(farmLevel)));

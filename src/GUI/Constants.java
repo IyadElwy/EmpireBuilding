@@ -132,7 +132,7 @@ public class Constants {
     public static MyButton spaceButton4() {
         MyButton spaceButton = new MyButton("SP");
         spaceButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 230));
+                "-Regular.ttf").toURI().toString(), 200));
         spaceButton.setTextFill(Color.DARKGOLDENROD);
         spaceButton.setOpacity(0);
         return spaceButton;

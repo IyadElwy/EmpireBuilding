@@ -25,7 +25,6 @@ public class ChooseCityWindow {
 
     public ChooseCityWindow() {
 
-        double buttonWidth = 188.3;
 
 //        Setting up the layouts and properties
         MyHbox allCitiesHbox = new MyHbox();
@@ -44,10 +43,7 @@ public class ChooseCityWindow {
         cairoButton = new MyButton("Cairo");
         cairoButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-//        cairoButton.setPadding(new Insets(0,
-//                buttonWidth
-//                , 0,
-//                buttonWidth));
+
         cairoButton.setTextFill(Color.WHITE);
         cairoButton.setOnMouseEntered(e -> {
             cairoButton.setTextFill(Color.RED);
@@ -78,10 +74,7 @@ public class ChooseCityWindow {
         romeButton.setTextFill(Color.WHITE);
         romeButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-//        romeButton.setPadding(new Insets(0,
-//                buttonWidth + 30
-//                , 0,
-//                buttonWidth + 30));
+
         romeButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
                 "/BerkshireSwash-Regular.ttf").toURI().toString(), 20));
         romeButton.setOnMouseEntered(e -> {
@@ -111,9 +104,7 @@ public class ChooseCityWindow {
         spartaButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,
                 CornerRadii.EMPTY, Insets.EMPTY)));
         spartaButton.setTextFill(Color.WHITE);
-//        spartaButton.setPadding(new Insets(0, buttonWidth
-//                , 0,
-//                buttonWidth));
+
         spartaButton.setFont(Font.loadFont(new File("src/GUI/Resources" +
                 "/BerkshireSwash-Regular.ttf").toURI().toString(), 20));
         spartaButton.setOnMouseEntered(e -> {

@@ -9,7 +9,6 @@ import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
 import GUI.Layouts.MyVbox;
-import GUI.Main;
 import GUI.Scenes.MyScene;
 import engine.City;
 import exceptions.MaxCapacityException;
@@ -136,6 +135,7 @@ public class ShowDefendingArmyOfCityWindow {
         chooseToAttackButton.setTextFill(Color.DARKGOLDENROD);
         chooseToAttackButton.setOnAction(event -> {
 
+
             BattleFieldWindow.mapButton.setDisable(true);
 
 
@@ -255,15 +255,21 @@ public class ShowDefendingArmyOfCityWindow {
                     }
                 }
 
+                Random rand = new Random();
+                int lowerBound = rand.nextInt(18);
+
                 if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()) instanceof Archer) {
                     BattleFieldWindow.battleLogTextArea.appendText("Your Opponent " +
-                            "lost an Archer Unit");
+                            "lost " + lowerBound +
+                            " soldiers of an  an Archer Unit");
                 } else if (((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()) instanceof Cavalry) {
                     BattleFieldWindow.battleLogTextArea.appendText("Your Opponent " +
-                            "lost a Cavalry Unit");
+                            "lost " + lowerBound +
+                            " soldiers of a  Cavalry Unit");
                 } else {
                     BattleFieldWindow.battleLogTextArea.appendText("Your Opponent " +
-                            "lost an Infantry Unit");
+                            "lost " + lowerBound +
+                            " soldiers of an  Infantry Unit");
                 }
 
                 city1.getDefendingArmy().getUnits().remove(((Unit) defendingArmytableView.getSelectionModel().getSelectedItem()));
@@ -273,70 +279,13 @@ public class ShowDefendingArmyOfCityWindow {
 
 //            Oponents turn:
 
-            BattleFieldWindow.battleLogTextArea.appendText("\n\nYour Opponent Will" +
-                    " " +
-                    "Strike Now....\n\n");
-
-
-            Random rand = new Random();
-            int upperBound =
-                    rand.nextInt(Controller.game.getPlayer().getControlledArmies().get(0).getUnits().size());
-
-            if (Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(upperBound) instanceof Archer) {
-                BattleFieldWindow.battleLogTextArea.appendText("You lost " +
-                        "lost an Archer Unit");
-            } else if (Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(upperBound) instanceof Cavalry) {
-                BattleFieldWindow.battleLogTextArea.appendText("You lost " +
-                        "lost a Cavalry Unit");
-            } else {
-                BattleFieldWindow.battleLogTextArea.appendText("You lost " +
-                        "lost an Infantry Unit");
-            }
-
-            Controller.game.getPlayer().getControlledArmies().get(0).getUnits().remove(
-                    Controller.game.getPlayer().getControlledArmies().get(0).getUnits().get(upperBound)
-            );
 
             Controller.game.endTurn();
             Controller.showDefendingArmiesWindow.close();
 
 
 //            Checking if battle lost or won
-            City city1 = null;
-            for (City cityTemp : Controller.game.getAvailableCities()
-            ) {
-                if (cityTemp.getName().equalsIgnoreCase(Controller.cityToAttack)) {
-                    city1 = cityTemp;
-                }
-            }
 
-            if (city1.getDefendingArmy().getUnits().isEmpty()) {
-                BattleFieldWindow.mapButton.setDisable(false);
-                new PopUpWindow("You Won This Battle");
-                if (MapViewWindow.cairoButton.getText().equalsIgnoreCase(city1.getName())) {
-                    Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "cairo");
-                    MapViewWindow.cairoButton.setDisable(false);
-                } else if (MapViewWindow.romeButton.getText().equalsIgnoreCase(city1.getName())) {
-                    Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "rome");
-                    MapViewWindow.romeButton.setDisable(false);
-                } else if (MapViewWindow.spartaButton.getText().equalsIgnoreCase(city1.getName())) {
-                    Controller.game.occupy(Controller.game.getPlayer().getControlledArmies().get(0), "sparta");
-                    MapViewWindow.spartaButton.setDisable(false);
-                }
-                Controller.game.getPlayer().getControlledCities().add(city1);
-                Main.window.setScene(new MapViewWindow().getMapViewScene());
-
-                if (Controller.game.isGameOver()) {
-                    Main.window.setScene(new GameOverWindow("Won").getGameOverScene());
-                }
-            }
-
-            if (Controller.game.getPlayer().getControlledArmies().get(0).getUnits().isEmpty()) {
-                BattleFieldWindow.mapButton.setDisable(false);
-                new PopUpWindow("You Lost This Battle");
-                Main.window.setScene(new MapViewWindow().getMapViewScene());
-
-            }
 
         });
 

@@ -82,7 +82,7 @@ public class CityViewWindowCairo {
                 "-Regular.ttf").toURI().toString(), 20));
         playerFoodAmountLabel.setTextFill(Color.MAROON);
 
-        turnsLabel = new MyLabel("Turns: " + turns + "/100 | Turns until arrived: " +
+        turnsLabel = new MyLabel("Turns: " + turns + "/50 | Turns until arrived: " +
                 (Controller.roundsUntilArrived > -1 ?
                         Integer.toString(Controller.roundsUntilArrived - 1)
                         : "0"

@@ -19,7 +19,7 @@ public class Game {
     private Player player;
     private ArrayList<City> availableCities;
     private ArrayList<Distance> distances;
-    private final int maxTurnCount = 100;
+    private final int maxTurnCount = 50;
     private int currentTurnCount;
 
     public Game(String playerName, String playerCity) throws IOException {
