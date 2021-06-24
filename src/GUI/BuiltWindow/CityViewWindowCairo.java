@@ -41,6 +41,7 @@ public class CityViewWindowCairo {
         MyHbox hboxForTopControllers = new MyHbox();
         cityViewGridPaneCairo = new MyGridPane();
         MyHbox bottomHbox = new MyHbox();
+        bottomHbox.setPadding(new Insets(0, 0, 10, 0));
 
         hboxForTopControllers.setAlignment(Pos.CENTER);
         bottomHbox.setAlignment(Pos.CENTER);
@@ -52,7 +53,7 @@ public class CityViewWindowCairo {
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, new BackgroundSize(2000, 1080, false,
                 false, false, false)
-                );
+        );
         borderPane.setBackground(new Background(backgroundImage));
 
         MyButton mapButton = new MyButton("Map");

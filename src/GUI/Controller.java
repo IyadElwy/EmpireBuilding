@@ -72,7 +72,11 @@ public class Controller {
             GameDescriptionWindow gameDescriptionWindow =
                     new GameDescriptionWindow();
             Main.window.setScene(gameDescriptionWindow.getGameDescriptionScene());
-            playerName = EnterNameWindow.textField.getText();
+            if (EnterNameWindow.textField.getText().isEmpty()) {
+                playerName = "Anonymous";
+            } else {
+                playerName = EnterNameWindow.textField.getText();
+            }
         });
     }
 
@@ -546,9 +550,9 @@ public class Controller {
         }
         try {
             game.getPlayer().build(building, currentCity.getName());
+            Controller.game.endTurn();
         } catch (Exception e) {
             new PopUpWindow("Not Enough Gold");
-            e.printStackTrace();
         }
         Constants.playEffect(Constants.clickButton);
         goBackToCityFromEditBuilding();
@@ -593,6 +597,7 @@ public class Controller {
 
         try {
             game.getPlayer().upgradeBuilding(buildingToUpgrade);
+            Controller.game.endTurn();
         } catch (Exception e) {
             new PopUpWindow("Not Enough Gold\nOr Not Built\nOr Building " +
                     "Cool Down\n Or Max Level");
@@ -632,20 +637,6 @@ public class Controller {
         }
         Constants.playEffect(Constants.clickButton);
         editBuildingwindow.close();
-//        goBackToCityFromEditBuilding();
-
-
-//        City currentCity2 = null;
-//        for (City city : game.getPlayer().getControlledCities()
-//        ) {
-//            if (city.getName().equalsIgnoreCase(inWhatCity)) {
-//                currentCity2 = city;
-//            }
-//        }
-//        System.out.println("defend " + currentCity2.getDefendingArmy().getUnits().size());
-//
-//        System.out.println("control " +
-//                game.getPlayer().getControlledArmies().get(0).getUnits().size());
 
 
     }

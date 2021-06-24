@@ -99,7 +99,7 @@ public class BattleFieldWindow {
 
         chooseNextAttackButton = new MyButton("Choose Next Attack");
         chooseNextAttackButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 20));
+                "-Regular.ttf").toURI().toString(), 24));
         chooseNextAttackButton.setTextFill(Color.DARKGOLDENROD);
         chooseNextAttackButton.setMinSize(30, 60);
         chooseNextAttackButton.setOpacity(0.8);

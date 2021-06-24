@@ -63,7 +63,7 @@ public class GameDescriptionWindow {
 
 //        Setting button properties and hbox for button
         MyHbox readyButtonHbox = new MyHbox();
-        readyButtonHbox.setPadding(new Insets(10, 600 , 10, 565));
+        readyButtonHbox.setPadding(new Insets(10, 600 , 10, 580));
         readyButton = new MyButton("Proceed");
         readyButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 40));

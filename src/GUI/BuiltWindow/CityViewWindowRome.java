@@ -41,6 +41,7 @@ public class CityViewWindowRome {
         MyHbox hboxForTopControllers = new MyHbox();
         cityViewGridPaneRome = new MyGridPane();
         MyHbox bottomHbox = new MyHbox();
+        bottomHbox.setPadding(new Insets(0, 0, 10, 0));
 
         hboxForTopControllers.setAlignment(Pos.CENTER);
         bottomHbox.setAlignment(Pos.CENTER);
