@@ -56,7 +56,8 @@ public class ShowArmyWindow {
         statusTextField.setText("Status: " + status);
         statusTextField.setEditable(false);
         statusTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 13));
+                "-Regular.ttf").toURI().toString(), 20));
+        statusTextField.setMinWidth(36);
         statusTextField.setStyle("-fx-text-inner-color: #6A1412");
 
 
