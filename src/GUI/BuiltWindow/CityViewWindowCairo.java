@@ -134,6 +134,47 @@ public class CityViewWindowCairo {
             } else {
                 Controller.attackButtonPressed();
             }
+
+            if (Controller.inWhatCity.equalsIgnoreCase("cairo")) {
+                CityViewWindowCairo.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else if (Controller.inWhatCity.equalsIgnoreCase("sparta")) {
+
+                CityViewWindowSparta.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else {
+
+                CityViewWindowRome.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            }
+
         });
 
 

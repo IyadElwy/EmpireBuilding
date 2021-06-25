@@ -50,6 +50,47 @@ public class EditBuildingWindow {
             } catch (Exception e) {
                 new PopUpWindow(e.toString());
             }
+
+            if (Controller.inWhatCity.equalsIgnoreCase("cairo")) {
+                CityViewWindowCairo.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else if (Controller.inWhatCity.equalsIgnoreCase("sparta")) {
+
+                CityViewWindowSparta.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else {
+
+                CityViewWindowRome.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            }
+
         });
 
         MyButton upgradeButton = new MyButton("Upgrade");
@@ -61,6 +102,47 @@ public class EditBuildingWindow {
                 Controller.upgradeButtonPressed(buildingChoiceBox.getValue());
             } catch (Exception e) {
                 new PopUpWindow(e.toString());
+            }
+
+
+            if (Controller.inWhatCity.equalsIgnoreCase("cairo")) {
+                CityViewWindowCairo.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else if (Controller.inWhatCity.equalsIgnoreCase("sparta")) {
+
+                CityViewWindowSparta.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else {
+
+                CityViewWindowRome.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
             }
         });
 
@@ -169,6 +251,47 @@ public class EditBuildingWindow {
             } catch (Exception e) {
 
             }
+
+            if (Controller.inWhatCity.equalsIgnoreCase("cairo")) {
+                CityViewWindowCairo.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else if (Controller.inWhatCity.equalsIgnoreCase("sparta")) {
+
+                CityViewWindowSparta.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            } else {
+
+                CityViewWindowRome.turnsLabel.setText("Turns: " + Controller.game.getCurrentTurnCount() +
+                        "/50" +
+                        " " +
+                        "|" +
+                        " Turns until" +
+                        " " +
+                        "arrived: " +
+                        (Controller.roundsUntilArrived > -1 ?
+                                Integer.toString(Controller.roundsUntilArrived - 1)
+                                : "0"
+                        ));
+            }
+
         });
 
 
@@ -183,6 +306,8 @@ public class EditBuildingWindow {
         borderPane.setCenter(hboxCenter);
 
         this.editBuildingScene = new MyScene(borderPane);
+
+
     }
 
 

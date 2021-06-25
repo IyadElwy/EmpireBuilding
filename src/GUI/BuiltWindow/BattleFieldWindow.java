@@ -111,6 +111,8 @@ public class BattleFieldWindow {
             mapButton.setDisable(true);
             AttackStrategyWindow.city1Button.setDisable(false);
             AttackStrategyWindow.city2Button.setDisable(false);
+            Controller.button1Disabled = false;
+            Controller.button2Disabled = false;
 
         });
 

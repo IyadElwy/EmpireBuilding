@@ -56,7 +56,7 @@ public class ShowArmyWindow {
         statusTextField.setText("Status: " + status);
         statusTextField.setEditable(false);
         statusTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
-                "-Regular.ttf").toURI().toString(), 20));
+                "-Regular.ttf").toURI().toString(), 13));
         statusTextField.setStyle("-fx-text-inner-color: #6A1412");
 
 
@@ -72,7 +72,7 @@ public class ShowArmyWindow {
         marchingToCityTextField.setPrefWidth(600);
 
         besiegingCityTextField = new MyTextField();
-        besiegingCityTextField.setText("Besieging: " + besiegingCity);
+        besiegingCityTextField.setText("Location: " + besiegingCity);
         besiegingCityTextField.setEditable(false);
         besiegingCityTextField.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 20));

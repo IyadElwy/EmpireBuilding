@@ -81,6 +81,7 @@ public class AttackStrategyWindow {
                     Controller.game.targetCity(Controller.game.getPlayer().getControlledArmies().get(0), cities[0]);
                     Controller.roundsUntilArrived =
                             Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget();
+                    System.out.println(Controller.roundsUntilArrived);
                     Controller.button2Disabled = true;
                     Controller.button1Disabled = true;
 
@@ -134,6 +135,7 @@ public class AttackStrategyWindow {
                     Controller.game.targetCity(Controller.game.getPlayer().getControlledArmies().get(0), cities[1]);
                     Controller.roundsUntilArrived =
                             Controller.game.getPlayer().getControlledArmies().get(0).getDistancetoTarget();
+                    System.out.println(Controller.roundsUntilArrived);
                     Controller.button1Disabled = true;
                     Controller.button2Disabled = true;
                 }
@@ -149,14 +151,14 @@ public class AttackStrategyWindow {
                     try {
                         Controller.game.getPlayer().laySiege(
                                 Controller.game.getPlayer().getControlledArmies().get(0),
-                                cityToAttack
+                                cityToAttack);
 
-                        );
                         Controller.cityToAttackButtonPressed();
                         Controller.roundsUntilArrived = -200;
                         city2Button.setDisable(true);
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                         new PopUpWindow("Missed Your Chance");
 
                     }
