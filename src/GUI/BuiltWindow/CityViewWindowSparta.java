@@ -67,6 +67,16 @@ public class CityViewWindowSparta {
             Controller.openMapFromCityView();
         });
 
+        MyButton endTurnButton = new MyButton("End Turn");
+        endTurnButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 20));
+        endTurnButton.setTextFill(Color.DARKGOLDENROD);
+        endTurnButton.setMinSize(20, 20);
+        endTurnButton.setOpacity(0.8);
+        endTurnButton.setOnAction(e -> {
+            Controller.endTurnInSparta();
+        });
+
 
         cityNameLabelSparta = new MyLabel(city);
         cityNameLabelSparta.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
@@ -209,7 +219,7 @@ public class CityViewWindowSparta {
                 Constants.spaceButton2(),
                 playerFoodAmountLabel,
                 Constants.spaceButton2(),
-                mapButton);
+                mapButton, endTurnButton);
 
 
         cityViewGridPaneSparta.add(Integer.parseInt(stablesLevel) > 0 ? stablesImg :

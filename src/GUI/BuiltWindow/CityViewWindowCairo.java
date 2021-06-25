@@ -178,6 +178,17 @@ public class CityViewWindowCairo {
         });
 
 
+        MyButton endTurnButton = new MyButton("End Turn");
+        endTurnButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 20));
+        endTurnButton.setTextFill(Color.DARKGOLDENROD);
+        endTurnButton.setMinSize(20, 20);
+        endTurnButton.setOpacity(0.8);
+        endTurnButton.setOnAction(e -> {
+            Controller.endTurnInCairo();
+        });
+
+
         Image stables = new Image(new File("src/GUI/Resources/stables.png").toURI().toString());
         MyImageView stablesImg = new MyImageView();
         stablesImg.setImage(stables);
@@ -249,7 +260,7 @@ public class CityViewWindowCairo {
                 Constants.spaceButton2(),
                 playerFoodAmountLabel,
                 Constants.spaceButton2(),
-                mapButton);
+                mapButton, endTurnButton);
 
 
         cityViewGridPaneCairo.add(Integer.parseInt(stablesLevel) > 0 ? stablesImg :

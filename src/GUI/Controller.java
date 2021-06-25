@@ -412,7 +412,7 @@ public class Controller {
         );
 
 
-        game.endTurn();
+//        game.endTurn();
 
 
         City city1 = null;
@@ -494,6 +494,55 @@ public class Controller {
 
 
     //    CityViewWindow
+    public static void endTurnInCairo() {
+        game.endTurn();
+        Main.window.setScene(new CityViewWindowCairo(
+                inWhatCity
+                ,
+                Double.toString(game.getPlayer().getTreasury()),
+                Double.toString(game.getPlayer().getFood()),
+                Integer.toString(game.getCurrentTurnCount()),
+                Integer.toString(marketLevelCairo),
+                Integer.toString(farmLevelCairo),
+                Integer.toString(archeryRangeLevelCairo),
+                Integer.toString(stableLevelCairo),
+                Integer.toString(barracksLevelCairo)
+        ).getCityViewScene());
+    }
+
+    public static void endTurnInRome() {
+        game.endTurn();
+        Main.window.setScene(new CityViewWindowRome(
+                inWhatCity
+                ,
+                Double.toString(game.getPlayer().getTreasury()),
+                Double.toString(game.getPlayer().getFood()),
+                Integer.toString(game.getCurrentTurnCount()),
+                Integer.toString(marketLevelRome),
+                Integer.toString(farmLevelRome),
+                Integer.toString(archeryRangeLevelRome),
+                Integer.toString(stableLevelRome),
+                Integer.toString(barracksLevelRome)
+        ).getCityViewScene());
+
+    }
+
+    public static void endTurnInSparta() {
+        game.endTurn();
+        Main.window.setScene(new CityViewWindowSparta(
+                inWhatCity
+                ,
+                Double.toString(game.getPlayer().getTreasury()),
+                Double.toString(game.getPlayer().getFood()),
+                Integer.toString(game.getCurrentTurnCount()),
+                Integer.toString(marketLevelSparta),
+                Integer.toString(farmLevelSparta),
+                Integer.toString(archeryRangeLevelSparta),
+                Integer.toString(stableLevelSparta),
+                Integer.toString(barracksLevelSparta)
+        ).getCityViewScene());
+    }
+
     public static void openMapFromCityView() {
         Constants.playEffect(Constants.clickButton);
         Main.window.setScene(new MapViewWindow().getMapViewScene());
@@ -623,7 +672,7 @@ public class Controller {
         }
         try {
             game.getPlayer().build(building, currentCity.getName());
-            Controller.game.endTurn();
+//            Controller.game.endTurn();
         } catch (Exception e) {
             new PopUpWindow("Not Enough Gold");
         }
@@ -670,7 +719,7 @@ public class Controller {
 
         try {
             game.getPlayer().upgradeBuilding(buildingToUpgrade);
-            Controller.game.endTurn();
+//            Controller.game.endTurn();
         } catch (Exception e) {
             new PopUpWindow("Not Enough Gold\nOr Not Built\nOr Building " +
                     "Cool Down\n Or Max Level");
@@ -704,7 +753,7 @@ public class Controller {
 
         try {
             game.getPlayer().recruitUnit(typeToRecruitFrom, inWhatCity);
-            game.endTurn();
+//            game.endTurn();
         } catch (Exception ignored) {
 
         }

@@ -280,7 +280,7 @@ public class ShowDefendingArmyOfCityWindow {
 //            Oponents turn:
 
 
-            Controller.game.endTurn();
+//            Controller.game.endTurn();
             Controller.showDefendingArmiesWindow.close();
 
 

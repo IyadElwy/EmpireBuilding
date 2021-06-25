@@ -103,6 +103,17 @@ public class CityViewWindowRome {
             Controller.buildButtonPressedRome();
         });
 
+        MyButton endTurnButton = new MyButton("End Turn");
+        endTurnButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
+                "-Regular.ttf").toURI().toString(), 20));
+        endTurnButton.setTextFill(Color.DARKGOLDENROD);
+        endTurnButton.setMinSize(20, 20);
+        endTurnButton.setOpacity(0.8);
+        endTurnButton.setOnAction(e -> {
+            Controller.endTurnInRome();
+        });
+
+
         MyButton armiesButton = new MyButton("Armies");
         armiesButton.setFont(Font.loadFont(new File("src/GUI/Resources/BerkshireSwash" +
                 "-Regular.ttf").toURI().toString(), 20));
@@ -209,7 +220,7 @@ public class CityViewWindowRome {
                 Constants.spaceButton2(),
                 playerFoodAmountLabel,
                 Constants.spaceButton2(),
-                mapButton);
+                mapButton, endTurnButton);
 
 
         cityViewGridPaneRome.add(Integer.parseInt(stablesLevel) > 0 ? stablesImg :
