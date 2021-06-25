@@ -67,22 +67,22 @@ public class ShowDefendingArmyOfCityWindow {
                 "Current Soldiers");
 
 
-        typeColumn.setMinWidth(400);
+        typeColumn.setMinWidth(360);
         typeColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        levelColumn.setMinWidth(400);
+        levelColumn.setMinWidth(360);
         levelColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        maxSoldierColumn.setMinWidth(400);
+        maxSoldierColumn.setMinWidth(360);
         maxSoldierColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +
                 "    -fx-text-fill: red;");
-        currentSoldiersColumn.setMinWidth(400);
+        currentSoldiersColumn.setMinWidth(360);
         currentSoldiersColumn.setStyle("-fx-padding: 0.5em;\n" +
                 "    -fx-border-color: transparent -fx-box-border transparent transparent;\n" +
                 "    -fx-font: 13px \"Arial\";\n" +

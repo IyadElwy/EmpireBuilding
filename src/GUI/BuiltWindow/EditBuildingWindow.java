@@ -249,7 +249,7 @@ public class EditBuildingWindow {
             try {
                 Controller.recruitButtonPressed(buildingChoiceBox.getValue());
             } catch (Exception e) {
-
+                new PopUpWindow("Not Enough\nGold");
             }
 
             if (Controller.inWhatCity.equalsIgnoreCase("cairo")) {

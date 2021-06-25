@@ -753,6 +753,46 @@ public class Controller {
 
         try {
             game.getPlayer().recruitUnit(typeToRecruitFrom, inWhatCity);
+            if (Controller.inWhatCity.equalsIgnoreCase("cairo")) {
+                Main.window.setScene(new CityViewWindowCairo(
+                        inWhatCity
+                        ,
+                        Double.toString(game.getPlayer().getTreasury()),
+                        Double.toString(game.getPlayer().getFood()),
+                        Integer.toString(game.getCurrentTurnCount()),
+                        Integer.toString(marketLevelCairo),
+                        Integer.toString(farmLevelCairo),
+                        Integer.toString(archeryRangeLevelCairo),
+                        Integer.toString(stableLevelCairo),
+                        Integer.toString(barracksLevelCairo)
+                ).getCityViewScene());
+            } else if (Controller.inWhatCity.equalsIgnoreCase("sparta")) {
+                Main.window.setScene(new CityViewWindowSparta(
+                        inWhatCity
+                        ,
+                        Double.toString(game.getPlayer().getTreasury()),
+                        Double.toString(game.getPlayer().getFood()),
+                        Integer.toString(game.getCurrentTurnCount()),
+                        Integer.toString(marketLevelSparta),
+                        Integer.toString(farmLevelSparta),
+                        Integer.toString(archeryRangeLevelSparta),
+                        Integer.toString(stableLevelSparta),
+                        Integer.toString(barracksLevelSparta)
+                ).getCityViewScene());
+            } else {
+                Main.window.setScene(new CityViewWindowRome(
+                        inWhatCity
+                        ,
+                        Double.toString(game.getPlayer().getTreasury()),
+                        Double.toString(game.getPlayer().getFood()),
+                        Integer.toString(game.getCurrentTurnCount()),
+                        Integer.toString(marketLevelRome),
+                        Integer.toString(farmLevelRome),
+                        Integer.toString(archeryRangeLevelRome),
+                        Integer.toString(stableLevelRome),
+                        Integer.toString(barracksLevelRome)
+                ).getCityViewScene());
+            }
 //            game.endTurn();
         } catch (Exception ignored) {
 
