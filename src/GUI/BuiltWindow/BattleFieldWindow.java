@@ -107,6 +107,9 @@ public class BattleFieldWindow {
         chooseNextAttackButton.setMinSize(18, 18);
         chooseNextAttackButton.setOpacity(0.8);
         chooseNextAttackButton.setOnAction(e -> {
+            chooseNextAttackButton.setDisable(true);
+            chooseNextAttackButton.setOpacity(0.4);
+            letOpponentAttackButton.setDisable(false);
             Controller.chooseNextAttack();
             mapButton.setDisable(true);
             AttackStrategyWindow.city1Button.setDisable(false);
@@ -123,6 +126,9 @@ public class BattleFieldWindow {
         letOpponentAttackButton.setMinSize(18, 18);
         letOpponentAttackButton.setOpacity(0.8);
         letOpponentAttackButton.setOnAction(e -> {
+            letOpponentAttackButton.setDisable(true);
+            letOpponentAttackButton.setOpacity(0.4);
+            chooseNextAttackButton.setDisable(false);
             Controller.letOpponentAttack();
         });
 
