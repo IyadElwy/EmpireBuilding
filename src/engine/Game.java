@@ -138,10 +138,10 @@ public class Game {
 
     public void endTurn() {
 
-
-        if (isGameOver()) {
+        if (isGameOver() || Controller.game.getCurrentTurnCount() >= 50) {
             Main.window.setScene(new GameOverWindow("Lost").getGameOverScene());
         }
+
 
         Controller.roundsUntilArrived--;
 

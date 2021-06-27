@@ -8,6 +8,7 @@ import GUI.CustomControllers.MyLabel;
 import GUI.Layouts.MyBorderPane;
 import GUI.Layouts.MyGridPane;
 import GUI.Layouts.MyHbox;
+import GUI.Main;
 import GUI.Scenes.MyScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -111,6 +112,9 @@ public class CityViewWindowRome {
         endTurnButton.setOpacity(0.8);
         endTurnButton.setOnAction(e -> {
             Controller.endTurnInRome();
+            if (Integer.parseInt(turns) >= 49) {
+                Main.window.setScene(new GameOverWindow("Lost").getGameOverScene());
+            }
         });
 
 
