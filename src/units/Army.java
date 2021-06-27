@@ -11,7 +11,7 @@ public class Army {
     private int distancetoTarget;
     private String target;
     private String currentLocation;
-    private final int maxToHold = 20;
+    private final int maxToHold = 25;
 
     public Army(String currentLocation) {
         this.currentLocation = currentLocation;
