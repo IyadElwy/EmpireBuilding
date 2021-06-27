@@ -139,36 +139,6 @@ public class Constants {
     }
 
 
-    public static Image cavalryLeft = new Image(new File("src/GUI/Resources/" +
-            "CavalryYemin.png").toURI().toString());
-
-
-    public static Image cavalryRight = new Image(new File("src/GUI/Resources/" +
-            "CavalryShemal.png").toURI().toString());
-
-    public static Image archeryLeft = new Image(new File("src/GUI/Resources/" +
-            "ArcheryYemin.png").toURI().toString());
-
-    public static Image archeryRight = new Image(new File("src/GUI/Resources/" +
-            "ArcheryShemal.png").toURI().toString());
-
-
-    public static Image infantryLeft = new Image(new File("src/GUI/Resources/" +
-            "InfantryYemin.png").toURI().toString());
-
-    public static Image infantryRight = new Image(new File("src/GUI/Resources/" +
-            "InfantryShemal.png").toURI().toString());
-
-
     public static Image egyptBack = new Image(new File("src/GUI/Resources/egypt_back.jpg").toURI().toString());
-    public static Image egypt1 = new Image(new File("src/GUI/Resources/egypt1.png").toURI().toString());
-    public static Image egypt2 = new Image(new File("src/GUI/Resources/egypt2.png").toURI().toString());
-    public static Image egypt3 = new Image(new File("src/GUI/Resources/egypt3.png").toURI().toString());
-    public static Image egypt4 = new Image(new File("src/GUI/Resources/egypt4.png").toURI().toString());
-    public static Image spartaBack = new Image(new File("src/GUI/Resources/sparta_back.jpg").toURI().toString());
-    public static Image sparta1 = new Image(new File("src/GUI/Resources/sparta1.jpg").toURI().toString());
-    public static Image sparta2 = new Image(new File("src/GUI/Resources/sparta2.jpg").toURI().toString());
-    public static Image sparta3 = new Image(new File("src/GUI/Resources/sparta3.png").toURI().toString());
-    public static Image sparta4 = new Image(new File("src/GUI/Resources/sparta4.png").toURI().toString());
 
 }
