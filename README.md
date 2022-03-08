@@ -4,7 +4,6 @@
 ### The player will win if he managed to conquer all cities available in the game under the determined amounts of turns. If these turns passed and the player did not achieve this goal, this is considered a loss.
 
 The Autoreslove and the battle view need to be configuered correctly.
-As of now the game works 80% correctly.
 
 ![Empire Building 7_19_2021 11_44_20 PM](https://user-images.githubusercontent.com/83036619/126232317-281b1a43-ac00-480d-a5e4-b5f91ed30d9a.png)
 ![Empire Building 7_19_2021 11_44_47 PM](https://user-images.githubusercontent.com/83036619/126232345-493050c0-a25e-4aef-86ca-d77ddc67974b.png)
